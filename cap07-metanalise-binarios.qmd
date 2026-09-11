@@ -56,7 +56,7 @@ A função `metabin()` é utilizada para realizar metanálises de desfechos bin�
 
 - **method** → Método utilizado para combinar os estudos. O padrão é `"MH"` (*Mantel-Haenszel*).
 
-- **method.tau** → Método utilizado para estimar a variância entre os estudos. O padrão é `"DL"` (*DerSimonian-Laird*).
+- **method.tau** → Método utilizado para estimar a variância entre os estudos. Neste livro, usamos `"DL"` (*DerSimonian-Laird*); nas versões atuais do pacote, o padrão é `"REML"` (máxima verossimilhança restrita).
 
 - **sm** → Medida de efeito utilizada. As opções mais comuns são `"RR"` (*Risk Ratio*) e `"OR"` (*Odds Ratio*).
 

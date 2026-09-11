@@ -12,7 +12,7 @@ Os capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no 
 - o código em R comentado, pronto para copiar pelo botão no canto de cada bloco;
 - orientações para interpretar o que o R devolve.
 
-Recomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 7 usam uma planilha de exemplo, disponível para download no capítulo 5.
+Recomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 10 usam planilhas de exemplo, disponíveis para download nos próprios capítulos.
 
 ## Conteúdo
 
@@ -74,12 +74,28 @@ Recomendamos acompanhar com o RStudio aberto, executando cada código à medida 
 [A função metabin(), o resumo dos resultados e o *forest plot*, argumento por argumento.]{.cartao-desc}
 :::
 
-::: {.g-col-12 .g-col-md-6 .cartao .em-breve}
-[Em elaboração]{.cartao-num}
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 8]{.cartao-num}
 
-[Próximos capítulos]{.cartao-titulo}
+[[Meta-análise de desfechos contínuos](cap08-metanalise-continuos.qmd)]{.cartao-titulo}
 
-[Desfechos contínuos, meta-análise de braço único e viés de publicação.]{.cartao-desc}
+[A função metacont(), a escolha entre MD e SMD e o *forest plot*.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 9]{.cartao-num}
+
+[[Meta-análise de braço único](cap09-metanalise-braco-unico.qmd)]{.cartao-titulo}
+
+[Proporções com metaprop(), transformações e heterogeneidade.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 10]{.cartao-num}
+
+[[Viés de publicação](cap10-vies-publicacao.qmd)]{.cartao-titulo}
+
+[Gráfico de funil, teste de Egger e método *trim-and-fill*.]{.cartao-desc}
 :::
 
 ::::

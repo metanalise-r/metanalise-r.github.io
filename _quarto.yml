@@ -2,6 +2,8 @@ project:
   type: book
   resources:
     - data.xlsx
+    - continuos.xlsx
+    - bcg.xlsx
 
 lang: pt
 language:
@@ -35,6 +37,11 @@ book:
         - cap05-importando-dados.qmd
         - cap06-manipulacao-dados.qmd
         - cap07-metanalise-binarios.qmd
+    - part: "Aprofundando a análise"
+      chapters:
+        - cap08-metanalise-continuos.qmd
+        - cap09-metanalise-braco-unico.qmd
+        - cap10-vies-publicacao.qmd
 
 format:
   html:

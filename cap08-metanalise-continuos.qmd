@@ -1,0 +1,188 @@
+# Meta-análise de desfechos contínuos
+
+```{r}
+#| include: false
+library(readxl)
+library(meta)
+cont <- as.data.frame(read_excel("continuos.xlsx", sheet = "util"))
+```
+
+Neste capítulo, vamos aprender a realizar metanálises de desfechos contínuos, ou seja, desfechos medidos em uma escala numérica, como pressão arterial, escore de dor, peso corporal ou dias de internação.
+
+::: {.callout-note}
+## Planilha de exemplo
+
+Para acompanhar este capítulo, baixe a planilha [continuos.xlsx](continuos.xlsx) e salve-a no seu diretório de trabalho. Ela reúne os dados de 5 estudos sobre o efeito do tratamento em saúde mental (psicoterapia) na utilização de serviços médicos, um exemplo clássico de meta-análise de desfecho contínuo (Fleiss JL. The statistical basis of meta-analysis. *Statistical Methods in Medical Research*, 1993;2:121-45), também disponível no pacote `meta` como `Fleiss1993cont`.
+:::
+
+## Carregando os Pacotes
+
+Neste capítulo, usaremos os pacotes `readxl` e `meta`, que já foram instalados nos capítulos anteriores. Basta carregá-los:
+
+```r
+library(readxl)   # Importar planilhas do Excel
+library(meta)     # Realizar a metanálise
+```
+
+## Preparando seu Conjunto de Dados
+
+Em uma metanálise de desfecho contínuo, cada estudo precisa informar, para cada grupo:
+
+- o número de participantes;
+- a média do desfecho;
+- o desvio padrão do desfecho.
+
+Assim, a planilha deve ter uma linha por estudo e as seguintes colunas:
+
+- **Author** → Identificação do estudo.
+- **Year** → Ano de publicação.
+- **n.e**, **mean.e** e **sd.e** → Número de participantes, média e desvio padrão no grupo experimental.
+- **n.c**, **mean.c** e **sd.c** → Número de participantes, média e desvio padrão no grupo controle.
+
+```{r}
+#| echo: false
+knitr::kable(cont)
+```
+
+💡 Alguns estudos informam o erro padrão (EP) em vez do desvio padrão (DP). Nesse caso, é possível convertê-lo com a fórmula DP = EP × √n, em que n é o número de participantes do grupo.
+
+## Importando os Dados
+
+Assim como no capítulo 5, usamos a função `read_excel()` para importar a planilha e a função `as.data.frame()` para convertê-la em um *data frame*:
+
+```{r}
+cont <- as.data.frame(read_excel("continuos.xlsx", sheet = "util"))
+
+head(cont)
+```
+
+## Diferença de Médias ou Diferença de Médias Padronizada?
+
+Antes de criar a metanálise, precisamos escolher a medida de efeito. Para desfechos contínuos, as duas opções mais comuns são:
+
+- **Diferença de médias (MD, *Mean Difference*)** → Utilizada quando todos os estudos medem o desfecho na mesma escala e na mesma unidade (por exemplo, pressão arterial em mmHg). O resultado é expresso na própria unidade do desfecho, o que facilita a interpretação.
+
+- **Diferença de médias padronizada (SMD, *Standardized Mean Difference*)** → Utilizada quando os estudos medem o mesmo desfecho com escalas ou instrumentos diferentes (por exemplo, questionários distintos de dor). O resultado é expresso em unidades de desvio padrão.
+
+Observe que, na nossa planilha, as médias do estudo de Gruen (entre 22 e 25) são bem maiores do que as dos demais estudos (entre 5 e 13). Isso indica que o desfecho não foi medido da mesma forma em todos os estudos. Por isso, neste exemplo, usaremos a **SMD**.
+
+💡 Como referência aproximada, valores de SMD em torno de 0,2 costumam ser considerados efeitos pequenos; em torno de 0,5, moderados; e a partir de 0,8, grandes.
+
+## Criando sua Metanálise
+
+A função `metacont()` é utilizada para realizar metanálises de desfechos contínuos.
+
+### Principais argumentos da função `metacont()`
+
+- **n.e** → Número de participantes no grupo experimental.
+
+- **mean.e** → Média do desfecho no grupo experimental.
+
+- **sd.e** → Desvio padrão do desfecho no grupo experimental.
+
+- **n.c**, **mean.c** e **sd.c** → Os mesmos dados para o grupo controle.
+
+- **data** → Nome do *data frame* contendo os dados da metanálise (neste exemplo, `cont`).
+
+- **studlab** → Nome da coluna contendo a identificação dos estudos (por exemplo, `Author`).
+
+- **sm** → Medida de efeito utilizada: `"MD"` (diferença de médias) ou `"SMD"` (diferença de médias padronizada).
+
+- **method.smd** → Método de cálculo da SMD. O padrão é `"Hedges"` (*g* de Hedges), que corrige o viés da SMD em estudos pequenos.
+
+- **method.tau** → Método utilizado para estimar a variância entre os estudos. Assim como no capítulo 7, usaremos `"DL"` (*DerSimonian-Laird*).
+
+## Exemplo de Código
+
+```{r}
+m.cont <- metacont(
+  n.e,
+  mean.e,
+  sd.e,
+  n.c,
+  mean.c,
+  sd.c,
+  data = cont,
+  studlab = Author,
+  sm = "SMD",
+  method.smd = "Hedges",
+  method.tau = "DL"
+)
+```
+
+## O que acontece aqui?
+
+O comando acima cria um novo objeto chamado **m.cont**, que armazenará todos os resultados da metanálise referente ao desfecho **utilização de serviços médicos**.
+
+Para cada estudo, a função calcula a SMD entre o grupo que recebeu psicoterapia (experimental) e o grupo controle e, em seguida, combina os resultados de todos os estudos em uma estimativa única.
+
+## Visualizando os Resultados da Metanálise
+
+Assim como no capítulo 7, utilizamos a função `summary()`:
+
+```{r}
+summary(m.cont)
+```
+
+## Interpretando os Resultados
+
+- **Efeito combinado** → No modelo de efeitos aleatórios, a SMD foi de −0,34 (IC 95%: −0,61 a −0,08; p = 0,01). O valor negativo indica que a média do grupo psicoterapia foi menor do que a do grupo controle.
+
+- **Direção do efeito** → Como valores menores indicam menor utilização de serviços médicos, o resultado mostra que os pacientes que receberam psicoterapia utilizaram menos os serviços médicos. Pela referência apresentada acima, trata-se de um efeito entre pequeno e moderado.
+
+- **Heterogeneidade** → O I² foi de 0%, indicando resultados consistentes entre os estudos. Por isso, os modelos de efeito comum e de efeitos aleatórios produziram o mesmo resultado. Observe, porém, que o intervalo de confiança do I² vai de 0% a 79,2%: com apenas 5 estudos, a estimativa da heterogeneidade é pouco precisa.
+
+## Criando o Forest Plot
+
+A função `forest()` funciona da mesma forma que no capítulo 7. Em desfechos contínuos, o gráfico exibe a média, o desvio padrão e o número de participantes de cada grupo.
+
+```{r}
+#| fig-width: 12
+#| fig-height: 3.6
+forest(
+  m.cont,
+  layout = "Revman5",
+  label.e = "Psicoterapia",
+  label.c = "Controle",
+  label.left = "Favorece psicoterapia",
+  col.label.left = "black",
+  ff.lr = "bold",
+  label.right = "Favorece controle",
+  col.label.right = "black",
+  random = TRUE,
+  common = FALSE,
+  digits.mean = 1,
+  digits.sd = 2,
+  col.square = "darkblue",
+  col.square.lines = "black",
+  col.diamond = "black"
+)
+```
+
+## Principais Argumentos da Função `forest()`
+
+Os principais argumentos já foram apresentados no capítulo 7. A seguir, destacamos os que mudam em desfechos contínuos.
+
+### `digits.mean` e `digits.sd`
+
+Controlam o número de casas decimais exibidas para as médias e os desvios padrão de cada grupo.
+
+### `label.left` e `label.right`
+
+Em desfechos contínuos, o lado favorecido depende do significado da escala. Neste exemplo, valores menores representam menor utilização de serviços médicos, então o lado esquerdo favorece a psicoterapia. Se valores maiores fossem desejáveis (por exemplo, em um escore de qualidade de vida), os rótulos deveriam ser invertidos.
+
+## Resumo do Tutorial
+
+Ao final deste capítulo, aprendemos como realizar uma metanálise de desfechos contínuos utilizando o pacote **meta**.
+
+Em resumo:
+
+- Organizamos a planilha com o número de participantes, a média e o desvio padrão de cada grupo;
+
+- Escolhemos entre a diferença de médias (MD) e a diferença de médias padronizada (SMD);
+
+- Realizamos a metanálise com a função `metacont()`;
+
+- Interpretamos o efeito combinado e a heterogeneidade com a função `summary()`;
+
+- Construímos o **Forest Plot** e ajustamos os rótulos de acordo com a direção do efeito.

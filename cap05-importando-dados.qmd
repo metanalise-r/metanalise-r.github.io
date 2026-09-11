@@ -15,7 +15,7 @@ names(ma) <- sheet_names
 ::: {.callout-note}
 ## Planilha de exemplo
 
-Para acompanhar os capítulos 5 a 7, baixe a planilha [data.xlsx](data.xlsx) e salve-a no seu diretório de trabalho. Ela reúne os dados de 7 ensaios clínicos sobre o uso de aspirina para prevenir mortes após infarto do miocárdio, um exemplo clássico de meta-análise de desfecho binário (Fleiss JL. The statistical basis of meta-analysis. *Statistical Methods in Medical Research*, 1993;2:121-45), também disponível no pacote `meta` como `Fleiss1993bin`.
+Para acompanhar os capítulos 5, 6, 7 e 9, baixe a planilha [data.xlsx](data.xlsx) e salve-a no seu diretório de trabalho. Ela reúne os dados de 7 ensaios clínicos sobre o uso de aspirina para prevenir mortes após infarto do miocárdio, um exemplo clássico de meta-análise de desfecho binário (Fleiss JL. The statistical basis of meta-analysis. *Statistical Methods in Medical Research*, 1993;2:121-45), também disponível no pacote `meta` como `Fleiss1993bin`.
 :::
 
 ## Preparando seus Dados

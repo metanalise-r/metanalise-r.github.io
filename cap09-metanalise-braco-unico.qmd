@@ -1,0 +1,163 @@
+# Meta-análise de braço único
+
+```{r}
+#| include: false
+library(readxl)
+library(meta)
+acm <- as.data.frame(read_excel("data.xlsx", sheet = "acm"))
+```
+
+Até aqui, todas as metanálises compararam dois grupos (experimental e controle). Em muitas situações, porém, cada estudo informa apenas um grupo, e o interesse está em estimar a frequência de um evento: por exemplo, a prevalência de uma doença, a taxa de complicações de um procedimento ou a proporção de pacientes que respondem a um tratamento em estudos sem grupo controle.
+
+Nesses casos, realizamos uma **metanálise de braço único** (*single-arm meta-analysis*), que combina as proporções observadas em cada estudo em uma proporção única.
+
+## Carregando os Pacotes
+
+Assim como no capítulo anterior, usaremos os pacotes `readxl` e `meta`:
+
+```r
+library(readxl)   # Importar planilhas do Excel
+library(meta)     # Realizar a metanálise
+```
+
+## Preparando seu Conjunto de Dados
+
+Em uma metanálise de proporções, cada estudo precisa informar apenas:
+
+- o número de eventos (por exemplo, número de óbitos ou de casos da doença);
+- o número total de participantes.
+
+Neste capítulo, para fins didáticos, vamos reaproveitar a aba `acm` da planilha [data.xlsx](data.xlsx), apresentada no capítulo 5. Usaremos apenas o grupo aspirina de cada estudo (colunas `event.e` e `n.e`), como se cada ensaio tivesse um único braço. A pergunta passa a ser: **qual a proporção de óbitos entre os pacientes que usaram aspirina após o infarto do miocárdio?**
+
+```{r}
+acm <- as.data.frame(read_excel("data.xlsx", sheet = "acm"))
+
+acm[, c("Author", "Year", "event.e", "n.e")]
+```
+
+💡 Em uma revisão com estudos de braço único de verdade, a planilha teria apenas as colunas de identificação do estudo, número de eventos e número total de participantes.
+
+## Por que Transformar as Proporções?
+
+Proporções têm características que dificultam a sua combinação direta: ficam sempre entre 0 e 1, e a sua variância depende do próprio valor da proporção, sendo muito pequena quando a proporção se aproxima de 0 ou de 1. Por isso, as proporções costumam ser transformadas antes da metanálise e, ao final, os resultados são convertidos de volta para a escala original.
+
+As opções mais utilizadas no pacote `meta` são:
+
+- **`"PLOGIT"`** → Transformação logit (padrão do pacote).
+
+- **`"PFT"`** → Transformação de Freeman-Tukey (arco-seno duplo).
+
+- **`"PRAW"`** → Proporções sem transformação.
+
+Atualmente, recomenda-se utilizar a transformação logit combinada a um modelo linear generalizado misto (GLMM), que analisa diretamente o número de eventos de cada estudo (Schwarzer G et al. *Research Synthesis Methods*, 2019;10:476-83).
+
+## Criando sua Metanálise
+
+A função `metaprop()` é utilizada para realizar metanálises de proporções.
+
+### Principais argumentos da função `metaprop()`
+
+- **event** → Número de eventos em cada estudo (neste exemplo, `event.e`).
+
+- **n** → Número total de participantes em cada estudo (neste exemplo, `n.e`).
+
+- **data** → Nome do *data frame* contendo os dados da metanálise (neste exemplo, `acm`).
+
+- **studlab** → Nome da coluna contendo a identificação dos estudos (por exemplo, `Author`).
+
+- **sm** → Transformação utilizada: `"PLOGIT"`, `"PFT"` ou `"PRAW"`.
+
+- **method** → Método utilizado para combinar os estudos. Usaremos `"GLMM"`; a alternativa clássica é `"Inverse"` (inverso da variância).
+
+## Exemplo de Código
+
+```{r}
+m.prop <- metaprop(
+  event.e,
+  n.e,
+  data = acm,
+  studlab = Author,
+  sm = "PLOGIT",
+  method = "GLMM"
+)
+```
+
+## O que acontece aqui?
+
+O comando acima cria um novo objeto chamado **m.prop**, que armazenará a proporção de óbitos de cada estudo, a proporção combinada e as medidas de heterogeneidade.
+
+💡 Com `method = "GLMM"`, a variância entre os estudos (Tau²) é estimada por máxima verossimilhança. Por isso, não é necessário informar o argumento `method.tau`.
+
+## Visualizando os Resultados da Metanálise
+
+```{r}
+summary(m.prop)
+```
+
+## Interpretando os Resultados
+
+- **Proporção combinada** → No modelo de efeitos aleatórios, a proporção combinada de óbitos foi de 10,4% (IC 95%: 8,1% a 13,4%).
+
+- **Efeito comum × efeitos aleatórios** → O modelo de efeito comum estimou 15,0%, um valor bem mais alto. Isso acontece porque esse modelo dá grande peso ao estudo ISIS-2, que sozinho reúne 60,5% dos participantes e apresenta a maior proporção de óbitos (18,3%). Quando há heterogeneidade importante, o modelo de efeitos aleatórios é o mais adequado.
+
+- **Heterogeneidade** → O I² foi de 96,9%, indicando heterogeneidade muito alta. Isso é comum em metanálises de braço único, pois os estudos podem diferir em população, tempo de acompanhamento e contexto. Por isso, a proporção combinada deve ser interpretada com cautela.
+
+- **Sem grupo de comparação** → Uma metanálise de braço único descreve a frequência de um evento, mas não permite concluir se a aspirina aumenta ou reduz a mortalidade. Para isso, é necessária a comparação com um grupo controle, como fizemos no capítulo 7.
+
+## Criando o Forest Plot
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3.8
+forest(
+  m.prop,
+  common = FALSE,
+  random = TRUE,
+  pscale = 100,
+  digits = 1,
+  xlab = "Óbitos (%)",
+  smlab = "Proporção de óbitos (%)",
+  leftlabs = c("Estudo", "Óbitos", "Total"),
+  rightlabs = c("Proporção (%)", "IC 95%"),
+  colgap.left = "10mm",
+  col.square = "darkblue",
+  col.square.lines = "black",
+  col.diamond = "black"
+)
+```
+
+## Principais Argumentos da Função `forest()`
+
+### `pscale`
+
+Multiplica as proporções por um valor. Com `pscale = 100`, os resultados são apresentados em porcentagem.
+
+### `leftlabs`, `rightlabs` e `smlab`
+
+Definem os títulos das colunas exibidas à esquerda e à direita do gráfico e o título da medida de efeito, permitindo traduzi-los para o português.
+
+### `colgap.left`
+
+Aumenta o espaço entre as colunas da esquerda, evitando que os textos fiquem sobrepostos ao gráfico.
+
+### `xlab`
+
+Define o rótulo do eixo horizontal do gráfico.
+
+## Resumo do Tutorial
+
+Ao final deste capítulo, aprendemos como realizar uma metanálise de braço único utilizando o pacote **meta**.
+
+Em resumo:
+
+- Entendemos quando utilizar uma metanálise de braço único;
+
+- Organizamos os dados com o número de eventos e o número total de participantes de cada estudo;
+
+- Conhecemos as principais transformações para proporções;
+
+- Realizamos a metanálise com a função `metaprop()`;
+
+- Interpretamos a proporção combinada, a diferença entre os modelos e a heterogeneidade;
+
+- Construímos o **Forest Plot** com os resultados em porcentagem.
