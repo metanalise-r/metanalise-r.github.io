@@ -15,6 +15,8 @@ book:
   repo-url: https://github.com/metanalise-r/metanalise-r.github.io
   repo-actions: [issue]
   search: true
+  page-footer:
+    center: "Conteúdo licenciado sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.pt-br)"
   chapters:
     - index.qmd
     - cap01-instalando-r-rstudio.qmd

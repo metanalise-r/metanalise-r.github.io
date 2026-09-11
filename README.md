@@ -16,3 +16,7 @@ quarto render    # gera o site completo em _book/
 ```sh
 quarto publish gh-pages
 ```
+
+## Licença
+
+Conteúdo licenciado sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Texto completo em [LICENSE](LICENSE).

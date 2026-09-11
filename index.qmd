@@ -29,3 +29,7 @@ Novos capítulos, sobre desfechos contínuos, meta-análise de braço único e v
 Material desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).
 
 Encontrou um erro ou tem uma sugestão? Use o link **Criar uma issue**, no alto da página à direita, para nos avisar.
+
+## Licença
+
+Este material está licenciado sob a [Licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Você pode copiar, redistribuir e adaptar o conteúdo para qualquer finalidade, inclusive comercial, desde que dê o devido crédito aos autores e indique se fez alterações.
