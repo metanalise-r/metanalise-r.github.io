@@ -52,9 +52,6 @@ knitr::kable(ma$acm)
 Cada desfecho da sua metanálise deve estar em uma planilha separada dentro do mesmo arquivo do Excel.
 
 **Exemplo:** uma aba `acm` para *All-Cause Mortality* (mortalidade por todas as causas) e outra `mb` para *Major Bleeding* (sangramento maior). A planilha de exemplo deste livro tem apenas a aba `acm`.
-
-<!-- 📌 (Inserir imagem mostrando um arquivo Excel com as abas "acm" e "mb".) -->
-
 ## Definindo o Diretório de Trabalho no RStudio
 
 Uma vez que seu conjunto de dados no Excel esteja pronto, você deve salvá-lo em uma pasta específica do seu computador. Essa pasta será chamada de **Diretório de Trabalho (Working Directory - WD)**.
@@ -137,7 +134,7 @@ View(ma$acm)   # Visualizar a aba "acm" (All-Cause Mortality)
 View(ma$mb)    # Visualizar a aba "mb" (Major Bleeding)
 ```
 
-<!-- 📌 (Inserir imagem mostrando os dados sendo visualizados no RStudio usando View().) -->
+![Visualizador de dados do RStudio aberto com `View(ma$acm)`.](imagens/cap05-view-rstudio.png){width="85%"}
 
 Também podemos visualizar um resumo inicial utilizando a função `head()`, que exibe as primeiras linhas do conjunto de dados.
 

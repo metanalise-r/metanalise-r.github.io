@@ -60,7 +60,7 @@ m.acm <- ma$acm
 
 Esse código extrai a planilha **acm** do objeto **ma** e a armazena em um novo objeto chamado **m.acm**, permitindo que ela seja manipulada de forma independente.
 
-<!-- 📌 (Inserir imagem mostrando o ambiente do RStudio após a criação do objeto `m.acm`.) -->
+![Painel *Environment* do RStudio após a criação do objeto `m.acm`.](imagens/cap06-environment-rstudio.png){width="70%"}
 
 ------------------------------------------------------------------------
 
@@ -150,9 +150,6 @@ m.acm <- as.data.frame(m.acm)
 ## Selecionando Variáveis de um Conjunto de Dados
 
 O R não reconhece automaticamente os nomes das variáveis. Para acessá-las, é necessário indicar o objeto ao qual pertencem.
-
-<!-- 📌 (Inserir imagem mostrando o objeto `ma$acm` no RStudio.) -->
-
 ### Erro comum
 
 Tentar utilizar uma variável sem informar o objeto de origem.
