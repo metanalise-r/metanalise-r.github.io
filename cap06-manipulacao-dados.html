@@ -225,7 +225,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#selecionando-variáveis-de-um-conjunto-de-dados" id="toc-selecionando-variáveis-de-um-conjunto-de-dados" class="nav-link" data-scroll-target="#selecionando-variáveis-de-um-conjunto-de-dados"><span class="header-section-number">6.5</span> Selecionando Variáveis de um Conjunto de Dados</a>
   <ul class="collapse">
-  <li><a href="#erro-comum" id="toc-erro-comum" class="nav-link" data-scroll-target="#erro-comum">Erro comum</a></li>
   <li><a href="#selecionando-uma-única-variável" id="toc-selecionando-uma-única-variável" class="nav-link" data-scroll-target="#selecionando-uma-única-variável">1. Selecionando uma única variável</a></li>
   <li><a href="#selecionando-um-intervalo-de-linhas" id="toc-selecionando-um-intervalo-de-linhas" class="nav-link" data-scroll-target="#selecionando-um-intervalo-de-linhas">2. Selecionando um intervalo de linhas</a></li>
   <li><a href="#selecionando-múltiplas-colunas" id="toc-selecionando-múltiplas-colunas" class="nav-link" data-scroll-target="#selecionando-múltiplas-colunas">3. Selecionando múltiplas colunas</a></li>
@@ -300,7 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="o-que-acontece-aqui" class="level4">
 <h4 class="anchored" data-anchor-id="o-que-acontece-aqui">O que acontece aqui?</h4>
 <p>Esse código extrai a planilha <strong>acm</strong> do objeto <strong>ma</strong> e a armazena em um novo objeto chamado <strong>m.acm</strong>, permitindo que ela seja manipulada de forma independente.</p>
-<!-- 📌 (Inserir imagem mostrando o ambiente do RStudio após a criação do objeto `m.acm`.) -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imagens/cap06-environment-rstudio.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Painel <em>Environment</em> do RStudio após a criação do objeto <code>m.acm</code>.</figcaption>
+</figure>
+</div>
 <hr>
 </section>
 </section>
@@ -396,10 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="selecionando-variáveis-de-um-conjunto-de-dados" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="selecionando-variáveis-de-um-conjunto-de-dados"><span class="header-section-number">6.5</span> Selecionando Variáveis de um Conjunto de Dados</h2>
-<p>O R não reconhece automaticamente os nomes das variáveis. Para acessá-las, é necessário indicar o objeto ao qual pertencem.</p>
-<!-- 📌 (Inserir imagem mostrando o objeto `ma$acm` no RStudio.) -->
-<section id="erro-comum" class="level3">
-<h3 class="anchored" data-anchor-id="erro-comum">Erro comum</h3>
+<p>O R não reconhece automaticamente os nomes das variáveis. Para acessá-las, é necessário indicar o objeto ao qual pertencem. ### Erro comum</p>
 <p>Tentar utilizar uma variável sem informar o objeto de origem.</p>
 <section id="exemplo-incorreto" class="level4">
 <h4 class="anchored" data-anchor-id="exemplo-incorreto">Exemplo incorreto</h4>
@@ -411,7 +412,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Esse comando retornará um erro, pois o R não sabe onde procurar a variável <strong>Author</strong>.</p>
-</section>
 </section>
 <section id="selecionando-uma-única-variável" class="level3">
 <h3 class="anchored" data-anchor-id="selecionando-uma-única-variável">1. Selecionando uma única variável</h3>
