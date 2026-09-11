@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Importando dados – Meta-análise no R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./cap06-manipulacao-dados.html" rel="next">
+<link href="./cap04-pacotes-metanalise.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bf8030b5a8b8f2de5bceddfb8bf38a1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap05-importando-dados.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importando dados</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Meta-análise no R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/metanalise-r/metanalise-r.github.io" title="Código fonte" class="quarto-navigation-tool px-1" aria-label="Código fonte"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apresentação</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap01-instalando-r-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Baixando e instalando o R e o RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap02-entendendo-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entendendo o RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap03-introducao-pacotes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução aos pacotes no R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap04-pacotes-metanalise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pacotes utilizados para realizar meta-análises</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap05-importando-dados.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importando dados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap06-manipulacao-dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap07-metanalise-binarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos binários</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#preparando-seus-dados" id="toc-preparando-seus-dados" class="nav-link active" data-scroll-target="#preparando-seus-dados"><span class="header-section-number">5.1</span> Preparando seus Dados</a>
+  <ul class="collapse">
+  <li><a href="#boas-práticas-ao-estruturar-seus-dados-no-excel" id="toc-boas-práticas-ao-estruturar-seus-dados-no-excel" class="nav-link" data-scroll-target="#boas-práticas-ao-estruturar-seus-dados-no-excel">Boas práticas ao estruturar seus dados no Excel</a></li>
+  </ul></li>
+  <li><a href="#passo-1-estruturando-corretamente-seu-conjunto-de-dados-no-excel" id="toc-passo-1-estruturando-corretamente-seu-conjunto-de-dados-no-excel" class="nav-link" data-scroll-target="#passo-1-estruturando-corretamente-seu-conjunto-de-dados-no-excel"><span class="header-section-number">5.2</span> Passo 1: Estruturando corretamente seu conjunto de dados no Excel</a></li>
+  <li><a href="#passo-2-criando-planilhas-separadas-para-cada-desfecho-da-metanálise" id="toc-passo-2-criando-planilhas-separadas-para-cada-desfecho-da-metanálise" class="nav-link" data-scroll-target="#passo-2-criando-planilhas-separadas-para-cada-desfecho-da-metanálise"><span class="header-section-number">5.3</span> Passo 2: Criando planilhas separadas para cada desfecho da metanálise</a></li>
+  <li><a href="#definindo-o-diretório-de-trabalho-no-rstudio" id="toc-definindo-o-diretório-de-trabalho-no-rstudio" class="nav-link" data-scroll-target="#definindo-o-diretório-de-trabalho-no-rstudio"><span class="header-section-number">5.4</span> Definindo o Diretório de Trabalho no RStudio</a>
+  <ul class="collapse">
+  <li><a href="#como-definir-o-diretório-de-trabalho-wd" id="toc-como-definir-o-diretório-de-trabalho-wd" class="nav-link" data-scroll-target="#como-definir-o-diretório-de-trabalho-wd">Como definir o Diretório de Trabalho (WD)</a></li>
+  </ul></li>
+  <li><a href="#importando-seu-conjunto-de-dados-para-o-r" id="toc-importando-seu-conjunto-de-dados-para-o-r" class="nav-link" data-scroll-target="#importando-seu-conjunto-de-dados-para-o-r"><span class="header-section-number">5.5</span> Importando seu Conjunto de Dados para o R</a></li>
+  <li><a href="#passo-1-instalar-e-carregar-o-pacote-readxl" id="toc-passo-1-instalar-e-carregar-o-pacote-readxl" class="nav-link" data-scroll-target="#passo-1-instalar-e-carregar-o-pacote-readxl"><span class="header-section-number">5.6</span> Passo 1: Instalar e carregar o pacote <code>readxl</code></a></li>
+  <li><a href="#passo-2-listar-os-nomes-das-planilhas-do-arquivo-excel" id="toc-passo-2-listar-os-nomes-das-planilhas-do-arquivo-excel" class="nav-link" data-scroll-target="#passo-2-listar-os-nomes-das-planilhas-do-arquivo-excel"><span class="header-section-number">5.7</span> Passo 2: Listar os nomes das planilhas do arquivo Excel</a></li>
+  <li><a href="#passo-3-importar-os-dados-para-o-rstudio" id="toc-passo-3-importar-os-dados-para-o-rstudio" class="nav-link" data-scroll-target="#passo-3-importar-os-dados-para-o-rstudio"><span class="header-section-number">5.8</span> Passo 3: Importar os dados para o RStudio</a></li>
+  <li><a href="#passo-4-renomear-os-elementos-da-lista" id="toc-passo-4-renomear-os-elementos-da-lista" class="nav-link" data-scroll-target="#passo-4-renomear-os-elementos-da-lista"><span class="header-section-number">5.9</span> Passo 4: Renomear os elementos da lista</a></li>
+  <li><a href="#visualizando-os-dados" id="toc-visualizando-os-dados" class="nav-link" data-scroll-target="#visualizando-os-dados"><span class="header-section-number">5.10</span> Visualizando os Dados</a></li>
+  <li><a href="#inspecionando-os-dados" id="toc-inspecionando-os-dados" class="nav-link" data-scroll-target="#inspecionando-os-dados"><span class="header-section-number">5.11</span> Inspecionando os Dados</a>
+  <ul class="collapse">
+  <li><a href="#usando-a-função-str" id="toc-usando-a-função-str" class="nav-link" data-scroll-target="#usando-a-função-str">1. Usando a função <code>str()</code></a></li>
+  <li><a href="#usando-a-função-summary" id="toc-usando-a-função-summary" class="nav-link" data-scroll-target="#usando-a-função-summary">2. Usando a função <code>summary()</code></a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Criar uma issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importando dados</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Este tutorial ensinará como preparar e importar dados para o R usando o RStudio.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Planilha de exemplo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para acompanhar os capítulos 5 a 7, baixe a planilha <a href="data.xlsx">data.xlsx</a> e salve-a no seu diretório de trabalho. Ela reúne os dados de 7 ensaios clínicos sobre o uso de aspirina para prevenir mortes após infarto do miocárdio, um exemplo clássico de meta-análise de desfecho binário (Fleiss JL. The statistical basis of meta-analysis. <em>Statistical Methods in Medical Research</em>, 1993;2:121-45), também disponível no pacote <code>meta</code> como <code>Fleiss1993bin</code>.</p>
+</div>
+</div>
+<section id="preparando-seus-dados" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="preparando-seus-dados"><span class="header-section-number">5.1</span> Preparando seus Dados</h2>
+<p>Neste tutorial, usaremos planilhas do Microsoft Excel para armazenar os dados que serão analisados no R.</p>
+<section id="boas-práticas-ao-estruturar-seus-dados-no-excel" class="level3">
+<h3 class="anchored" data-anchor-id="boas-práticas-ao-estruturar-seus-dados-no-excel">Boas práticas ao estruturar seus dados no Excel</h3>
+<section id="o-que-fazer" class="level4">
+<h4 class="anchored" data-anchor-id="o-que-fazer">O que fazer</h4>
+<ul>
+<li><p>Nomeie corretamente as colunas da sua planilha. Se os nomes das colunas forem apropriados desde o início, você economizará tempo, pois não precisará transformá-los depois no R.</p></li>
+<li><p>Use <strong>underline</strong> (<code>_</code>) em vez de espaços nos nomes das colunas.</p></li>
+<li><p>A ordem das colunas na planilha não importa, desde que estejam rotuladas corretamente.</p></li>
+</ul>
+</section>
+<section id="o-que-evitar" class="level4">
+<h4 class="anchored" data-anchor-id="o-que-evitar">O que evitar</h4>
+<ul>
+<li><p>Evite caracteres especiais como <strong>ä</strong>, <strong>ü</strong> e <strong>ö</strong>, pois podem ser distorcidos ao serem importados. Se possível, transforme-os antes da importação.</p></li>
+<li><p>Se houver linhas ou colunas vazias que antes continham dados, exclua-as completamente para evitar que o R interprete esses espaços como valores ausentes.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="passo-1-estruturando-corretamente-seu-conjunto-de-dados-no-excel" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="passo-1-estruturando-corretamente-seu-conjunto-de-dados-no-excel"><span class="header-section-number">5.2</span> Passo 1: Estruturando corretamente seu conjunto de dados no Excel</h2>
+<p>Aqui está um exemplo básico de como formatar sua planilha quando estiver lidando com variáveis binárias (exemplo de endpoints).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Author</th>
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">event.e</th>
+<th style="text-align: right;">n.e</th>
+<th style="text-align: right;">event.c</th>
+<th style="text-align: right;">n.c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">MRC-1</td>
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">615</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">624</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CDP</td>
+<td style="text-align: right;">1976</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">758</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">771</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MRC-2</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">832</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">850</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GASP</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">317</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">309</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PARIS</td>
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">810</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">406</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AMIS</td>
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">246</td>
+<td style="text-align: right;">2267</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">2257</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ISIS-2</td>
+<td style="text-align: right;">1988</td>
+<td style="text-align: right;">1570</td>
+<td style="text-align: right;">8587</td>
+<td style="text-align: right;">1720</td>
+<td style="text-align: right;">8600</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="passo-2-criando-planilhas-separadas-para-cada-desfecho-da-metanálise" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="passo-2-criando-planilhas-separadas-para-cada-desfecho-da-metanálise"><span class="header-section-number">5.3</span> Passo 2: Criando planilhas separadas para cada desfecho da metanálise</h2>
+<p>Cada desfecho da sua metanálise deve estar em uma planilha separada dentro do mesmo arquivo do Excel.</p>
+<p><strong>Exemplo:</strong> uma aba <code>acm</code> para <em>All-Cause Mortality</em> (mortalidade por todas as causas) e outra <code>mb</code> para <em>Major Bleeding</em> (sangramento maior). A planilha de exemplo deste livro tem apenas a aba <code>acm</code>.</p>
+<!-- 📌 (Inserir imagem mostrando um arquivo Excel com as abas "acm" e "mb".) -->
+</section>
+<section id="definindo-o-diretório-de-trabalho-no-rstudio" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="definindo-o-diretório-de-trabalho-no-rstudio"><span class="header-section-number">5.4</span> Definindo o Diretório de Trabalho no RStudio</h2>
+<p>Uma vez que seu conjunto de dados no Excel esteja pronto, você deve salvá-lo em uma pasta específica do seu computador. Essa pasta será chamada de <strong>Diretório de Trabalho (Working Directory - WD)</strong>.</p>
+<p>O WD é essencial, pois é a pasta onde o R buscará seus arquivos de entrada e salvará seus resultados.</p>
+<section id="como-definir-o-diretório-de-trabalho-wd" class="level3">
+<h3 class="anchored" data-anchor-id="como-definir-o-diretório-de-trabalho-wd">Como definir o Diretório de Trabalho (WD)</h3>
+<ol type="1">
+<li><p>Crie uma pasta no seu computador para armazenar seus dados e resultados da metanálise.</p></li>
+<li><p>Defina essa pasta como seu diretório de trabalho no RStudio usando a função <code>setwd()</code>.</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Definindo o diretório de trabalho no RStudio</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/SeuUsuario/Desktop/WD_RStudio"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Salve seu arquivo do Excel (<code>.xlsx</code>) dentro dessa pasta.</li>
+</ol>
+<p><strong>Exemplo:</strong> Nome do arquivo = <code>data.xlsx</code></p>
+</section>
+</section>
+<section id="importando-seu-conjunto-de-dados-para-o-r" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="importando-seu-conjunto-de-dados-para-o-r"><span class="header-section-number">5.5</span> Importando seu Conjunto de Dados para o R</h2>
+<p>Agora que seu arquivo Excel está salvo no Diretório de Trabalho, podemos importá-lo para o R.</p>
+</section>
+<section id="passo-1-instalar-e-carregar-o-pacote-readxl" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="passo-1-instalar-e-carregar-o-pacote-readxl"><span class="header-section-number">5.6</span> Passo 1: Instalar e carregar o pacote <code>readxl</code></h2>
+<p>Para ler arquivos Excel no R, precisamos do pacote <code>readxl</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instalar e carregar o pacote readxl</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="passo-2-listar-os-nomes-das-planilhas-do-arquivo-excel" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="passo-2-listar-os-nomes-das-planilhas-do-arquivo-excel"><span class="header-section-number">5.7</span> Passo 2: Listar os nomes das planilhas do arquivo Excel</h2>
+<p>Podemos usar a função <code>excel_sheets()</code> para verificar todas as abas do nosso arquivo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtendo os nomes das planilhas dentro do arquivo Excel</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sheet_names <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(<span class="st">"data.xlsx"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sheet_names</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "acm"</code></pre>
+</div>
+</div>
+</section>
+<section id="passo-3-importar-os-dados-para-o-rstudio" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="passo-3-importar-os-dados-para-o-rstudio"><span class="header-section-number">5.8</span> Passo 3: Importar os dados para o RStudio</h2>
+<p>Agora vamos importar todas as planilhas do arquivo <code>data.xlsx</code> e convertê-las para um formato adequado para análise no R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Importando os dados de todas as planilhas e convertendo para data frames</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ma <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sheet_names, <span class="cf">function</span>(x) {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> x))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Esse código cria um objeto chamado <strong>ma</strong>, que é uma lista contendo todas as planilhas do Excel convertidas para <strong>data frames</strong>.</p>
+</section>
+<section id="passo-4-renomear-os-elementos-da-lista" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="passo-4-renomear-os-elementos-da-lista"><span class="header-section-number">5.9</span> Passo 4: Renomear os elementos da lista</h2>
+<p>Para facilitar o uso, podemos renomear cada elemento da lista com os nomes das planilhas originais.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ma) <span class="ot">&lt;-</span> sheet_names</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualizando-os-dados" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="visualizando-os-dados"><span class="header-section-number">5.10</span> Visualizando os Dados</h2>
+<p>Agora podemos visualizar os dados que foram importados para o R.</p>
+<p>Para visualizar uma planilha específica, utilize as funções <code>View()</code> ou <code>head()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ma<span class="sc">$</span>acm)   <span class="co"># Visualizar a aba "acm" (All-Cause Mortality)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ma<span class="sc">$</span>mb)    <span class="co"># Visualizar a aba "mb" (Major Bleeding)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<!-- 📌 (Inserir imagem mostrando os dados sendo visualizados no RStudio usando View().) -->
+<p>Também podemos visualizar um resumo inicial utilizando a função <code>head()</code>, que exibe as primeiras linhas do conjunto de dados.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ma<span class="sc">$</span>acm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Author Year event.e  n.e event.c  n.c
+1  MRC-1 1974      49  615      67  624
+2    CDP 1976      44  758      64  771
+3  MRC-2 1979     102  832     126  850
+4   GASP 1979      32  317      38  309
+5  PARIS 1980      85  810      52  406
+6   AMIS 1980     246 2267     219 2257</code></pre>
+</div>
+</div>
+</section>
+<section id="inspecionando-os-dados" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="inspecionando-os-dados"><span class="header-section-number">5.11</span> Inspecionando os Dados</h2>
+<section id="usando-a-função-str" class="level3">
+<h3 class="anchored" data-anchor-id="usando-a-função-str">1. Usando a função <code>str()</code></h3>
+<p>A função <code>str()</code> fornece um resumo da estrutura do conjunto de dados, incluindo o número de observações, variáveis e seus tipos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ma<span class="sc">$</span>acm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   7 obs. of  6 variables:
+ $ Author : chr  "MRC-1" "CDP" "MRC-2" "GASP" ...
+ $ Year   : num  1974 1976 1979 1979 1980 ...
+ $ event.e: num  49 44 102 32 85 246 1570
+ $ n.e    : num  615 758 832 317 810 ...
+ $ event.c: num  67 64 126 38 52 219 1720
+ $ n.c    : num  624 771 850 309 406 ...</code></pre>
+</div>
+</div>
+<section id="interpretação-da-saída" class="level4">
+<h4 class="anchored" data-anchor-id="interpretação-da-saída">Interpretação da saída</h4>
+<ul>
+<li><p>O objeto <strong>acm</strong> é um <strong>data frame</strong> contendo 7 observações e 6 variáveis.</p></li>
+<li><p><code>chr</code> indica que a variável contém texto (por exemplo, <code>Author</code>).</p></li>
+<li><p><code>num</code> indica que a variável contém valores numéricos (por exemplo, <code>Year</code> e <code>event.e</code>).</p></li>
+</ul>
+</section>
+</section>
+<section id="usando-a-função-summary" class="level3">
+<h3 class="anchored" data-anchor-id="usando-a-função-summary">2. Usando a função <code>summary()</code></h3>
+<p>A função <code>summary()</code> fornece estatísticas descritivas das variáveis do conjunto de dados.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ma<span class="sc">$</span>acm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Author               Year         event.e            n.e        
+ Length:7           Min.   :1974   Min.   :  32.0   Min.   : 317.0  
+ Class :character   1st Qu.:1978   1st Qu.:  46.5   1st Qu.: 686.5  
+ Mode  :character   Median :1979   Median :  85.0   Median : 810.0  
+                    Mean   :1979   Mean   : 304.0   Mean   :2026.6  
+                    3rd Qu.:1980   3rd Qu.: 174.0   3rd Qu.:1549.5  
+                    Max.   :1988   Max.   :1570.0   Max.   :8587.0  
+    event.c            n.c      
+ Min.   :  38.0   Min.   : 309  
+ 1st Qu.:  58.0   1st Qu.: 515  
+ Median :  67.0   Median : 771  
+ Mean   : 326.6   Mean   :1974  
+ 3rd Qu.: 172.5   3rd Qu.:1554  
+ Max.   :1720.0   Max.   :8600  </code></pre>
+</div>
+</div>
+<section id="interpretação-da-saída-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretação-da-saída-1">Interpretação da saída</h4>
+<ul>
+<li><p>Para variáveis numéricas, a função <code>summary()</code> exibe o valor mínimo, primeiro quartil, mediana, média, terceiro quartil e valor máximo.</p></li>
+<li><p>Para variáveis categóricas, exibe a frequência de ocorrência de cada categoria.</p></li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/metanalise-r\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cap04-pacotes-metanalise.html" class="pagination-link" aria-label="Pacotes utilizados para realizar meta-análises">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pacotes utilizados para realizar meta-análises</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./cap06-manipulacao-dados.html" class="pagination-link" aria-label="Manipulação de dados no R">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Criar uma issue</a></li></ul></div></div></div></footer></body></html>

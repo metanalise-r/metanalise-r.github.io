@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://metanalise-r.github.io/index.html</loc>
+    <lastmod>2026-09-11T12:24:52.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap01-instalando-r-rstudio.html</loc>
+    <lastmod>2026-09-11T12:24:41.996Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap02-entendendo-rstudio.html</loc>
+    <lastmod>2026-09-11T12:24:42.047Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap03-introducao-pacotes.html</loc>
+    <lastmod>2026-09-11T12:24:42.098Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap04-pacotes-metanalise.html</loc>
+    <lastmod>2026-09-11T12:24:42.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap05-importando-dados.html</loc>
+    <lastmod>2026-09-11T12:24:42.387Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap06-manipulacao-dados.html</loc>
+    <lastmod>2026-09-11T12:26:18.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap07-metanalise-binarios.html</loc>
+    <lastmod>2026-09-11T12:26:17.020Z</lastmod>
+  </url>
+</urlset>
