@@ -1,0 +1,309 @@
+# Meta-análise de desfechos binários
+
+```{r}
+#| include: false
+library(readxl)
+library(meta)
+library(tidyverse)
+sheet_names <- excel_sheets("data.xlsx")
+ma <- lapply(sheet_names, function(x) as.data.frame(read_excel("data.xlsx", sheet = x)))
+names(ma) <- sheet_names
+acm <- ma$acm
+```
+
+## Instalando e Carregando o Pacote `meta`
+
+Antes de começar, precisamos instalar e carregar o pacote `meta`, que contém as funções necessárias para realizar metanálises.
+
+### Passo 1: Instalar e carregar o pacote `meta`
+
+```r
+install.packages("meta")  # Instalar o pacote
+
+library(meta)             # Carregar o pacote
+```
+
+## Preparando seu Conjunto de Dados
+
+Antes de iniciar sua metanálise, é essencial garantir que os dados estejam organizados corretamente. Isso evita erros e facilita a compatibilidade com as funções do R.
+
+Abaixo está um exemplo de como estruturar seu conjunto de dados no Microsoft Excel antes de importá-lo para o R.
+
+```{r}
+#| echo: false
+knitr::kable(ma$acm)
+```
+
+Neste capítulo usamos a planilha de exemplo `data.xlsx`, apresentada no capítulo 5.
+
+Após organizar seu conjunto de dados, importe-o para o R, converta-o para um **data frame** e atribua o nome **acm**, referente ao desfecho **All-Cause Mortality**.
+
+## Criando sua Metanálise
+
+A função `metabin()` é utilizada para realizar metanálises de desfechos binários, ou seja, situações em que existem apenas dois possíveis resultados (por exemplo: vivo/morto, sucesso/fracasso ou sim/não).
+
+### Principais argumentos da função `metabin()`
+
+- **event.e** → Número de eventos no grupo experimental.
+
+- **n.e** → Número total de participantes no grupo experimental.
+
+- **event.c** → Número de eventos no grupo controle.
+
+- **n.c** → Número total de participantes no grupo controle.
+
+- **data** → Nome do *data frame* contendo os dados da metanálise (neste exemplo, `acm`).
+
+- **method** → Método utilizado para combinar os estudos. O padrão é `"MH"` (*Mantel-Haenszel*).
+
+- **method.tau** → Método utilizado para estimar a variância entre os estudos. O padrão é `"DL"` (*DerSimonian-Laird*).
+
+- **sm** → Medida de efeito utilizada. As opções mais comuns são `"RR"` (*Risk Ratio*) e `"OR"` (*Odds Ratio*).
+
+- **method.random.ci** → Método usado para calcular o intervalo de confiança no modelo de efeitos aleatórios. O padrão é `"classic"`; `"HK"` aplica o ajuste de Hartung-Knapp. Em versões antigas do pacote, esse argumento se chamava `hakn`.
+
+- **studlab** → Nome da coluna contendo a identificação dos estudos (por exemplo, `Author`).
+
+## Exemplo de Código
+
+```{r}
+m.acm <- metabin(
+  event.e,
+  n.e,
+  event.c,
+  n.c,
+  data = acm,
+  method = "MH",
+  method.tau = "DL",
+  sm = "OR",
+  method.random.ci = "classic",
+  studlab = Author
+)
+```
+
+## O que acontece aqui?
+
+O comando acima cria um novo objeto chamado **m.acm**, que armazenará todos os resultados da metanálise referente ao desfecho **All-Cause Mortality (ACM)**.
+
+Esse objeto conterá informações como:
+
+- medida de efeito combinada;
+- intervalo de confiança;
+- heterogeneidade;
+- pesos dos estudos;
+- resultados individuais;
+- informações necessárias para construção do **Forest Plot**.
+
+## Visualizando os Resultados da Metanálise
+
+Após executar a função `metabin()`, podemos visualizar um resumo estatístico utilizando a função `summary()`.
+
+### Código
+
+```{r}
+summary(m.acm)
+```
+
+## O que o `summary()` mostra?
+
+A função `summary()` fornece um resumo completo da metanálise, incluindo:
+
+- estimativa da medida de efeito (Odds Ratio ou Risk Ratio);
+
+- intervalo de confiança de 95%;
+
+- número de estudos incluídos;
+
+- peso de cada estudo;
+
+- heterogeneidade entre os estudos;
+
+- estimativa da variância entre estudos (Tau²);
+
+- estatística Q de Cochran;
+
+- valor de I²;
+
+- testes estatísticos referentes ao efeito combinado.
+
+## Criando um Gráfico de Floresta (*Forest Plot*)
+
+Após criar a metanálise e armazenar seus resultados no objeto `m.acm`, podemos visualizar os resultados graficamente utilizando a função `forest()`.
+
+### O que é um *Forest Plot*?
+
+O **Forest Plot** é o gráfico mais utilizado em metanálises. Ele apresenta, de forma visual, o efeito individual de cada estudo incluído na análise, bem como a estimativa combinada de todos os estudos.
+
+Cada estudo é representado por um quadrado, cujo tamanho é proporcional ao seu peso na metanálise, acompanhado por uma linha horizontal correspondente ao intervalo de confiança de 95%. Ao final do gráfico, o efeito combinado é representado por um diamante.
+
+## Código para gerar o Forest Plot
+
+```{r}
+#| fig-width: 12
+#| fig-height: 4.5
+forest(
+  m.acm,
+  layout = "Revman5",
+  sortvar = studlab,
+  label.e = "Aspirina",
+  label.c = "Placebo",
+  label.left = "Favorece aspirina",
+  col.label.left = "black",
+  ff.lr = "bold",
+  label.right = "Favorece placebo",
+  col.label.right = "black",
+  leftcols = c(
+    "studlab",
+    "Year",
+    "event.e",
+    "n.e",
+    "event.c",
+    "n.c",
+    "w.random",
+    "effect",
+    "ci"
+  ),
+  rightcols = FALSE,
+  pooled.events = TRUE,
+  pooled.totals = TRUE,
+  random = TRUE,
+  common = FALSE,
+  diamond.random = TRUE,
+  fs.heading = 12,
+  fs.study = 12,
+  fs.hetstat = 12,
+  colgap = "6mm",
+  digits = 2,
+  digits.pval = 3,
+  col.square = "darkblue",
+  col.square.lines = "black",
+  col.diamond = "black",
+  col.diamond.lines = "black",
+  print.Q = TRUE,
+  print.pval.Q = TRUE,
+  print.tau.ci = TRUE,
+  test.overall.random = TRUE,
+  overall.hetstat = TRUE
+)
+```
+
+## Principais Argumentos da Função `forest()`
+
+A função `forest()` possui diversas opções de personalização. A seguir, são apresentados os argumentos mais importantes utilizados neste tutorial.
+
+### `sortvar`
+
+Define a ordem em que os estudos serão apresentados no gráfico.
+
+Neste exemplo, os estudos são ordenados pela variável `studlab`, que identifica cada estudo.
+
+### `label.e` e `label.c`
+
+Definem os nomes que serão exibidos para os grupos experimental e controle. Em versões antigas do pacote, esses argumentos se chamavam `lab.e` e `lab.c`.
+
+``` text
+label.e = "Aspirina"
+
+label.c = "Placebo"
+```
+
+### `label.left` e `label.right`
+
+Adicionam rótulos indicando a direção do efeito observado.
+
+Esses textos auxiliam na interpretação do gráfico, indicando qual intervenção é favorecida conforme a posição do efeito em relação à linha de nulidade.
+
+### `leftcols`
+
+Define quais informações serão exibidas na tabela localizada à esquerda do gráfico.
+
+Neste exemplo são apresentados:
+
+- Nome do estudo;
+- Ano de publicação;
+- Número de eventos no grupo experimental;
+- Número total de participantes do grupo experimental;
+- Número de eventos no grupo controle;
+- Número total de participantes do grupo controle;
+- Peso do estudo;
+- Medida de efeito;
+- Intervalo de confiança.
+
+### `random` e `common`
+
+Esses argumentos definem qual modelo estatístico será utilizado.
+
+``` text
+random = TRUE
+common = FALSE
+```
+
+Nesse exemplo, será utilizado o modelo de **efeitos aleatórios**, enquanto o modelo de efeitos fixos não será exibido.
+
+### `w.random`
+
+Quando utilizado em `leftcols`, exibe o peso de cada estudo considerando o modelo de efeitos aleatórios.
+
+Caso seja utilizado um modelo de efeitos fixos, normalmente utiliza-se `w.common`.
+
+### `pooled.events` e `pooled.totals`
+
+Esses argumentos adicionam ao gráfico o número total de eventos e o número total de participantes de cada grupo após o agrupamento dos estudos.
+
+### `col.square` e `col.diamond`
+
+Permitem personalizar as cores utilizadas no gráfico.
+
+Neste exemplo:
+
+- os quadrados dos estudos são exibidos em azul escuro;
+- o diamante correspondente ao efeito combinado é exibido em preto.
+
+### `digits` e `digits.pval`
+
+Controlam o número de casas decimais exibidas para as medidas de efeito e para os valores de *p*.
+
+### `overall.hetstat`
+
+Quando definido como `TRUE`, exibe automaticamente as principais estatísticas de heterogeneidade da metanálise, incluindo:
+
+- Estatística Q de Cochran;
+- Valor de *p* da heterogeneidade;
+- I²;
+- Tau².
+
+Essas informações auxiliam na interpretação da consistência entre os estudos incluídos.
+
+## Interpretando o Forest Plot
+
+Após a geração do gráfico, é possível identificar rapidamente:
+
+- a medida de efeito individual de cada estudo;
+
+- os respectivos intervalos de confiança;
+
+- o peso relativo de cada estudo;
+
+- o efeito combinado da metanálise;
+
+- o grau de heterogeneidade entre os estudos.
+
+A interpretação conjunta dessas informações permite avaliar não apenas a magnitude do efeito observado, mas também a consistência dos resultados disponíveis na literatura.
+
+## Resumo do Tutorial
+
+Ao final deste capítulo, aprendemos como realizar uma metanálise de desfechos binários utilizando o pacote **meta**.
+
+Em resumo:
+
+- Instalamos e carregamos o pacote `meta`;
+
+- Organizamos corretamente o conjunto de dados para a análise;
+
+- Realizamos uma metanálise utilizando a função `metabin()`;
+
+- Visualizamos os resultados estatísticos com a função `summary()`;
+
+- Construímos um **Forest Plot** utilizando a função `forest()`;
+
+- Conhecemos os principais argumentos utilizados para personalizar o gráfico e interpretar seus resultados.

@@ -1,0 +1,63 @@
+# Baixando e instalando o R e o RStudio
+
+## Introdução
+
+Antes de começarmos a realizar nossas análises estatísticas, precisamos preparar o ambiente adequado. Isso inclui baixar e instalar um programa que facilite o uso do R. Uma das melhores opções atualmente é o **RStudio**, que fornece uma interface amigável para lidar com dados, pacotes e resultados de forma prática.
+
+A melhor parte é que o RStudio é totalmente gratuito e pode ser baixado a qualquer momento pela internet.
+
+## Entendendo a Relação entre R e RStudio
+
+O RStudio é uma interface que torna a escrita e execução de códigos em R muito mais fácil e eficiente. No entanto, é importante lembrar que o RStudio **não é** o R propriamente dito. Ele funciona como uma ferramenta auxiliar e exige que o software R já esteja instalado no computador.
+
+Outro ponto essencial é que o R é atualizado com frequência. Se sua versão estiver muito desatualizada, alguns pacotes ou comandos podem não funcionar corretamente. Por isso, recomenda-se atualizar o R regularmente --- idealmente, ao menos uma vez ao ano --- instalando a versão mais recente.
+
+## Instruções Passo a Passo para Instalar o R e o RStudio
+
+### 1. Baixar o R
+
+O software R pode ser baixado no site oficial do **Comprehensive R Archive Network (CRAN)**. Siga os passos:
+
+1.  Acesse o site oficial do R: <https://www.r-project.org/>.
+2.  Clique em **Download R**, localizado na seção *Getting Started* no lado esquerdo.
+3.  Escolha o espelho (*mirror*) mais próximo da sua localização.
+4.  Selecione o link de download apropriado para seu sistema operacional (Windows, macOS ou Linux).
+5.  Clique na subpasta **base** e baixe a versão mais recente do R.
+
+### 2. Instalar o R
+
+Após baixar o instalador:
+
+1.  Dê um duplo clique no arquivo baixado.
+2.  Autorize a execução clicando em **Sim**.
+3.  Clique em **Avançar** na tela de boas-vindas.
+4.  Leia e aceite o contrato de licença.
+5.  Escolha os componentes que deseja instalar.
+6.  Recomenda-se instalar o R diretamente no disco **C:**, evitando nomes de diretórios com espaços.
+7.  Clique em **Avançar** para iniciar a instalação.
+8.  Quando for concluída, clique em **Concluir**.
+
+### 3. Baixar o RStudio
+
+Com o R já instalado, prossiga para o RStudio:
+
+1.  Acesse: <https://www.rstudio.com/products/rstudio/download/>.
+2.  Clique em **Download** para o RStudio Desktop.
+3.  Escolha a versão compatível com seu sistema operacional.
+4.  Baixe a versão mais recente do RStudio Desktop.
+
+### 4. Instalar o RStudio
+
+Após baixar o instalador do RStudio:
+
+1.  Dê um duplo clique no arquivo de instalação.
+2.  Autorize a execução clicando em **Sim**.
+3.  Clique em **Avançar**.
+4.  Leia e aceite o contrato de licença.
+5.  Escolha o local de instalação.
+6.  Clique em **Avançar** para iniciar o processo.
+7.  Ao final, clique em **Concluir**.
+
+## Próximos Passos
+
+Com o R e o RStudio devidamente instalados, você está pronto para explorar e realizar análises estatísticas, incluindo metanálises. No próximo capítulo, aprenderemos a instalar os pacotes necessários e a utilizar o R para manipular dados e executar comandos básicos.

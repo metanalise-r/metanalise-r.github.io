@@ -1,0 +1,89 @@
+# Introdução aos pacotes no R
+
+Os pacotes no R são coleções de funções, conjuntos de dados e outros códigos projetados para resolver problemas específicos ou executar determinadas tarefas.
+
+Eles são uma parte essencial da linguagem R, permitindo ampliar sua funcionalidade.
+
+Para se familiarizar com os pacotes do R, você pode explorar a grande variedade de pacotes disponíveis e suas documentações.
+
+O Comprehensive R Archive Network (CRAN) é o principal repositório de pacotes do R. Você pode navegar por sua coleção no link abaixo:
+
+<https://cran.r-project.org/web/packages/index.html>
+
+## Como instalar um pacote no RStudio a partir do CRAN?
+
+Instalar pacotes no R é uma tarefa simples.
+
+Você pode utilizar a função `install.packages()` no console do R.
+
+Por exemplo, para instalar o pacote `meta`, basta digitar:
+
+```r
+install.packages("meta")
+```
+
+Após a instalação, para utilizar um pacote, você precisa carregá-lo na sessão do R usando a função `library()`:
+
+```r
+library(meta)
+```
+
+Isso tornará as funções e os dados do pacote `meta` disponíveis para uso no seu código R.
+
+O pacote `meta` é um dos mais importantes para realizar metanálises no R. No entanto, há outros pacotes que também serão necessários.
+
+Vamos ensiná-lo a instalar cada um à medida que forem utilizados ao longo do curso.
+
+## Instalando os Pacotes Utilizados no Curso
+
+Para garantir que você tenha todas as ferramentas necessárias para suas análises, instale os seguintes pacotes utilizando os códigos abaixo.
+
+### Instalação de Pacotes
+
+```r
+install.packages("meta")
+install.packages("metafor")
+install.packages("remotes")
+install.packages("readr")
+install.packages("readxl")
+install.packages("ggplot2")
+install.packages("tidyverse")
+install.packages("grid")
+install.packages("forestplot")
+```
+
+## Instalação do Pacote dmetar
+
+O pacote `dmetar` não está disponível diretamente no CRAN, mas pode ser instalado a partir do GitHub.
+
+Para isso, siga os passos abaixo:
+
+```r
+## Instalar o pacote "devtools" caso ainda não esteja instalado
+
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+
+## Instalar o dmetar a partir do GitHub
+
+devtools::install_github("MathiasHarrer/dmetar")
+```
+
+## Carregando os Pacotes no R
+
+Após a instalação, carregue os pacotes com o seguinte código para utilizá-los em sua análise:
+
+```r
+library(meta)
+library(metafor)
+library(remotes)
+library(dmetar)
+library(readr)
+library(readxl)
+library(ggplot2)
+library(tidyverse)
+library(grid)
+library(devtools)
+library(forestplot)
+```

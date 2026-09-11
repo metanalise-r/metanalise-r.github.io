@@ -1,0 +1,97 @@
+# Pacotes utilizados para realizar meta-análises
+
+No R, existem diversos pacotes disponíveis para conduzir metanálises. Abaixo estão alguns dos mais utilizados.
+
+### 1. meta
+
+Esse é um pacote abrangente para metanálise, incluindo funções para estimar e visualizar efeitos, testar heterogeneidade, ajustar modelos de metarregressão e realizar análises de subgrupos.
+
+**Como citar:**
+
+Balduzzi S, Rücker G, Schwarzer G (2019). *How to perform a meta-analysis with R: a practical tutorial.* Evidence-Based Mental Health, 153--160.
+
+### 2. metafor
+
+Outro pacote amplamente utilizado para metanálises. Ele oferece funções para calcular e visualizar efeitos, testar heterogeneidade, ajustar modelos de metarregressão, realizar análises de subgrupos e muito mais.
+
+**Como citar:**
+
+Viechtbauer W (2010). *Conducting meta-analyses in R with the metafor package.* Journal of Statistical Software, 36(3), 1--48.
+
+### 3. rmeta
+
+Este pacote oferece funções para metanálises univariadas e multivariadas, incluindo modelos de efeitos fixos e aleatórios.
+
+### 4. metaBMA
+
+Utiliza a abordagem *Bayesian Model Averaging* (BMA) para metanálises. Possui funções para estimar pesos de cada estudo, ajustar modelos de metarregressão e realizar análises de subgrupos.
+
+### 5. netmeta
+
+Pacote projetado para metanálises em redes de tratamento, permitindo comparar múltiplos tratamentos simultaneamente. Possui funções para calcular e visualizar efeitos, testar heterogeneidade e realizar análises de subgrupos.
+
+**Como citar:**
+
+Rücker G, Krahn U, König J, Efthimiou O, Davies A, Papakonstantinou T, Schwarzer G (2022). *netmeta: Network Meta-Analysis using Frequentist Methods.* R package version 2.7-0.
+
+### 6. robust
+
+Fornece métodos robustos para metanálises em situações onde há *outliers* ou estudos influentes. Inclui funções para calcular e visualizar efeitos, testar heterogeneidade e realizar análises de subgrupos usando métodos robustos.
+
+### 7. dmetar
+
+Este pacote foi desenvolvido para análises diagnósticas e metanalíticas de estudos de Differential Item Functioning (DIF) e Differential Test Functioning (DTF). Possui diversas funções para diferentes abordagens de metanálises, incluindo modelos de efeitos fixos e aleatórios, além de ferramentas para criar *forest plots*, *funnel plots* e outras visualizações gráficas.
+
+**Como citar:**
+
+Harrer, M., Cuijpers, P., Furukawa, T. & Ebert, D. D. (2019). *dmetar: Companion R Package For The Guide 'Doing Meta-Analysis in R'.* R package version 0.0.9000.
+
+## Como instalar o pacote dmetar
+
+Este pacote não está disponível no CRAN, mas pode ser instalado diretamente do GitHub usando o código abaixo.
+
+```r
+## Instalar o pacote "devtools" caso ainda não esteja instalado
+
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+
+## Instalar o dmetar a partir do GitHub
+
+devtools::install_github("MathiasHarrer/dmetar")
+```
+
+## Outros Pacotes Úteis
+
+Além dos pacotes específicos para metanálises, há outros que auxiliam na manipulação de dados, visualização gráfica e leitura de arquivos.
+
+### 1. readxl
+
+Permite importar dados de arquivos do Excel para o R. Suporta os formatos `.xls` e `.xlsx`, podendo ler tanto planilhas individuais quanto um livro inteiro.
+
+### 2. ggplot2
+
+Um dos pacotes mais populares para criar gráficos de alta qualidade no R. Baseado na gramática de gráficos, permite criar diversos tipos de visualizações, como gráficos de dispersão, barras, linhas, entre outros.
+
+### 3. tidyverse
+
+Uma coleção de pacotes que trabalham juntos para facilitar a manipulação e visualização de dados no R.
+
+Inclui pacotes como:
+
+- `dplyr` --- manipulação de dados;
+- `ggplot2` --- visualização de dados;
+- `tidyr` --- organização e estruturação de dados.
+
+### 4. readr
+
+Permite a importação rápida e eficiente de arquivos de texto delimitados (`.csv`, `.tsv` e outros formatos). É especialmente útil para lidar com grandes conjuntos de dados.
+
+### 5. remotes
+
+Facilita a instalação e o gerenciamento de pacotes R hospedados em repositórios remotos, como o GitHub.
+
+### 6. grid
+
+Fornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos.

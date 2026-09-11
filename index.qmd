@@ -1,0 +1,31 @@
+# Apresentação {.unnumbered}
+
+Este material ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Foi escrito em português para estudantes da área da saúde e não exige experiência prévia com programação.
+
+## Como usar este material
+
+Os capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no anterior. Neles você encontra:
+
+- a explicação do conceito;
+- o código em R comentado, pronto para copiar pelo botão no canto de cada bloco;
+- orientações para interpretar o que o R devolve.
+
+Recomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 7 usam uma planilha de exemplo, disponível para download no capítulo 5.
+
+## Conteúdo
+
+1. Baixando e instalando o R e o RStudio
+2. Entendendo o RStudio
+3. Introdução aos pacotes no R
+4. Pacotes utilizados para realizar meta-análises
+5. Importando dados
+6. Manipulação de dados no R
+7. Meta-análise de desfechos binários
+
+Novos capítulos, sobre desfechos contínuos, meta-análise de braço único e viés de publicação, estão em elaboração.
+
+## Autoria
+
+Material desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).
+
+Encontrou um erro ou tem uma sugestão? Use o link **Criar uma issue**, no alto da página à direita, para nos avisar.

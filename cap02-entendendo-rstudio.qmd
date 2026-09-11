@@ -1,0 +1,131 @@
+# Entendendo o RStudio
+
+## Explorando a Interface do RStudio
+
+O RStudio possui quatro janelas principais que organizam suas ferramentas e funcionalidades:
+
+- Console\
+- Source\
+- Environment/History\
+- Files/Plots/Packages/Help
+
+Cada janela possui uma funcionalidade específica, e você pode alternar entre elas usando as abas da interface.
+
+## 1. Console
+
+O console é onde você interage diretamente com o R e visualiza os resultados dos seus comandos.
+
+Quando você executa um comando, o resultado aparece aqui, incluindo mensagens de erro ou alertas caso algo esteja incorreto.
+
+Exemplo de operação simples:
+
+```r
+2 + 2
+```
+
+Exemplo de função mais complexa:
+
+```r
+summary(mtcars)
+```
+
+## 2. Source
+
+A janela **Source** é usada para escrever, salvar e executar códigos em arquivos separados.
+
+Para criar um novo script:
+
+1.  Clique em **Arquivo \> Novo Arquivo \> Script R**.
+
+Para executar o código:
+
+- Selecione o trecho desejado e clique em **Executar**
+
+- Ou utilize os atalhos:
+
+  - **Ctrl + Enter** (Windows)
+  - **Command + Enter** (Mac)
+
+Escrever o código no Source é recomendado, pois facilita salvar, editar e organizar seu trabalho.
+
+## 3. Environment e History
+
+A aba **Environment** mostra todos os objetos criados no R, como variáveis, data frames e funções, junto dos seus valores.
+
+A aba **History** exibe a lista de comandos digitados no console, permitindo reutilizá-los facilmente.
+
+Ambas as abas permitem limpar o ambiente e o histórico quando necessário.
+
+## 4. Files, Plots, Packages e Help
+
+Esta janela oferece acesso a arquivos, gráficos, pacotes instalados e ajuda integrada.
+
+### Arquivos (Files)
+
+Mostra o diretório de trabalho atual e permite abrir ou criar arquivos e pastas.
+
+### Gráficos (Plots)
+
+Exibe os gráficos gerados pelo R.
+
+### Pacotes (Packages)
+
+Lista pacotes instalados e permite adicionar ou remover pacotes.
+
+### Ajuda (Help)
+
+Fornece documentação detalhada sobre funções e pacotes.
+
+## Criando um Novo Script no RStudio
+
+1.  Abra a janela Source.
+
+2.  Clique em **Arquivo \> Novo Arquivo \> Script R**.
+
+3.  Escreva seu código no editor.
+
+4.  Execute com:
+
+    - Botão **Executar**
+    - Ou o atalho **Ctrl + Enter** (Windows) / **Cmd + Enter** (Mac)
+
+## Explorando Pacotes no R
+
+O R possui uma grande variedade de pacotes que ampliam suas funcionalidades.
+
+### Instalando um pacote
+
+```r
+install.packages("dplyr")
+```
+
+### Carregando um pacote
+
+```r
+library(dplyr)
+```
+
+Você pode visualizar e gerenciar pacotes na aba **Pacotes**, localizada no canto inferior direito do RStudio.
+
+## Gerenciando o Ambiente e Histórico
+
+- A aba **Environment** permite visualizar e gerenciar objetos criados no R.
+- A aba **History** armazena os comandos anteriores, permitindo reutilizá-los.
+
+## Salvando seu Trabalho
+
+Para salvar o script:
+
+- Clique em **Arquivo \> Salvar**
+
+- Ou utilize:
+
+  - **Ctrl + S** (Windows)
+  - **Cmd + S** (Mac)
+
+## Fechando o RStudio
+
+Para fechar o RStudio:
+
+- Clique em **Arquivo \> Sair**
+- Ou no botão **X** no canto superior direito.

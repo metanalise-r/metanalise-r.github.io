@@ -1,0 +1,178 @@
+# Importando dados
+
+Este tutorial ensinará como preparar e importar dados para o R usando o RStudio.
+
+```{r}
+#| include: false
+library(readxl)
+library(meta)
+library(tidyverse)
+sheet_names <- excel_sheets("data.xlsx")
+ma <- lapply(sheet_names, function(x) as.data.frame(read_excel("data.xlsx", sheet = x)))
+names(ma) <- sheet_names
+```
+
+::: {.callout-note}
+## Planilha de exemplo
+
+Para acompanhar os capítulos 5 a 7, baixe a planilha [data.xlsx](data.xlsx) e salve-a no seu diretório de trabalho. Ela reúne os dados de 7 ensaios clínicos sobre o uso de aspirina para prevenir mortes após infarto do miocárdio, um exemplo clássico de meta-análise de desfecho binário (Fleiss JL. The statistical basis of meta-analysis. *Statistical Methods in Medical Research*, 1993;2:121-45), também disponível no pacote `meta` como `Fleiss1993bin`.
+:::
+
+## Preparando seus Dados
+
+Neste tutorial, usaremos planilhas do Microsoft Excel para armazenar os dados que serão analisados no R.
+
+### Boas práticas ao estruturar seus dados no Excel
+
+#### O que fazer
+
+- Nomeie corretamente as colunas da sua planilha. Se os nomes das colunas forem apropriados desde o início, você economizará tempo, pois não precisará transformá-los depois no R.
+
+- Use **underline** (`_`) em vez de espaços nos nomes das colunas.
+
+- A ordem das colunas na planilha não importa, desde que estejam rotuladas corretamente.
+
+#### O que evitar
+
+- Evite caracteres especiais como **ä**, **ü** e **ö**, pois podem ser distorcidos ao serem importados. Se possível, transforme-os antes da importação.
+
+- Se houver linhas ou colunas vazias que antes continham dados, exclua-as completamente para evitar que o R interprete esses espaços como valores ausentes.
+
+## Passo 1: Estruturando corretamente seu conjunto de dados no Excel
+
+Aqui está um exemplo básico de como formatar sua planilha quando estiver lidando com variáveis binárias (exemplo de endpoints).
+
+```{r}
+#| echo: false
+knitr::kable(ma$acm)
+```
+
+## Passo 2: Criando planilhas separadas para cada desfecho da metanálise
+
+Cada desfecho da sua metanálise deve estar em uma planilha separada dentro do mesmo arquivo do Excel.
+
+**Exemplo:** uma aba `acm` para *All-Cause Mortality* (mortalidade por todas as causas) e outra `mb` para *Major Bleeding* (sangramento maior). A planilha de exemplo deste livro tem apenas a aba `acm`.
+
+<!-- 📌 (Inserir imagem mostrando um arquivo Excel com as abas "acm" e "mb".) -->
+
+## Definindo o Diretório de Trabalho no RStudio
+
+Uma vez que seu conjunto de dados no Excel esteja pronto, você deve salvá-lo em uma pasta específica do seu computador. Essa pasta será chamada de **Diretório de Trabalho (Working Directory - WD)**.
+
+O WD é essencial, pois é a pasta onde o R buscará seus arquivos de entrada e salvará seus resultados.
+
+### Como definir o Diretório de Trabalho (WD)
+
+1.  Crie uma pasta no seu computador para armazenar seus dados e resultados da metanálise.
+
+2.  Defina essa pasta como seu diretório de trabalho no RStudio usando a função `setwd()`.
+
+```r
+## Definindo o diretório de trabalho no RStudio
+
+setwd("/Users/SeuUsuario/Desktop/WD_RStudio")
+```
+
+3.  Salve seu arquivo do Excel (`.xlsx`) dentro dessa pasta.
+
+**Exemplo:** Nome do arquivo = `data.xlsx`
+
+## Importando seu Conjunto de Dados para o R
+
+Agora que seu arquivo Excel está salvo no Diretório de Trabalho, podemos importá-lo para o R.
+
+## Passo 1: Instalar e carregar o pacote `readxl`
+
+Para ler arquivos Excel no R, precisamos do pacote `readxl`.
+
+```r
+## Instalar e carregar o pacote readxl
+
+install.packages("readxl")
+library(readxl)
+```
+
+## Passo 2: Listar os nomes das planilhas do arquivo Excel
+
+Podemos usar a função `excel_sheets()` para verificar todas as abas do nosso arquivo.
+
+```{r}
+## Obtendo os nomes das planilhas dentro do arquivo Excel
+
+sheet_names <- excel_sheets("data.xlsx")
+sheet_names
+```
+
+## Passo 3: Importar os dados para o RStudio
+
+Agora vamos importar todas as planilhas do arquivo `data.xlsx` e convertê-las para um formato adequado para análise no R.
+
+```{r}
+## Importando os dados de todas as planilhas e convertendo para data frames
+
+ma <- lapply(sheet_names, function(x) {
+  as.data.frame(read_excel("data.xlsx", sheet = x))
+})
+```
+
+Esse código cria um objeto chamado **ma**, que é uma lista contendo todas as planilhas do Excel convertidas para **data frames**.
+
+## Passo 4: Renomear os elementos da lista
+
+Para facilitar o uso, podemos renomear cada elemento da lista com os nomes das planilhas originais.
+
+```{r}
+names(ma) <- sheet_names
+```
+
+## Visualizando os Dados
+
+Agora podemos visualizar os dados que foram importados para o R.
+
+Para visualizar uma planilha específica, utilize as funções `View()` ou `head()`.
+
+```r
+View(ma$acm)   # Visualizar a aba "acm" (All-Cause Mortality)
+
+View(ma$mb)    # Visualizar a aba "mb" (Major Bleeding)
+```
+
+<!-- 📌 (Inserir imagem mostrando os dados sendo visualizados no RStudio usando View().) -->
+
+Também podemos visualizar um resumo inicial utilizando a função `head()`, que exibe as primeiras linhas do conjunto de dados.
+
+```{r}
+head(ma$acm)
+```
+
+## Inspecionando os Dados
+
+### 1. Usando a função `str()`
+
+A função `str()` fornece um resumo da estrutura do conjunto de dados, incluindo o número de observações, variáveis e seus tipos.
+
+```{r}
+str(ma$acm)
+```
+
+#### Interpretação da saída
+
+- O objeto **acm** é um **data frame** contendo 7 observações e 6 variáveis.
+
+- `chr` indica que a variável contém texto (por exemplo, `Author`).
+
+- `num` indica que a variável contém valores numéricos (por exemplo, `Year` e `event.e`).
+
+### 2. Usando a função `summary()`
+
+A função `summary()` fornece estatísticas descritivas das variáveis do conjunto de dados.
+
+```{r}
+summary(ma$acm)
+```
+
+#### Interpretação da saída
+
+- Para variáveis numéricas, a função `summary()` exibe o valor mínimo, primeiro quartil, mediana, média, terceiro quartil e valor máximo.
+
+- Para variáveis categóricas, exibe a frequência de ocorrência de cada categoria.
