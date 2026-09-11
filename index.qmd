@@ -90,6 +90,18 @@ Material desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. A
 
 Encontrou um erro ou tem uma sugestão? Use o link **Relatar um problema**, no alto da página à direita, para nos avisar.
 
+## Como citar
+
+O material tem registro permanente no Zenodo, com o DOI [10.5281/zenodo.22710110](https://doi.org/10.5281/zenodo.22710110). Esse DOI sempre leva à versão mais recente.
+
+**ABNT**
+
+DIAZ, Camilo André Viana; FERNANDES, Ana Paula. **Meta-análise no R**: guia prático para estudantes da área da saúde. Zenodo, 2026. DOI: 10.5281/zenodo.22710110. Disponível em: https://metanalise-r.github.io.
+
+**Vancouver**
+
+Diaz CAV, Fernandes AP. Meta-análise no R: guia prático para estudantes da área da saúde [Internet]. Zenodo; 2026. Disponível em: https://doi.org/10.5281/zenodo.22710110
+
 ## Licença
 
 Este material está licenciado sob a [Licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Você pode copiar, redistribuir e adaptar o conteúdo para qualquer finalidade, inclusive comercial, desde que dê o devido crédito aos autores e indique se fez alterações.
