@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://metanalise-r.github.io/index.html</loc>
-    <lastmod>2026-09-11T13:54:26.691Z</lastmod>
+    <lastmod>2026-09-11T14:20:36.266Z</lastmod>
   </url>
   <url>
     <loc>https://metanalise-r.github.io/cap01-instalando-r-rstudio.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://metanalise-r.github.io/cap05-importando-dados.html</loc>
-    <lastmod>2026-09-11T13:04:58.789Z</lastmod>
+    <lastmod>2026-09-11T14:20:29.332Z</lastmod>
   </url>
   <url>
     <loc>https://metanalise-r.github.io/cap06-manipulacao-dados.html</loc>
@@ -30,6 +30,18 @@
   </url>
   <url>
     <loc>https://metanalise-r.github.io/cap07-metanalise-binarios.html</loc>
-    <lastmod>2026-09-11T12:26:17.020Z</lastmod>
+    <lastmod>2026-09-11T14:20:27.578Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap08-metanalise-continuos.html</loc>
+    <lastmod>2026-09-11T14:22:25.693Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap09-metanalise-braco-unico.html</loc>
+    <lastmod>2026-09-11T14:22:25.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://metanalise-r.github.io/cap10-vies-publicacao.html</loc>
+    <lastmod>2026-09-11T14:22:25.695Z</lastmod>
   </url>
 </urlset>

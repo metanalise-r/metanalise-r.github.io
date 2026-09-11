@@ -14,7 +14,7 @@
     "href": "index.html#como-usar-este-material",
     "title": "Meta-análise no R",
     "section": "Como usar este material",
-    "text": "Como usar este material\nOs capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no anterior. Neles você encontra:\n\na explicação do conceito;\no código em R comentado, pronto para copiar pelo botão no canto de cada bloco;\norientações para interpretar o que o R devolve.\n\nRecomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 7 usam uma planilha de exemplo, disponível para download no capítulo 5.",
+    "text": "Como usar este material\nOs capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no anterior. Neles você encontra:\n\na explicação do conceito;\no código em R comentado, pronto para copiar pelo botão no canto de cada bloco;\norientações para interpretar o que o R devolve.\n\nRecomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 10 usam planilhas de exemplo, disponíveis para download nos próprios capítulos.",
     "crumbs": [
       "Apresentação"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#conteúdo",
     "title": "Meta-análise no R",
     "section": "Conteúdo",
-    "text": "Conteúdo\n\n\nCapítulo 1\nBaixando e instalando o R e o RStudio\nO que são o R e o RStudio e como instalar os dois, passo a passo.\n\n\nCapítulo 2\nEntendendo o RStudio\nOs painéis da interface, scripts, pacotes e como salvar seu trabalho.\n\n\nCapítulo 3\nIntrodução aos pacotes no R\nComo instalar e carregar pacotes, incluindo os usados neste material.\n\n\nCapítulo 4\nPacotes utilizados para realizar meta-análises\nmeta, metafor, dmetar e outros pacotes úteis para meta-análise.\n\n\nCapítulo 5\nImportando dados\nBoas práticas na planilha e importação dos dados do Excel para o R.\n\n\nCapítulo 6\nManipulação de dados no R\nOperadores do R, tidyverse e seleção de variáveis, linhas e colunas.\n\n\nCapítulo 7\nMeta-análise de desfechos binários\nA função metabin(), o resumo dos resultados e o forest plot, argumento por argumento.\n\n\nEm elaboração\nPróximos capítulos\nDesfechos contínuos, meta-análise de braço único e viés de publicação.",
+    "text": "Conteúdo\n\n\nCapítulo 1\nBaixando e instalando o R e o RStudio\nO que são o R e o RStudio e como instalar os dois, passo a passo.\n\n\nCapítulo 2\nEntendendo o RStudio\nOs painéis da interface, scripts, pacotes e como salvar seu trabalho.\n\n\nCapítulo 3\nIntrodução aos pacotes no R\nComo instalar e carregar pacotes, incluindo os usados neste material.\n\n\nCapítulo 4\nPacotes utilizados para realizar meta-análises\nmeta, metafor, dmetar e outros pacotes úteis para meta-análise.\n\n\nCapítulo 5\nImportando dados\nBoas práticas na planilha e importação dos dados do Excel para o R.\n\n\nCapítulo 6\nManipulação de dados no R\nOperadores do R, tidyverse e seleção de variáveis, linhas e colunas.\n\n\nCapítulo 7\nMeta-análise de desfechos binários\nA função metabin(), o resumo dos resultados e o forest plot, argumento por argumento.\n\n\nCapítulo 8\nMeta-análise de desfechos contínuos\nA função metacont(), a escolha entre MD e SMD e o forest plot.\n\n\nCapítulo 9\nMeta-análise de braço único\nProporções com metaprop(), transformações e heterogeneidade.\n\n\nCapítulo 10\nViés de publicação\nGráfico de funil, teste de Egger e método trim-and-fill.",
     "crumbs": [
       "Apresentação"
     ]
@@ -537,7 +537,7 @@
     "href": "cap07-metanalise-binarios.html#criando-sua-metanálise",
     "title": "7  Meta-análise de desfechos binários",
     "section": "7.3 Criando sua Metanálise",
-    "text": "7.3 Criando sua Metanálise\nA função metabin() é utilizada para realizar metanálises de desfechos binários, ou seja, situações em que existem apenas dois possíveis resultados (por exemplo: vivo/morto, sucesso/fracasso ou sim/não).\n\nPrincipais argumentos da função metabin()\n\nevent.e → Número de eventos no grupo experimental.\nn.e → Número total de participantes no grupo experimental.\nevent.c → Número de eventos no grupo controle.\nn.c → Número total de participantes no grupo controle.\ndata → Nome do data frame contendo os dados da metanálise (neste exemplo, acm).\nmethod → Método utilizado para combinar os estudos. O padrão é \"MH\" (Mantel-Haenszel).\nmethod.tau → Método utilizado para estimar a variância entre os estudos. O padrão é \"DL\" (DerSimonian-Laird).\nsm → Medida de efeito utilizada. As opções mais comuns são \"RR\" (Risk Ratio) e \"OR\" (Odds Ratio).\nmethod.random.ci → Método usado para calcular o intervalo de confiança no modelo de efeitos aleatórios. O padrão é \"classic\"; \"HK\" aplica o ajuste de Hartung-Knapp. Em versões antigas do pacote, esse argumento se chamava hakn.\nstudlab → Nome da coluna contendo a identificação dos estudos (por exemplo, Author).",
+    "text": "7.3 Criando sua Metanálise\nA função metabin() é utilizada para realizar metanálises de desfechos binários, ou seja, situações em que existem apenas dois possíveis resultados (por exemplo: vivo/morto, sucesso/fracasso ou sim/não).\n\nPrincipais argumentos da função metabin()\n\nevent.e → Número de eventos no grupo experimental.\nn.e → Número total de participantes no grupo experimental.\nevent.c → Número de eventos no grupo controle.\nn.c → Número total de participantes no grupo controle.\ndata → Nome do data frame contendo os dados da metanálise (neste exemplo, acm).\nmethod → Método utilizado para combinar os estudos. O padrão é \"MH\" (Mantel-Haenszel).\nmethod.tau → Método utilizado para estimar a variância entre os estudos. Neste livro, usamos \"DL\" (DerSimonian-Laird); nas versões atuais do pacote, o padrão é \"REML\" (máxima verossimilhança restrita).\nsm → Medida de efeito utilizada. As opções mais comuns são \"RR\" (Risk Ratio) e \"OR\" (Odds Ratio).\nmethod.random.ci → Método usado para calcular o intervalo de confiança no modelo de efeitos aleatórios. O padrão é \"classic\"; \"HK\" aplica o ajuste de Hartung-Knapp. Em versões antigas do pacote, esse argumento se chamava hakn.\nstudlab → Nome da coluna contendo a identificação dos estudos (por exemplo, Author).",
     "crumbs": [
       "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
@@ -640,6 +640,369 @@
     "crumbs": [
       "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html",
+    "href": "cap08-metanalise-continuos.html",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "",
+    "text": "8.1 Carregando os Pacotes\nNeste capítulo, vamos aprender a realizar metanálises de desfechos contínuos, ou seja, desfechos medidos em uma escala numérica, como pressão arterial, escore de dor, peso corporal ou dias de internação.\nNeste capítulo, usaremos os pacotes readxl e meta, que já foram instalados nos capítulos anteriores. Basta carregá-los:",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#carregando-os-pacotes",
+    "href": "cap08-metanalise-continuos.html#carregando-os-pacotes",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "",
+    "text": "library(readxl)   # Importar planilhas do Excel\nlibrary(meta)     # Realizar a metanálise",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#preparando-seu-conjunto-de-dados",
+    "href": "cap08-metanalise-continuos.html#preparando-seu-conjunto-de-dados",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.2 Preparando seu Conjunto de Dados",
+    "text": "8.2 Preparando seu Conjunto de Dados\nEm uma metanálise de desfecho contínuo, cada estudo precisa informar, para cada grupo:\n\no número de participantes;\na média do desfecho;\no desvio padrão do desfecho.\n\nAssim, a planilha deve ter uma linha por estudo e as seguintes colunas:\n\nAuthor → Identificação do estudo.\nYear → Ano de publicação.\nn.e, mean.e e sd.e → Número de participantes, média e desvio padrão no grupo experimental.\nn.c, mean.c e sd.c → Número de participantes, média e desvio padrão no grupo controle.\n\n\n\n\n\n\nAuthor\nYear\nn.e\nmean.e\nsd.e\nn.c\nmean.c\nsd.c\n\n\n\n\nDavis\n1973\n13\n5.0\n4.70\n13\n6.50\n3.80\n\n\nFlorell\n1971\n30\n4.9\n1.71\n50\n6.10\n2.30\n\n\nGruen\n1975\n35\n22.5\n3.44\n35\n24.90\n10.65\n\n\nHart\n1975\n20\n12.5\n1.47\n20\n12.30\n1.66\n\n\nWilson\n1977\n8\n6.5\n0.76\n8\n7.38\n1.41\n\n\n\n\n\n💡 Alguns estudos informam o erro padrão (EP) em vez do desvio padrão (DP). Nesse caso, é possível convertê-lo com a fórmula DP = EP × √n, em que n é o número de participantes do grupo.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#importando-os-dados",
+    "href": "cap08-metanalise-continuos.html#importando-os-dados",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.3 Importando os Dados",
+    "text": "8.3 Importando os Dados\nAssim como no capítulo 5, usamos a função read_excel() para importar a planilha e a função as.data.frame() para convertê-la em um data frame:\n\ncont &lt;- as.data.frame(read_excel(\"continuos.xlsx\", sheet = \"util\"))\n\nhead(cont)\n\n   Author Year n.e mean.e sd.e n.c mean.c  sd.c\n1   Davis 1973  13    5.0 4.70  13   6.50  3.80\n2 Florell 1971  30    4.9 1.71  50   6.10  2.30\n3   Gruen 1975  35   22.5 3.44  35  24.90 10.65\n4    Hart 1975  20   12.5 1.47  20  12.30  1.66\n5  Wilson 1977   8    6.5 0.76   8   7.38  1.41",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#diferença-de-médias-ou-diferença-de-médias-padronizada",
+    "href": "cap08-metanalise-continuos.html#diferença-de-médias-ou-diferença-de-médias-padronizada",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.4 Diferença de Médias ou Diferença de Médias Padronizada?",
+    "text": "8.4 Diferença de Médias ou Diferença de Médias Padronizada?\nAntes de criar a metanálise, precisamos escolher a medida de efeito. Para desfechos contínuos, as duas opções mais comuns são:\n\nDiferença de médias (MD, Mean Difference) → Utilizada quando todos os estudos medem o desfecho na mesma escala e na mesma unidade (por exemplo, pressão arterial em mmHg). O resultado é expresso na própria unidade do desfecho, o que facilita a interpretação.\nDiferença de médias padronizada (SMD, Standardized Mean Difference) → Utilizada quando os estudos medem o mesmo desfecho com escalas ou instrumentos diferentes (por exemplo, questionários distintos de dor). O resultado é expresso em unidades de desvio padrão.\n\nObserve que, na nossa planilha, as médias do estudo de Gruen (entre 22 e 25) são bem maiores do que as dos demais estudos (entre 5 e 13). Isso indica que o desfecho não foi medido da mesma forma em todos os estudos. Por isso, neste exemplo, usaremos a SMD.\n💡 Como referência aproximada, valores de SMD em torno de 0,2 costumam ser considerados efeitos pequenos; em torno de 0,5, moderados; e a partir de 0,8, grandes.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#criando-sua-metanálise",
+    "href": "cap08-metanalise-continuos.html#criando-sua-metanálise",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.5 Criando sua Metanálise",
+    "text": "8.5 Criando sua Metanálise\nA função metacont() é utilizada para realizar metanálises de desfechos contínuos.\n\nPrincipais argumentos da função metacont()\n\nn.e → Número de participantes no grupo experimental.\nmean.e → Média do desfecho no grupo experimental.\nsd.e → Desvio padrão do desfecho no grupo experimental.\nn.c, mean.c e sd.c → Os mesmos dados para o grupo controle.\ndata → Nome do data frame contendo os dados da metanálise (neste exemplo, cont).\nstudlab → Nome da coluna contendo a identificação dos estudos (por exemplo, Author).\nsm → Medida de efeito utilizada: \"MD\" (diferença de médias) ou \"SMD\" (diferença de médias padronizada).\nmethod.smd → Método de cálculo da SMD. O padrão é \"Hedges\" (g de Hedges), que corrige o viés da SMD em estudos pequenos.\nmethod.tau → Método utilizado para estimar a variância entre os estudos. Assim como no capítulo 7, usaremos \"DL\" (DerSimonian-Laird).",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#exemplo-de-código",
+    "href": "cap08-metanalise-continuos.html#exemplo-de-código",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.6 Exemplo de Código",
+    "text": "8.6 Exemplo de Código\n\nm.cont &lt;- metacont(\n  n.e,\n  mean.e,\n  sd.e,\n  n.c,\n  mean.c,\n  sd.c,\n  data = cont,\n  studlab = Author,\n  sm = \"SMD\",\n  method.smd = \"Hedges\",\n  method.tau = \"DL\"\n)",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#o-que-acontece-aqui",
+    "href": "cap08-metanalise-continuos.html#o-que-acontece-aqui",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.7 O que acontece aqui?",
+    "text": "8.7 O que acontece aqui?\nO comando acima cria um novo objeto chamado m.cont, que armazenará todos os resultados da metanálise referente ao desfecho utilização de serviços médicos.\nPara cada estudo, a função calcula a SMD entre o grupo que recebeu psicoterapia (experimental) e o grupo controle e, em seguida, combina os resultados de todos os estudos em uma estimativa única.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#visualizando-os-resultados-da-metanálise",
+    "href": "cap08-metanalise-continuos.html#visualizando-os-resultados-da-metanálise",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.8 Visualizando os Resultados da Metanálise",
+    "text": "8.8 Visualizando os Resultados da Metanálise\nAssim como no capítulo 7, utilizamos a função summary():\n\nsummary(m.cont)\n\n            SMD             95% CI %W(common) %W(random)\nDavis   -0.3399 [-1.1151;  0.4353]       11.5       11.5\nFlorell -0.5659 [-1.0273; -0.1044]       32.6       32.6\nGruen   -0.2999 [-0.7712;  0.1714]       31.2       31.2\nHart     0.1250 [-0.4954;  0.7455]       18.0       18.0\nWilson  -0.7344 [-1.7566;  0.2877]        6.6        6.6\n\nNumber of studies: k = 5\nNumber of observations: o = 232 (o.e = 106, o.c = 126)\n\n                         SMD             95% CI     z p-value\nCommon effect model  -0.3434 [-0.6068; -0.0801] -2.56  0.0106\nRandom effects model -0.3434 [-0.6068; -0.0801] -2.56  0.0106\n\nQuantifying heterogeneity (with 95% CIs):\n tau^2 = 0 [0.0000; 0.6935]; tau = 0 [0.0000; 0.8328]\n I^2 = 0.0% [0.0%; 79.2%]; H = 1.00 [1.00; 2.19]\n\nTest of heterogeneity:\n    Q d.f. p-value\n 3.68    4  0.4514\n\nDetails of meta-analysis methods:\n- Inverse variance method\n- DerSimonian-Laird estimator for tau^2\n- Jackson method for confidence interval of tau^2 and tau\n- Calculation of I^2 based on Q\n- Hedges' g (bias corrected standardised mean difference; using exact formulae)",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#interpretando-os-resultados",
+    "href": "cap08-metanalise-continuos.html#interpretando-os-resultados",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.9 Interpretando os Resultados",
+    "text": "8.9 Interpretando os Resultados\n\nEfeito combinado → No modelo de efeitos aleatórios, a SMD foi de −0,34 (IC 95%: −0,61 a −0,08; p = 0,01). O valor negativo indica que a média do grupo psicoterapia foi menor do que a do grupo controle.\nDireção do efeito → Como valores menores indicam menor utilização de serviços médicos, o resultado mostra que os pacientes que receberam psicoterapia utilizaram menos os serviços médicos. Pela referência apresentada acima, trata-se de um efeito entre pequeno e moderado.\nHeterogeneidade → O I² foi de 0%, indicando resultados consistentes entre os estudos. Por isso, os modelos de efeito comum e de efeitos aleatórios produziram o mesmo resultado. Observe, porém, que o intervalo de confiança do I² vai de 0% a 79,2%: com apenas 5 estudos, a estimativa da heterogeneidade é pouco precisa.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#criando-o-forest-plot",
+    "href": "cap08-metanalise-continuos.html#criando-o-forest-plot",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.10 Criando o Forest Plot",
+    "text": "8.10 Criando o Forest Plot\nA função forest() funciona da mesma forma que no capítulo 7. Em desfechos contínuos, o gráfico exibe a média, o desvio padrão e o número de participantes de cada grupo.\n\nforest(\n  m.cont,\n  layout = \"Revman5\",\n  label.e = \"Psicoterapia\",\n  label.c = \"Controle\",\n  label.left = \"Favorece psicoterapia\",\n  col.label.left = \"black\",\n  ff.lr = \"bold\",\n  label.right = \"Favorece controle\",\n  col.label.right = \"black\",\n  random = TRUE,\n  common = FALSE,\n  digits.mean = 1,\n  digits.sd = 2,\n  col.square = \"darkblue\",\n  col.square.lines = \"black\",\n  col.diamond = \"black\"\n)",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#principais-argumentos-da-função-forest",
+    "href": "cap08-metanalise-continuos.html#principais-argumentos-da-função-forest",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.11 Principais Argumentos da Função forest()",
+    "text": "8.11 Principais Argumentos da Função forest()\nOs principais argumentos já foram apresentados no capítulo 7. A seguir, destacamos os que mudam em desfechos contínuos.\n\ndigits.mean e digits.sd\nControlam o número de casas decimais exibidas para as médias e os desvios padrão de cada grupo.\n\n\nlabel.left e label.right\nEm desfechos contínuos, o lado favorecido depende do significado da escala. Neste exemplo, valores menores representam menor utilização de serviços médicos, então o lado esquerdo favorece a psicoterapia. Se valores maiores fossem desejáveis (por exemplo, em um escore de qualidade de vida), os rótulos deveriam ser invertidos.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap08-metanalise-continuos.html#resumo-do-tutorial",
+    "href": "cap08-metanalise-continuos.html#resumo-do-tutorial",
+    "title": "8  Meta-análise de desfechos contínuos",
+    "section": "8.12 Resumo do Tutorial",
+    "text": "8.12 Resumo do Tutorial\nAo final deste capítulo, aprendemos como realizar uma metanálise de desfechos contínuos utilizando o pacote meta.\nEm resumo:\n\nOrganizamos a planilha com o número de participantes, a média e o desvio padrão de cada grupo;\nEscolhemos entre a diferença de médias (MD) e a diferença de médias padronizada (SMD);\nRealizamos a metanálise com a função metacont();\nInterpretamos o efeito combinado e a heterogeneidade com a função summary();\nConstruímos o Forest Plot e ajustamos os rótulos de acordo com a direção do efeito.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Meta-análise de desfechos contínuos</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html",
+    "href": "cap09-metanalise-braco-unico.html",
+    "title": "9  Meta-análise de braço único",
+    "section": "",
+    "text": "9.1 Carregando os Pacotes\nAté aqui, todas as metanálises compararam dois grupos (experimental e controle). Em muitas situações, porém, cada estudo informa apenas um grupo, e o interesse está em estimar a frequência de um evento: por exemplo, a prevalência de uma doença, a taxa de complicações de um procedimento ou a proporção de pacientes que respondem a um tratamento em estudos sem grupo controle.\nNesses casos, realizamos uma metanálise de braço único (single-arm meta-analysis), que combina as proporções observadas em cada estudo em uma proporção única.\nAssim como no capítulo anterior, usaremos os pacotes readxl e meta:",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#carregando-os-pacotes",
+    "href": "cap09-metanalise-braco-unico.html#carregando-os-pacotes",
+    "title": "9  Meta-análise de braço único",
+    "section": "",
+    "text": "library(readxl)   # Importar planilhas do Excel\nlibrary(meta)     # Realizar a metanálise",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#preparando-seu-conjunto-de-dados",
+    "href": "cap09-metanalise-braco-unico.html#preparando-seu-conjunto-de-dados",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.2 Preparando seu Conjunto de Dados",
+    "text": "9.2 Preparando seu Conjunto de Dados\nEm uma metanálise de proporções, cada estudo precisa informar apenas:\n\no número de eventos (por exemplo, número de óbitos ou de casos da doença);\no número total de participantes.\n\nNeste capítulo, para fins didáticos, vamos reaproveitar a aba acm da planilha data.xlsx, apresentada no capítulo 5. Usaremos apenas o grupo aspirina de cada estudo (colunas event.e e n.e), como se cada ensaio tivesse um único braço. A pergunta passa a ser: qual a proporção de óbitos entre os pacientes que usaram aspirina após o infarto do miocárdio?\n\nacm &lt;- as.data.frame(read_excel(\"data.xlsx\", sheet = \"acm\"))\n\nacm[, c(\"Author\", \"Year\", \"event.e\", \"n.e\")]\n\n  Author Year event.e  n.e\n1  MRC-1 1974      49  615\n2    CDP 1976      44  758\n3  MRC-2 1979     102  832\n4   GASP 1979      32  317\n5  PARIS 1980      85  810\n6   AMIS 1980     246 2267\n7 ISIS-2 1988    1570 8587\n\n\n💡 Em uma revisão com estudos de braço único de verdade, a planilha teria apenas as colunas de identificação do estudo, número de eventos e número total de participantes.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#por-que-transformar-as-proporções",
+    "href": "cap09-metanalise-braco-unico.html#por-que-transformar-as-proporções",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.3 Por que Transformar as Proporções?",
+    "text": "9.3 Por que Transformar as Proporções?\nProporções têm características que dificultam a sua combinação direta: ficam sempre entre 0 e 1, e a sua variância depende do próprio valor da proporção, sendo muito pequena quando a proporção se aproxima de 0 ou de 1. Por isso, as proporções costumam ser transformadas antes da metanálise e, ao final, os resultados são convertidos de volta para a escala original.\nAs opções mais utilizadas no pacote meta são:\n\n\"PLOGIT\" → Transformação logit (padrão do pacote).\n\"PFT\" → Transformação de Freeman-Tukey (arco-seno duplo).\n\"PRAW\" → Proporções sem transformação.\n\nAtualmente, recomenda-se utilizar a transformação logit combinada a um modelo linear generalizado misto (GLMM), que analisa diretamente o número de eventos de cada estudo (Schwarzer G et al. Research Synthesis Methods, 2019;10:476-83).",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#criando-sua-metanálise",
+    "href": "cap09-metanalise-braco-unico.html#criando-sua-metanálise",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.4 Criando sua Metanálise",
+    "text": "9.4 Criando sua Metanálise\nA função metaprop() é utilizada para realizar metanálises de proporções.\n\nPrincipais argumentos da função metaprop()\n\nevent → Número de eventos em cada estudo (neste exemplo, event.e).\nn → Número total de participantes em cada estudo (neste exemplo, n.e).\ndata → Nome do data frame contendo os dados da metanálise (neste exemplo, acm).\nstudlab → Nome da coluna contendo a identificação dos estudos (por exemplo, Author).\nsm → Transformação utilizada: \"PLOGIT\", \"PFT\" ou \"PRAW\".\nmethod → Método utilizado para combinar os estudos. Usaremos \"GLMM\"; a alternativa clássica é \"Inverse\" (inverso da variância).",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#exemplo-de-código",
+    "href": "cap09-metanalise-braco-unico.html#exemplo-de-código",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.5 Exemplo de Código",
+    "text": "9.5 Exemplo de Código\n\nm.prop &lt;- metaprop(\n  event.e,\n  n.e,\n  data = acm,\n  studlab = Author,\n  sm = \"PLOGIT\",\n  method = \"GLMM\"\n)",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#o-que-acontece-aqui",
+    "href": "cap09-metanalise-braco-unico.html#o-que-acontece-aqui",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.6 O que acontece aqui?",
+    "text": "9.6 O que acontece aqui?\nO comando acima cria um novo objeto chamado m.prop, que armazenará a proporção de óbitos de cada estudo, a proporção combinada e as medidas de heterogeneidade.\n💡 Com method = \"GLMM\", a variância entre os estudos (Tau²) é estimada por máxima verossimilhança. Por isso, não é necessário informar o argumento method.tau.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#visualizando-os-resultados-da-metanálise",
+    "href": "cap09-metanalise-braco-unico.html#visualizando-os-resultados-da-metanálise",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.7 Visualizando os Resultados da Metanálise",
+    "text": "9.7 Visualizando os Resultados da Metanálise\n\nsummary(m.prop)\n\n       proportion           95% CI\nMRC-1      0.0797 [0.0595; 0.1040]\nCDP        0.0580 [0.0425; 0.0771]\nMRC-2      0.1226 [0.1011; 0.1468]\nGASP       0.1009 [0.0701; 0.1395]\nPARIS      0.1049 [0.0847; 0.1281]\nAMIS       0.1085 [0.0960; 0.1220]\nISIS-2     0.1828 [0.1747; 0.1912]\n\nNumber of studies: k = 7\nNumber of observations: o = 14186\nNumber of events: e = 2128\n\n                     proportion           95% CI\nCommon effect model      0.1500 [0.1442; 0.1560]\nRandom effects model     0.1045 [0.0808; 0.1340]\n\nQuantifying heterogeneity (with 95% CIs):\n tau^2 = 0.1301; tau = 0.3607; I^2 = 96.9% [95.2%; 97.9%]; H = 5.64 [4.58; 6.95]\n\nTest of heterogeneity:\n           Q d.f.  p-value\n Wald 190.95    6 &lt; 0.0001\n LRT  219.10    6 &lt; 0.0001\n\nDetails of meta-analysis methods:\n- Random intercept logistic regression model\n- Maximum-likelihood estimator for tau^2\n- Calculation of I^2 based on Q\n- Logit transformation\n- Clopper-Pearson confidence interval for individual studies",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#interpretando-os-resultados",
+    "href": "cap09-metanalise-braco-unico.html#interpretando-os-resultados",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.8 Interpretando os Resultados",
+    "text": "9.8 Interpretando os Resultados\n\nProporção combinada → No modelo de efeitos aleatórios, a proporção combinada de óbitos foi de 10,4% (IC 95%: 8,1% a 13,4%).\nEfeito comum × efeitos aleatórios → O modelo de efeito comum estimou 15,0%, um valor bem mais alto. Isso acontece porque esse modelo dá grande peso ao estudo ISIS-2, que sozinho reúne 60,5% dos participantes e apresenta a maior proporção de óbitos (18,3%). Quando há heterogeneidade importante, o modelo de efeitos aleatórios é o mais adequado.\nHeterogeneidade → O I² foi de 96,9%, indicando heterogeneidade muito alta. Isso é comum em metanálises de braço único, pois os estudos podem diferir em população, tempo de acompanhamento e contexto. Por isso, a proporção combinada deve ser interpretada com cautela.\nSem grupo de comparação → Uma metanálise de braço único descreve a frequência de um evento, mas não permite concluir se a aspirina aumenta ou reduz a mortalidade. Para isso, é necessária a comparação com um grupo controle, como fizemos no capítulo 7.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#criando-o-forest-plot",
+    "href": "cap09-metanalise-braco-unico.html#criando-o-forest-plot",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.9 Criando o Forest Plot",
+    "text": "9.9 Criando o Forest Plot\n\nforest(\n  m.prop,\n  common = FALSE,\n  random = TRUE,\n  pscale = 100,\n  digits = 1,\n  xlab = \"Óbitos (%)\",\n  smlab = \"Proporção de óbitos (%)\",\n  leftlabs = c(\"Estudo\", \"Óbitos\", \"Total\"),\n  rightlabs = c(\"Proporção (%)\", \"IC 95%\"),\n  colgap.left = \"10mm\",\n  col.square = \"darkblue\",\n  col.square.lines = \"black\",\n  col.diamond = \"black\"\n)",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#principais-argumentos-da-função-forest",
+    "href": "cap09-metanalise-braco-unico.html#principais-argumentos-da-função-forest",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.10 Principais Argumentos da Função forest()",
+    "text": "9.10 Principais Argumentos da Função forest()\n\npscale\nMultiplica as proporções por um valor. Com pscale = 100, os resultados são apresentados em porcentagem.\n\n\nleftlabs, rightlabs e smlab\nDefinem os títulos das colunas exibidas à esquerda e à direita do gráfico e o título da medida de efeito, permitindo traduzi-los para o português.\n\n\ncolgap.left\nAumenta o espaço entre as colunas da esquerda, evitando que os textos fiquem sobrepostos ao gráfico.\n\n\nxlab\nDefine o rótulo do eixo horizontal do gráfico.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap09-metanalise-braco-unico.html#resumo-do-tutorial",
+    "href": "cap09-metanalise-braco-unico.html#resumo-do-tutorial",
+    "title": "9  Meta-análise de braço único",
+    "section": "9.11 Resumo do Tutorial",
+    "text": "9.11 Resumo do Tutorial\nAo final deste capítulo, aprendemos como realizar uma metanálise de braço único utilizando o pacote meta.\nEm resumo:\n\nEntendemos quando utilizar uma metanálise de braço único;\nOrganizamos os dados com o número de eventos e o número total de participantes de cada estudo;\nConhecemos as principais transformações para proporções;\nRealizamos a metanálise com a função metaprop();\nInterpretamos a proporção combinada, a diferença entre os modelos e a heterogeneidade;\nConstruímos o Forest Plot com os resultados em porcentagem.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Meta-análise de braço único</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html",
+    "href": "cap10-vies-publicacao.html",
+    "title": "10  Viés de publicação",
+    "section": "",
+    "text": "10.1 Carregando os Pacotes\nEstudos com resultados estatisticamente significativos ou favoráveis à intervenção têm mais chance de serem publicados, e de forma mais rápida, do que estudos com resultados nulos. Quando isso acontece, a literatura disponível para a metanálise fica incompleta, e o efeito combinado pode ser superestimado. Esse fenômeno é chamado de viés de publicação.\nNeste capítulo, vamos aprender três ferramentas para investigar esse problema: o gráfico de funil (funnel plot), o teste de Egger e o método trim-and-fill.\n💡 Por que não usamos a planilha dos capítulos anteriores? Os testes de assimetria do gráfico de funil só são recomendados quando a metanálise inclui pelo menos 10 estudos, e a planilha data.xlsx tem apenas 7. Com poucos estudos, esses testes têm baixo poder para detectar o problema.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#carregando-os-pacotes",
+    "href": "cap10-vies-publicacao.html#carregando-os-pacotes",
+    "title": "10  Viés de publicação",
+    "section": "",
+    "text": "library(readxl)   # Importar planilhas do Excel\nlibrary(meta)     # Realizar a metanálise",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#preparando-seu-conjunto-de-dados",
+    "href": "cap10-vies-publicacao.html#preparando-seu-conjunto-de-dados",
+    "title": "10  Viés de publicação",
+    "section": "10.2 Preparando seu Conjunto de Dados",
+    "text": "10.2 Preparando seu Conjunto de Dados\nA planilha segue a mesma estrutura da utilizada no capítulo 7:\n\nAuthor e Year → Identificação e ano do estudo.\nevent.e e n.e → Casos de tuberculose e total de participantes no grupo vacinado.\nevent.c e n.c → Casos de tuberculose e total de participantes no grupo não vacinado.\n\n\n\n\n\n\nAuthor\nYear\nevent.e\nn.e\nevent.c\nn.c\n\n\n\n\nAronson\n1948\n4\n123\n11\n139\n\n\nFerguson & Simes\n1949\n6\n306\n29\n303\n\n\nRosenthal et al\n1960\n3\n231\n11\n220\n\n\nHart & Sutherland\n1977\n62\n13598\n248\n12867\n\n\nFrimodt-Moller et al\n1973\n33\n5069\n47\n5808\n\n\nStein & Aronson\n1953\n180\n1541\n372\n1451\n\n\nVandiviere et al\n1973\n8\n2545\n10\n629\n\n\nTPT Madras\n1980\n505\n88391\n499\n88391\n\n\nCoetzee & Berjak\n1968\n29\n7499\n45\n7277\n\n\nRosenthal et al\n1961\n17\n1716\n65\n1665\n\n\nComstock et al\n1974\n186\n50634\n141\n27338\n\n\nComstock & Webster\n1969\n5\n2498\n3\n2341\n\n\nComstock et al\n1976\n27\n16913\n29\n17854",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#realizando-a-metanálise",
+    "href": "cap10-vies-publicacao.html#realizando-a-metanálise",
+    "title": "10  Viés de publicação",
+    "section": "10.3 Realizando a Metanálise",
+    "text": "10.3 Realizando a Metanálise\nPrimeiro, importamos os dados e realizamos a metanálise com a função metabin(), exatamente como no capítulo 7. Neste exemplo, usaremos o risco relativo (\"RR\") como medida de efeito:\n\nbcg &lt;- as.data.frame(read_excel(\"bcg.xlsx\", sheet = \"tb\"))\n\nm.bcg &lt;- metabin(\n  event.e,\n  n.e,\n  event.c,\n  n.c,\n  data = bcg,\n  method = \"MH\",\n  method.tau = \"DL\",\n  sm = \"RR\",\n  studlab = Author\n)\n\nm.bcg\n\nNumber of studies: k = 13\nNumber of observations: o = 357347 (o.e = 191064, o.c = 166283)\nNumber of events: e = 2575\n\n                         RR           95% CI      z  p-value\nCommon effect model  0.6353 [0.5881; 0.6862] -11.53 &lt; 0.0001\nRandom effects model 0.4896 [0.3448; 0.6952]  -3.99 &lt; 0.0001\n\nQuantifying heterogeneity (with 95% CIs):\n tau^2 = 0.3095; tau = 0.5563; I^2 = 92.1% [88.3%; 94.7%]; H = 3.57 [2.93; 4.34]\n\nTest of heterogeneity:\n      Q d.f.  p-value\n 152.57   12 &lt; 0.0001\n\nDetails of meta-analysis methods:\n- Mantel-Haenszel method (common effect model)\n- Inverse variance method (random effects model)\n- DerSimonian-Laird estimator for tau^2\n- Mantel-Haenszel estimator used in calculation of Q and tau^2 (like RevMan 5)\n- Calculation of I^2 based on Q\n\n\nNo modelo de efeitos aleatórios, o risco relativo foi de 0,49 (IC 95%: 0,34 a 0,70), o que corresponde a uma redução de cerca de 51% no risco de tuberculose entre os vacinados. A heterogeneidade, porém, é muito alta (I² = 92,1%).",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#o-gráfico-de-funil-funnel-plot",
+    "href": "cap10-vies-publicacao.html#o-gráfico-de-funil-funnel-plot",
+    "title": "10  Viés de publicação",
+    "section": "10.4 O Gráfico de Funil (Funnel Plot)",
+    "text": "10.4 O Gráfico de Funil (Funnel Plot)\nO gráfico de funil é a principal ferramenta visual para investigar o viés de publicação. Nele:\n\ncada ponto representa um estudo;\no eixo horizontal mostra o efeito de cada estudo (neste exemplo, o risco relativo, em escala logarítmica);\no eixo vertical mostra o erro padrão do efeito, com os estudos maiores (mais precisos) no topo e os menores na base.\n\nNa ausência de viés, os pontos formam um funil invertido e simétrico em torno do efeito combinado: os estudos grandes ficam próximos do centro, e os pequenos se espalham igualmente para os dois lados. Se estudos pequenos com resultados desfavoráveis deixaram de ser publicados, um dos lados da base do funil fica vazio, e o gráfico se torna assimétrico.\n\nCódigo\n\nfunnel(\n  m.bcg,\n  common = FALSE,\n  random = TRUE,\n  xlab = \"Risco relativo\",\n  ylab = \"Erro padrão\"\n)\n\n\n\n\n\n\n\n\nNo nosso exemplo, os estudos menores (na base do gráfico) tendem a se concentrar à esquerda do efeito combinado, ou seja, com efeitos mais favoráveis à vacina: dos 5 estudos com maior erro padrão, 4 estão desse lado. Isso sugere alguma assimetria, que vamos investigar a seguir.\n\n\nGráfico de funil com contornos de significância\nUma versão mais informativa do gráfico adiciona faixas que indicam o nível de significância estatística de cada região. Se os estudos “faltantes” estiverem na área de resultados não significativos (em branco), a assimetria é mais compatível com viés de publicação.\n\nfunnel(\n  m.bcg,\n  common = FALSE,\n  random = TRUE,\n  xlab = \"Risco relativo\",\n  ylab = \"Erro padrão\",\n  contour.levels = c(0.90, 0.95, 0.99),\n  col.contour = c(\"gray75\", \"gray85\", \"gray95\")\n)\n\nlegend(\n  \"topleft\",\n  legend = c(\"0,05 &lt; p &lt; 0,10\", \"0,01 &lt; p &lt; 0,05\", \"p &lt; 0,01\"),\n  fill = c(\"gray75\", \"gray85\", \"gray95\"),\n  bg = \"white\",\n  cex = 0.85\n)\n\n\n\n\n\n\n\n\n\n\nPrincipais argumentos da função funnel()\n\ncommon e random → Definem qual efeito combinado será usado como centro do funil. Neste exemplo, usamos o modelo de efeitos aleatórios.\nxlab e ylab → Rótulos dos eixos horizontal e vertical.\ncontour.levels → Níveis de confiança usados para desenhar os contornos de significância.\ncol.contour → Cores das faixas de significância.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#teste-de-egger",
+    "href": "cap10-vies-publicacao.html#teste-de-egger",
+    "title": "10  Viés de publicação",
+    "section": "10.5 Teste de Egger",
+    "text": "10.5 Teste de Egger\nA inspeção visual do gráfico de funil é subjetiva. Por isso, costuma ser complementada por testes estatísticos. O mais utilizado é o teste de Egger, uma regressão que avalia se existe relação entre o tamanho do efeito e a precisão dos estudos. Um resultado significativo indica assimetria no gráfico de funil.\n\nmetabias(m.bcg, method.bias = \"Egger\")\n\nLinear regression test of funnel plot asymmetry\n\nTest result: t = -1.40, df = 11, p-value = 0.1887\nBias estimate: -2.1120 (SE = 1.5072)\n\nDetails:\n- multiplicative residual heterogeneity variance (tau^2 = 11.7431)\n- predictor: standard error\n- weight:    inverse variance\n- reference: Egger et al. (1997), BMJ\n\n\n\nO que o resultado mostra?\n\nTest result → Estatística do teste (t = −1,40), graus de liberdade (df = 11) e valor de p (p = 0,19).\nBias estimate → Estimativa da assimetria (intercepto da regressão).\n\nComo o valor de p foi maior do que 0,05, não houve evidência estatisticamente significativa de assimetria. Isso, porém, não prova que o viés de publicação esteja ausente: com poucos estudos, o teste tem baixo poder.\n💡 Para desfechos binários, existem alternativas ao teste de Egger, como os testes de Harbord e de Peters, disponíveis no argumento method.bias (\"Harbord\" ou \"Peters\").",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#método-trim-and-fill",
+    "href": "cap10-vies-publicacao.html#método-trim-and-fill",
+    "title": "10  Viés de publicação",
+    "section": "10.6 Método Trim-and-fill",
+    "text": "10.6 Método Trim-and-fill\nO método trim-and-fill estima quantos estudos estariam “faltando” para que o gráfico de funil fosse simétrico, acrescenta esses estudos hipotéticos à análise e recalcula o efeito combinado.\n\ntf.bcg &lt;- trimfill(m.bcg)\n\ntf.bcg\n\nNumber of studies: k = 17 (with 4 added studies)\nNumber of observations: o = 390976 (o.e = 209229, o.c = 181747)\nNumber of events: e = 3020\n\n                         RR           95% CI     z p-value\nRandom effects model 0.7124 [0.4971; 1.0207] -1.85  0.0646\n\nQuantifying heterogeneity (with 95% CIs):\n tau^2 = 0.4568; tau = 0.6758; I^2 = 93.9% [91.6%; 95.6%]; H = 4.05 [3.46; 4.75]\n\nTest of heterogeneity:\n      Q d.f.  p-value\n 262.73   16 &lt; 0.0001\n\nDetails of meta-analysis methods:\n- Inverse variance method\n- DerSimonian-Laird estimator for tau^2\n- Calculation of I^2 based on Q\n- Trim-and-fill method to adjust for funnel plot asymmetry (L-estimator)\n\n\nNo gráfico de funil do resultado, os estudos acrescentados pelo método aparecem como pontos vazados:\n\nfunnel(tf.bcg, xlab = \"Risco relativo\", ylab = \"Erro padrão\")\n\n\n\n\n\n\n\n\n\nInterpretando o Trim-and-fill\n\nEstudos acrescentados → O método acrescentou 4 estudos hipotéticos, passando de 13 para 17 estudos.\nEfeito ajustado → O risco relativo passou de 0,49 para 0,71 (IC 95%: 0,50 a 1,02; p = 0,06). Ou seja, o efeito ficou menor, e o intervalo de confiança passou a incluir o valor 1.\nCautela → O trim-and-fill parte do princípio de que toda a assimetria se deve ao viés de publicação. Quando a heterogeneidade é muito alta, como neste exemplo (I² = 92,1%), a assimetria pode ter outras causas, e o método pode acrescentar estudos sem necessidade. No caso da vacina BCG, sabe-se que boa parte da heterogeneidade está relacionada à latitude dos locais onde os estudos foram realizados (Colditz et al., 1994). Por isso, o resultado ajustado deve ser visto como uma análise de sensibilidade, e não como o “efeito verdadeiro”.\n\nObserve que o teste de Egger e o trim-and-fill chegaram a conclusões diferentes. Isso reforça que nenhuma ferramenta deve ser usada isoladamente: o viés de publicação deve ser avaliado com o gráfico de funil, os testes estatísticos e o conhecimento sobre os estudos incluídos.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
+    ]
+  },
+  {
+    "objectID": "cap10-vies-publicacao.html#resumo-do-tutorial",
+    "href": "cap10-vies-publicacao.html#resumo-do-tutorial",
+    "title": "10  Viés de publicação",
+    "section": "10.7 Resumo do Tutorial",
+    "text": "10.7 Resumo do Tutorial\nAo final deste capítulo, aprendemos como investigar o viés de publicação em uma metanálise utilizando o pacote meta.\nEm resumo:\n\nEntendemos o que é o viés de publicação e por que ele pode superestimar o efeito combinado;\nConstruímos o gráfico de funil com a função funnel(), incluindo os contornos de significância;\nAplicamos o teste de Egger com a função metabias();\nUtilizamos o método trim-and-fill com a função trimfill();\nDiscutimos as limitações de cada ferramenta e a importância de interpretá-las em conjunto.",
+    "crumbs": [
+      "Aprofundando a análise",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Viés de publicação</span>"
     ]
   }
 ]

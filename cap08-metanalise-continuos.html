@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Entendendo o RStudio – Meta-análise no R</title>
+<title>8&nbsp; Meta-análise de desfechos contínuos – Meta-análise no R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap03-introducao-pacotes.html" rel="next">
-<link href="./cap01-instalando-r-rstudio.html" rel="prev">
+<link href="./cap09-metanalise-braco-unico.html" rel="next">
+<link href="./cap07-metanalise-binarios.html" rel="prev">
 <link href="./imagens/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap01-instalando-r-rstudio.html">Primeiros passos no R</a></li><li class="breadcrumb-item"><a href="./cap02-entendendo-rstudio.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entendendo o RStudio</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap02-entendendo-rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="./cap02-entendendo-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entendendo o RStudio</span></span></a>
   </div>
 </li>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap08-metanalise-continuos.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap08-metanalise-continuos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></span></a>
   </div>
 </li>
@@ -261,35 +261,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#explorando-a-interface-do-rstudio" id="toc-explorando-a-interface-do-rstudio" class="nav-link active" data-scroll-target="#explorando-a-interface-do-rstudio"><span class="header-section-number">2.1</span> Explorando a Interface do RStudio</a></li>
-  <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console"><span class="header-section-number">2.2</span> Console</a></li>
-  <li><a href="#source" id="toc-source" class="nav-link" data-scroll-target="#source"><span class="header-section-number">2.3</span> Source</a></li>
-  <li><a href="#environment-e-history" id="toc-environment-e-history" class="nav-link" data-scroll-target="#environment-e-history"><span class="header-section-number">2.4</span> Environment e History</a></li>
-  <li><a href="#files-plots-packages-e-help" id="toc-files-plots-packages-e-help" class="nav-link" data-scroll-target="#files-plots-packages-e-help"><span class="header-section-number">2.5</span> Files, Plots, Packages e Help</a>
+  <li><a href="#carregando-os-pacotes" id="toc-carregando-os-pacotes" class="nav-link active" data-scroll-target="#carregando-os-pacotes"><span class="header-section-number">8.1</span> Carregando os Pacotes</a></li>
+  <li><a href="#preparando-seu-conjunto-de-dados" id="toc-preparando-seu-conjunto-de-dados" class="nav-link" data-scroll-target="#preparando-seu-conjunto-de-dados"><span class="header-section-number">8.2</span> Preparando seu Conjunto de Dados</a></li>
+  <li><a href="#importando-os-dados" id="toc-importando-os-dados" class="nav-link" data-scroll-target="#importando-os-dados"><span class="header-section-number">8.3</span> Importando os Dados</a></li>
+  <li><a href="#diferença-de-médias-ou-diferença-de-médias-padronizada" id="toc-diferença-de-médias-ou-diferença-de-médias-padronizada" class="nav-link" data-scroll-target="#diferença-de-médias-ou-diferença-de-médias-padronizada"><span class="header-section-number">8.4</span> Diferença de Médias ou Diferença de Médias Padronizada?</a></li>
+  <li><a href="#criando-sua-metanálise" id="toc-criando-sua-metanálise" class="nav-link" data-scroll-target="#criando-sua-metanálise"><span class="header-section-number">8.5</span> Criando sua Metanálise</a>
   <ul class="collapse">
-  <li><a href="#arquivos-files" id="toc-arquivos-files" class="nav-link" data-scroll-target="#arquivos-files">Arquivos (Files)</a></li>
-  <li><a href="#gráficos-plots" id="toc-gráficos-plots" class="nav-link" data-scroll-target="#gráficos-plots">Gráficos (Plots)</a></li>
-  <li><a href="#pacotes-packages" id="toc-pacotes-packages" class="nav-link" data-scroll-target="#pacotes-packages">Pacotes (Packages)</a></li>
-  <li><a href="#ajuda-help" id="toc-ajuda-help" class="nav-link" data-scroll-target="#ajuda-help">Ajuda (Help)</a></li>
+  <li><a href="#principais-argumentos-da-função-metacont" id="toc-principais-argumentos-da-função-metacont" class="nav-link" data-scroll-target="#principais-argumentos-da-função-metacont">Principais argumentos da função <code>metacont()</code></a></li>
   </ul></li>
-  <li><a href="#criando-um-novo-script-no-rstudio" id="toc-criando-um-novo-script-no-rstudio" class="nav-link" data-scroll-target="#criando-um-novo-script-no-rstudio"><span class="header-section-number">2.6</span> Criando um Novo Script no RStudio</a></li>
-  <li><a href="#explorando-pacotes-no-r" id="toc-explorando-pacotes-no-r" class="nav-link" data-scroll-target="#explorando-pacotes-no-r"><span class="header-section-number">2.7</span> Explorando Pacotes no R</a>
+  <li><a href="#exemplo-de-código" id="toc-exemplo-de-código" class="nav-link" data-scroll-target="#exemplo-de-código"><span class="header-section-number">8.6</span> Exemplo de Código</a></li>
+  <li><a href="#o-que-acontece-aqui" id="toc-o-que-acontece-aqui" class="nav-link" data-scroll-target="#o-que-acontece-aqui"><span class="header-section-number">8.7</span> O que acontece aqui?</a></li>
+  <li><a href="#visualizando-os-resultados-da-metanálise" id="toc-visualizando-os-resultados-da-metanálise" class="nav-link" data-scroll-target="#visualizando-os-resultados-da-metanálise"><span class="header-section-number">8.8</span> Visualizando os Resultados da Metanálise</a></li>
+  <li><a href="#interpretando-os-resultados" id="toc-interpretando-os-resultados" class="nav-link" data-scroll-target="#interpretando-os-resultados"><span class="header-section-number">8.9</span> Interpretando os Resultados</a></li>
+  <li><a href="#criando-o-forest-plot" id="toc-criando-o-forest-plot" class="nav-link" data-scroll-target="#criando-o-forest-plot"><span class="header-section-number">8.10</span> Criando o Forest Plot</a></li>
+  <li><a href="#principais-argumentos-da-função-forest" id="toc-principais-argumentos-da-função-forest" class="nav-link" data-scroll-target="#principais-argumentos-da-função-forest"><span class="header-section-number">8.11</span> Principais Argumentos da Função <code>forest()</code></a>
   <ul class="collapse">
-  <li><a href="#instalando-um-pacote" id="toc-instalando-um-pacote" class="nav-link" data-scroll-target="#instalando-um-pacote">Instalando um pacote</a></li>
-  <li><a href="#carregando-um-pacote" id="toc-carregando-um-pacote" class="nav-link" data-scroll-target="#carregando-um-pacote">Carregando um pacote</a></li>
+  <li><a href="#digits.mean-e-digits.sd" id="toc-digits.mean-e-digits.sd" class="nav-link" data-scroll-target="#digits.mean-e-digits.sd"><code>digits.mean</code> e <code>digits.sd</code></a></li>
+  <li><a href="#label.left-e-label.right" id="toc-label.left-e-label.right" class="nav-link" data-scroll-target="#label.left-e-label.right"><code>label.left</code> e <code>label.right</code></a></li>
   </ul></li>
-  <li><a href="#gerenciando-o-ambiente-e-histórico" id="toc-gerenciando-o-ambiente-e-histórico" class="nav-link" data-scroll-target="#gerenciando-o-ambiente-e-histórico"><span class="header-section-number">2.8</span> Gerenciando o Ambiente e Histórico</a></li>
-  <li><a href="#salvando-seu-trabalho" id="toc-salvando-seu-trabalho" class="nav-link" data-scroll-target="#salvando-seu-trabalho"><span class="header-section-number">2.9</span> Salvando seu Trabalho</a></li>
-  <li><a href="#fechando-o-rstudio" id="toc-fechando-o-rstudio" class="nav-link" data-scroll-target="#fechando-o-rstudio"><span class="header-section-number">2.10</span> Fechando o RStudio</a></li>
+  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">8.12</span> Resumo do Tutorial</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Relatar um problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap01-instalando-r-rstudio.html">Primeiros passos no R</a></li><li class="breadcrumb-item"><a href="./cap02-entendendo-rstudio.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entendendo o RStudio</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entendendo o RStudio</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></h1>
 </div>
 
 
@@ -306,124 +305,279 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="explorando-a-interface-do-rstudio" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="explorando-a-interface-do-rstudio"><span class="header-section-number">2.1</span> Explorando a Interface do RStudio</h2>
-<p>O RStudio possui quatro janelas principais que organizam suas ferramentas e funcionalidades:</p>
+<p>Neste capítulo, vamos aprender a realizar metanálises de desfechos contínuos, ou seja, desfechos medidos em uma escala numérica, como pressão arterial, escore de dor, peso corporal ou dias de internação.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Planilha de exemplo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para acompanhar este capítulo, baixe a planilha <a href="continuos.xlsx">continuos.xlsx</a> e salve-a no seu diretório de trabalho. Ela reúne os dados de 5 estudos sobre o efeito do tratamento em saúde mental (psicoterapia) na utilização de serviços médicos, um exemplo clássico de meta-análise de desfecho contínuo (Fleiss JL. The statistical basis of meta-analysis. <em>Statistical Methods in Medical Research</em>, 1993;2:121-45), também disponível no pacote <code>meta</code> como <code>Fleiss1993cont</code>.</p>
+</div>
+</div>
+<section id="carregando-os-pacotes" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="carregando-os-pacotes"><span class="header-section-number">8.1</span> Carregando os Pacotes</h2>
+<p>Neste capítulo, usaremos os pacotes <code>readxl</code> e <code>meta</code>, que já foram instalados nos capítulos anteriores. Basta carregá-los:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># Importar planilhas do Excel</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)     <span class="co"># Realizar a metanálise</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="preparando-seu-conjunto-de-dados" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="preparando-seu-conjunto-de-dados"><span class="header-section-number">8.2</span> Preparando seu Conjunto de Dados</h2>
+<p>Em uma metanálise de desfecho contínuo, cada estudo precisa informar, para cada grupo:</p>
 <ul>
-<li>Console<br>
-</li>
-<li>Source<br>
-</li>
-<li>Environment/History<br>
-</li>
-<li>Files/Plots/Packages/Help</li>
+<li>o número de participantes;</li>
+<li>a média do desfecho;</li>
+<li>o desvio padrão do desfecho.</li>
 </ul>
-<p>Cada janela possui uma funcionalidade específica, e você pode alternar entre elas usando as abas da interface.</p>
-</section>
-<section id="console" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="console"><span class="header-section-number">2.2</span> Console</h2>
-<p>O console é onde você interage diretamente com o R e visualiza os resultados dos seus comandos.</p>
-<p>Quando você executa um comando, o resultado aparece aqui, incluindo mensagens de erro ou alertas caso algo esteja incorreto.</p>
-<p>Exemplo de operação simples:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Exemplo de função mais complexa:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="source" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="source"><span class="header-section-number">2.3</span> Source</h2>
-<p>A janela <strong>Source</strong> é usada para escrever, salvar e executar códigos em arquivos separados.</p>
-<p>Para criar um novo script:</p>
-<ol type="1">
-<li>Clique em <strong>Arquivo &gt; Novo Arquivo &gt; Script R</strong>.</li>
-</ol>
-<p>Para executar o código:</p>
+<p>Assim, a planilha deve ter uma linha por estudo e as seguintes colunas:</p>
 <ul>
-<li><p>Selecione o trecho desejado e clique em <strong>Executar</strong></p></li>
-<li><p>Ou utilize os atalhos:</p>
-<ul>
-<li><strong>Ctrl + Enter</strong> (Windows)</li>
-<li><strong>Command + Enter</strong> (Mac)</li>
-</ul></li>
+<li><strong>Author</strong> → Identificação do estudo.</li>
+<li><strong>Year</strong> → Ano de publicação.</li>
+<li><strong>n.e</strong>, <strong>mean.e</strong> e <strong>sd.e</strong> → Número de participantes, média e desvio padrão no grupo experimental.</li>
+<li><strong>n.c</strong>, <strong>mean.c</strong> e <strong>sd.c</strong> → Número de participantes, média e desvio padrão no grupo controle.</li>
 </ul>
-<p>Escrever o código no Source é recomendado, pois facilita salvar, editar e organizar seu trabalho.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Author</th>
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">n.e</th>
+<th style="text-align: right;">mean.e</th>
+<th style="text-align: right;">sd.e</th>
+<th style="text-align: right;">n.c</th>
+<th style="text-align: right;">mean.c</th>
+<th style="text-align: right;">sd.c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Davis</td>
+<td style="text-align: right;">1973</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">4.70</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">6.50</td>
+<td style="text-align: right;">3.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Florell</td>
+<td style="text-align: right;">1971</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">4.9</td>
+<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">6.10</td>
+<td style="text-align: right;">2.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gruen</td>
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">3.44</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">24.90</td>
+<td style="text-align: right;">10.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hart</td>
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">1.47</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">12.30</td>
+<td style="text-align: right;">1.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wilson</td>
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">7.38</td>
+<td style="text-align: right;">1.41</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>💡 Alguns estudos informam o erro padrão (EP) em vez do desvio padrão (DP). Nesse caso, é possível convertê-lo com a fórmula DP = EP × √n, em que n é o número de participantes do grupo.</p>
 </section>
-<section id="environment-e-history" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="environment-e-history"><span class="header-section-number">2.4</span> Environment e History</h2>
-<p>A aba <strong>Environment</strong> mostra todos os objetos criados no R, como variáveis, data frames e funções, junto dos seus valores.</p>
-<p>A aba <strong>History</strong> exibe a lista de comandos digitados no console, permitindo reutilizá-los facilmente.</p>
-<p>Ambas as abas permitem limpar o ambiente e o histórico quando necessário.</p>
+<section id="importando-os-dados" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="importando-os-dados"><span class="header-section-number">8.3</span> Importando os Dados</h2>
+<p>Assim como no capítulo 5, usamos a função <code>read_excel()</code> para importar a planilha e a função <code>as.data.frame()</code> para convertê-la em um <em>data frame</em>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cont <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"continuos.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"util"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cont)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Author Year n.e mean.e sd.e n.c mean.c  sd.c
+1   Davis 1973  13    5.0 4.70  13   6.50  3.80
+2 Florell 1971  30    4.9 1.71  50   6.10  2.30
+3   Gruen 1975  35   22.5 3.44  35  24.90 10.65
+4    Hart 1975  20   12.5 1.47  20  12.30  1.66
+5  Wilson 1977   8    6.5 0.76   8   7.38  1.41</code></pre>
+</div>
+</div>
 </section>
-<section id="files-plots-packages-e-help" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="files-plots-packages-e-help"><span class="header-section-number">2.5</span> Files, Plots, Packages e Help</h2>
-<p>Esta janela oferece acesso a arquivos, gráficos, pacotes instalados e ajuda integrada.</p>
-<section id="arquivos-files" class="level3">
-<h3 class="anchored" data-anchor-id="arquivos-files">Arquivos (Files)</h3>
-<p>Mostra o diretório de trabalho atual e permite abrir ou criar arquivos e pastas.</p>
-</section>
-<section id="gráficos-plots" class="level3">
-<h3 class="anchored" data-anchor-id="gráficos-plots">Gráficos (Plots)</h3>
-<p>Exibe os gráficos gerados pelo R.</p>
-</section>
-<section id="pacotes-packages" class="level3">
-<h3 class="anchored" data-anchor-id="pacotes-packages">Pacotes (Packages)</h3>
-<p>Lista pacotes instalados e permite adicionar ou remover pacotes.</p>
-</section>
-<section id="ajuda-help" class="level3">
-<h3 class="anchored" data-anchor-id="ajuda-help">Ajuda (Help)</h3>
-<p>Fornece documentação detalhada sobre funções e pacotes.</p>
-</section>
-</section>
-<section id="criando-um-novo-script-no-rstudio" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="criando-um-novo-script-no-rstudio"><span class="header-section-number">2.6</span> Criando um Novo Script no RStudio</h2>
-<ol type="1">
-<li><p>Abra a janela Source.</p></li>
-<li><p>Clique em <strong>Arquivo &gt; Novo Arquivo &gt; Script R</strong>.</p></li>
-<li><p>Escreva seu código no editor.</p></li>
-<li><p>Execute com:</p>
+<section id="diferença-de-médias-ou-diferença-de-médias-padronizada" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="diferença-de-médias-ou-diferença-de-médias-padronizada"><span class="header-section-number">8.4</span> Diferença de Médias ou Diferença de Médias Padronizada?</h2>
+<p>Antes de criar a metanálise, precisamos escolher a medida de efeito. Para desfechos contínuos, as duas opções mais comuns são:</p>
 <ul>
-<li>Botão <strong>Executar</strong></li>
-<li>Ou o atalho <strong>Ctrl + Enter</strong> (Windows) / <strong>Cmd + Enter</strong> (Mac)</li>
-</ul></li>
-</ol>
+<li><p><strong>Diferença de médias (MD, <em>Mean Difference</em>)</strong> → Utilizada quando todos os estudos medem o desfecho na mesma escala e na mesma unidade (por exemplo, pressão arterial em mmHg). O resultado é expresso na própria unidade do desfecho, o que facilita a interpretação.</p></li>
+<li><p><strong>Diferença de médias padronizada (SMD, <em>Standardized Mean Difference</em>)</strong> → Utilizada quando os estudos medem o mesmo desfecho com escalas ou instrumentos diferentes (por exemplo, questionários distintos de dor). O resultado é expresso em unidades de desvio padrão.</p></li>
+</ul>
+<p>Observe que, na nossa planilha, as médias do estudo de Gruen (entre 22 e 25) são bem maiores do que as dos demais estudos (entre 5 e 13). Isso indica que o desfecho não foi medido da mesma forma em todos os estudos. Por isso, neste exemplo, usaremos a <strong>SMD</strong>.</p>
+<p>💡 Como referência aproximada, valores de SMD em torno de 0,2 costumam ser considerados efeitos pequenos; em torno de 0,5, moderados; e a partir de 0,8, grandes.</p>
 </section>
-<section id="explorando-pacotes-no-r" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="explorando-pacotes-no-r"><span class="header-section-number">2.7</span> Explorando Pacotes no R</h2>
-<p>O R possui uma grande variedade de pacotes que ampliam suas funcionalidades.</p>
-<section id="instalando-um-pacote" class="level3">
-<h3 class="anchored" data-anchor-id="instalando-um-pacote">Instalando um pacote</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="carregando-um-pacote" class="level3">
-<h3 class="anchored" data-anchor-id="carregando-um-pacote">Carregando um pacote</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Você pode visualizar e gerenciar pacotes na aba <strong>Pacotes</strong>, localizada no canto inferior direito do RStudio.</p>
-</section>
-</section>
-<section id="gerenciando-o-ambiente-e-histórico" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="gerenciando-o-ambiente-e-histórico"><span class="header-section-number">2.8</span> Gerenciando o Ambiente e Histórico</h2>
+<section id="criando-sua-metanálise" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="criando-sua-metanálise"><span class="header-section-number">8.5</span> Criando sua Metanálise</h2>
+<p>A função <code>metacont()</code> é utilizada para realizar metanálises de desfechos contínuos.</p>
+<section id="principais-argumentos-da-função-metacont" class="level3">
+<h3 class="anchored" data-anchor-id="principais-argumentos-da-função-metacont">Principais argumentos da função <code>metacont()</code></h3>
 <ul>
-<li>A aba <strong>Environment</strong> permite visualizar e gerenciar objetos criados no R.</li>
-<li>A aba <strong>History</strong> armazena os comandos anteriores, permitindo reutilizá-los.</li>
+<li><p><strong>n.e</strong> → Número de participantes no grupo experimental.</p></li>
+<li><p><strong>mean.e</strong> → Média do desfecho no grupo experimental.</p></li>
+<li><p><strong>sd.e</strong> → Desvio padrão do desfecho no grupo experimental.</p></li>
+<li><p><strong>n.c</strong>, <strong>mean.c</strong> e <strong>sd.c</strong> → Os mesmos dados para o grupo controle.</p></li>
+<li><p><strong>data</strong> → Nome do <em>data frame</em> contendo os dados da metanálise (neste exemplo, <code>cont</code>).</p></li>
+<li><p><strong>studlab</strong> → Nome da coluna contendo a identificação dos estudos (por exemplo, <code>Author</code>).</p></li>
+<li><p><strong>sm</strong> → Medida de efeito utilizada: <code>"MD"</code> (diferença de médias) ou <code>"SMD"</code> (diferença de médias padronizada).</p></li>
+<li><p><strong>method.smd</strong> → Método de cálculo da SMD. O padrão é <code>"Hedges"</code> (<em>g</em> de Hedges), que corrige o viés da SMD em estudos pequenos.</p></li>
+<li><p><strong>method.tau</strong> → Método utilizado para estimar a variância entre os estudos. Assim como no capítulo 7, usaremos <code>"DL"</code> (<em>DerSimonian-Laird</em>).</p></li>
 </ul>
 </section>
-<section id="salvando-seu-trabalho" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="salvando-seu-trabalho"><span class="header-section-number">2.9</span> Salvando seu Trabalho</h2>
-<p>Para salvar o script:</p>
+</section>
+<section id="exemplo-de-código" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="exemplo-de-código"><span class="header-section-number">8.6</span> Exemplo de Código</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m.cont <span class="ot">&lt;-</span> <span class="fu">metacont</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  n.e,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  mean.e,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  sd.e,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  n.c,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  mean.c,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  sd.c,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cont,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">studlab =</span> Author,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">method.smd =</span> <span class="st">"Hedges"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method.tau =</span> <span class="st">"DL"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="o-que-acontece-aqui" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="o-que-acontece-aqui"><span class="header-section-number">8.7</span> O que acontece aqui?</h2>
+<p>O comando acima cria um novo objeto chamado <strong>m.cont</strong>, que armazenará todos os resultados da metanálise referente ao desfecho <strong>utilização de serviços médicos</strong>.</p>
+<p>Para cada estudo, a função calcula a SMD entre o grupo que recebeu psicoterapia (experimental) e o grupo controle e, em seguida, combina os resultados de todos os estudos em uma estimativa única.</p>
+</section>
+<section id="visualizando-os-resultados-da-metanálise" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="visualizando-os-resultados-da-metanálise"><span class="header-section-number">8.8</span> Visualizando os Resultados da Metanálise</h2>
+<p>Assim como no capítulo 7, utilizamos a função <code>summary()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.cont)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            SMD             95% CI %W(common) %W(random)
+Davis   -0.3399 [-1.1151;  0.4353]       11.5       11.5
+Florell -0.5659 [-1.0273; -0.1044]       32.6       32.6
+Gruen   -0.2999 [-0.7712;  0.1714]       31.2       31.2
+Hart     0.1250 [-0.4954;  0.7455]       18.0       18.0
+Wilson  -0.7344 [-1.7566;  0.2877]        6.6        6.6
+
+Number of studies: k = 5
+Number of observations: o = 232 (o.e = 106, o.c = 126)
+
+                         SMD             95% CI     z p-value
+Common effect model  -0.3434 [-0.6068; -0.0801] -2.56  0.0106
+Random effects model -0.3434 [-0.6068; -0.0801] -2.56  0.0106
+
+Quantifying heterogeneity (with 95% CIs):
+ tau^2 = 0 [0.0000; 0.6935]; tau = 0 [0.0000; 0.8328]
+ I^2 = 0.0% [0.0%; 79.2%]; H = 1.00 [1.00; 2.19]
+
+Test of heterogeneity:
+    Q d.f. p-value
+ 3.68    4  0.4514
+
+Details of meta-analysis methods:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Jackson method for confidence interval of tau^2 and tau
+- Calculation of I^2 based on Q
+- Hedges' g (bias corrected standardised mean difference; using exact formulae)</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretando-os-resultados" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="interpretando-os-resultados"><span class="header-section-number">8.9</span> Interpretando os Resultados</h2>
 <ul>
-<li><p>Clique em <strong>Arquivo &gt; Salvar</strong></p></li>
-<li><p>Ou utilize:</p>
-<ul>
-<li><strong>Ctrl + S</strong> (Windows)</li>
-<li><strong>Cmd + S</strong> (Mac)</li>
-</ul></li>
+<li><p><strong>Efeito combinado</strong> → No modelo de efeitos aleatórios, a SMD foi de −0,34 (IC 95%: −0,61 a −0,08; p = 0,01). O valor negativo indica que a média do grupo psicoterapia foi menor do que a do grupo controle.</p></li>
+<li><p><strong>Direção do efeito</strong> → Como valores menores indicam menor utilização de serviços médicos, o resultado mostra que os pacientes que receberam psicoterapia utilizaram menos os serviços médicos. Pela referência apresentada acima, trata-se de um efeito entre pequeno e moderado.</p></li>
+<li><p><strong>Heterogeneidade</strong> → O I² foi de 0%, indicando resultados consistentes entre os estudos. Por isso, os modelos de efeito comum e de efeitos aleatórios produziram o mesmo resultado. Observe, porém, que o intervalo de confiança do I² vai de 0% a 79,2%: com apenas 5 estudos, a estimativa da heterogeneidade é pouco precisa.</p></li>
 </ul>
 </section>
-<section id="fechando-o-rstudio" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="fechando-o-rstudio"><span class="header-section-number">2.10</span> Fechando o RStudio</h2>
-<p>Para fechar o RStudio:</p>
+<section id="criando-o-forest-plot" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="criando-o-forest-plot"><span class="header-section-number">8.10</span> Criando o Forest Plot</h2>
+<p>A função <code>forest()</code> funciona da mesma forma que no capítulo 7. Em desfechos contínuos, o gráfico exibe a média, o desvio padrão e o número de participantes de cada grupo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  m.cont,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">layout =</span> <span class="st">"Revman5"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label.e =</span> <span class="st">"Psicoterapia"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label.c =</span> <span class="st">"Controle"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label.left =</span> <span class="st">"Favorece psicoterapia"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.label.left =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ff.lr =</span> <span class="st">"bold"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">label.right =</span> <span class="st">"Favorece controle"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.label.right =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">common =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits.mean =</span> <span class="dv">1</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits.sd =</span> <span class="dv">2</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.square =</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.square.lines =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.diamond =</span> <span class="st">"black"</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cap08-metanalise-continuos_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="principais-argumentos-da-função-forest" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="principais-argumentos-da-função-forest"><span class="header-section-number">8.11</span> Principais Argumentos da Função <code>forest()</code></h2>
+<p>Os principais argumentos já foram apresentados no capítulo 7. A seguir, destacamos os que mudam em desfechos contínuos.</p>
+<section id="digits.mean-e-digits.sd" class="level3">
+<h3 class="anchored" data-anchor-id="digits.mean-e-digits.sd"><code>digits.mean</code> e <code>digits.sd</code></h3>
+<p>Controlam o número de casas decimais exibidas para as médias e os desvios padrão de cada grupo.</p>
+</section>
+<section id="label.left-e-label.right" class="level3">
+<h3 class="anchored" data-anchor-id="label.left-e-label.right"><code>label.left</code> e <code>label.right</code></h3>
+<p>Em desfechos contínuos, o lado favorecido depende do significado da escala. Neste exemplo, valores menores representam menor utilização de serviços médicos, então o lado esquerdo favorece a psicoterapia. Se valores maiores fossem desejáveis (por exemplo, em um escore de qualidade de vida), os rótulos deveriam ser invertidos.</p>
+</section>
+</section>
+<section id="resumo-do-tutorial" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">8.12</span> Resumo do Tutorial</h2>
+<p>Ao final deste capítulo, aprendemos como realizar uma metanálise de desfechos contínuos utilizando o pacote <strong>meta</strong>.</p>
+<p>Em resumo:</p>
 <ul>
-<li>Clique em <strong>Arquivo &gt; Sair</strong></li>
-<li>Ou no botão <strong>X</strong> no canto superior direito.</li>
+<li><p>Organizamos a planilha com o número de participantes, a média e o desvio padrão de cada grupo;</p></li>
+<li><p>Escolhemos entre a diferença de médias (MD) e a diferença de médias padronizada (SMD);</p></li>
+<li><p>Realizamos a metanálise com a função <code>metacont()</code>;</p></li>
+<li><p>Interpretamos o efeito combinado e a heterogeneidade com a função <code>summary()</code>;</p></li>
+<li><p>Construímos o <strong>Forest Plot</strong> e ajustamos os rótulos de acordo com a direção do efeito.</p></li>
 </ul>
 
 
@@ -832,13 +986,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cap01-instalando-r-rstudio.html" class="pagination-link" aria-label="Baixando e instalando o R e o RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Baixando e instalando o R e o RStudio</span></span>
+      <a href="./cap07-metanalise-binarios.html" class="pagination-link" aria-label="Meta-análise de desfechos binários">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos binários</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap03-introducao-pacotes.html" class="pagination-link" aria-label="Introdução aos pacotes no R">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução aos pacotes no R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap09-metanalise-braco-unico.html" class="pagination-link" aria-label="Meta-análise de braço único">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

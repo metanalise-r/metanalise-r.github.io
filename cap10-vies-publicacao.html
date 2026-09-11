@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Manipulação de dados no R – Meta-análise no R</title>
+<title>10&nbsp; Viés de publicação – Meta-análise no R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap07-metanalise-binarios.html" rel="next">
-<link href="./cap05-importando-dados.html" rel="prev">
+<link href="./cap09-metanalise-braco-unico.html" rel="prev">
 <link href="./imagens/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap05-importando-dados.html">Meta-análise na prática</a></li><li class="breadcrumb-item"><a href="./cap06-manipulacao-dados.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap10-vies-publicacao.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -210,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap06-manipulacao-dados.html" class="sidebar-item-text sidebar-link active">
+  <a href="./cap06-manipulacao-dados.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></span></a>
   </div>
 </li>
@@ -245,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap10-vies-publicacao.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap10-vies-publicacao.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></span></a>
   </div>
 </li>
@@ -261,39 +260,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#manipulação-de-dados-no-r-com-o-tidyverse" id="toc-manipulação-de-dados-no-r-com-o-tidyverse" class="nav-link active" data-scroll-target="#manipulação-de-dados-no-r-com-o-tidyverse"><span class="header-section-number">6.1</span> Manipulação de Dados no R com o tidyverse</a></li>
-  <li><a href="#instalando-e-carregando-o-pacote-necessário" id="toc-instalando-e-carregando-o-pacote-necessário" class="nav-link" data-scroll-target="#instalando-e-carregando-o-pacote-necessário"><span class="header-section-number">6.2</span> Instalando e Carregando o Pacote Necessário</a>
+  <li><a href="#carregando-os-pacotes" id="toc-carregando-os-pacotes" class="nav-link active" data-scroll-target="#carregando-os-pacotes"><span class="header-section-number">10.1</span> Carregando os Pacotes</a></li>
+  <li><a href="#preparando-seu-conjunto-de-dados" id="toc-preparando-seu-conjunto-de-dados" class="nav-link" data-scroll-target="#preparando-seu-conjunto-de-dados"><span class="header-section-number">10.2</span> Preparando seu Conjunto de Dados</a></li>
+  <li><a href="#realizando-a-metanálise" id="toc-realizando-a-metanálise" class="nav-link" data-scroll-target="#realizando-a-metanálise"><span class="header-section-number">10.3</span> Realizando a Metanálise</a></li>
+  <li><a href="#o-gráfico-de-funil-funnel-plot" id="toc-o-gráfico-de-funil-funnel-plot" class="nav-link" data-scroll-target="#o-gráfico-de-funil-funnel-plot"><span class="header-section-number">10.4</span> O Gráfico de Funil (<em>Funnel Plot</em>)</a>
   <ul class="collapse">
-  <li><a href="#passo-1-instalar-e-carregar-o-tidyverse" id="toc-passo-1-instalar-e-carregar-o-tidyverse" class="nav-link" data-scroll-target="#passo-1-instalar-e-carregar-o-tidyverse">Passo 1: Instalar e carregar o tidyverse</a></li>
+  <li><a href="#código" id="toc-código" class="nav-link" data-scroll-target="#código">Código</a></li>
+  <li><a href="#gráfico-de-funil-com-contornos-de-significância" id="toc-gráfico-de-funil-com-contornos-de-significância" class="nav-link" data-scroll-target="#gráfico-de-funil-com-contornos-de-significância">Gráfico de funil com contornos de significância</a></li>
+  <li><a href="#principais-argumentos-da-função-funnel" id="toc-principais-argumentos-da-função-funnel" class="nav-link" data-scroll-target="#principais-argumentos-da-função-funnel">Principais argumentos da função <code>funnel()</code></a></li>
   </ul></li>
-  <li><a href="#operadores-essenciais-para-manipulação-de-dados" id="toc-operadores-essenciais-para-manipulação-de-dados" class="nav-link" data-scroll-target="#operadores-essenciais-para-manipulação-de-dados"><span class="header-section-number">6.3</span> Operadores Essenciais para Manipulação de Dados</a>
+  <li><a href="#teste-de-egger" id="toc-teste-de-egger" class="nav-link" data-scroll-target="#teste-de-egger"><span class="header-section-number">10.5</span> Teste de Egger</a>
   <ul class="collapse">
-  <li><a href="#operador-de-atribuição---ou" id="toc-operador-de-atribuição---ou" class="nav-link" data-scroll-target="#operador-de-atribuição---ou">1. Operador de Atribuição (<code>&lt;-</code> ou <code>=</code>)</a></li>
-  <li><a href="#operador-de-subconjunto" id="toc-operador-de-subconjunto" class="nav-link" data-scroll-target="#operador-de-subconjunto">2. Operador de Subconjunto (<code>[]</code>)</a></li>
-  <li><a href="#operador-de-função" id="toc-operador-de-função" class="nav-link" data-scroll-target="#operador-de-função">3. Operador de Função (<code>()</code>)</a></li>
-  <li><a href="#operador-pipe" id="toc-operador-pipe" class="nav-link" data-scroll-target="#operador-pipe">4. Operador Pipe (<code>%&gt;%</code>)</a></li>
+  <li><a href="#o-que-o-resultado-mostra" id="toc-o-que-o-resultado-mostra" class="nav-link" data-scroll-target="#o-que-o-resultado-mostra">O que o resultado mostra?</a></li>
   </ul></li>
-  <li><a href="#convertendo-um-conjunto-de-dados-para-um-data-frame" id="toc-convertendo-um-conjunto-de-dados-para-um-data-frame" class="nav-link" data-scroll-target="#convertendo-um-conjunto-de-dados-para-um-data-frame"><span class="header-section-number">6.4</span> Convertendo um Conjunto de Dados para um Data Frame</a>
+  <li><a href="#método-trim-and-fill" id="toc-método-trim-and-fill" class="nav-link" data-scroll-target="#método-trim-and-fill"><span class="header-section-number">10.6</span> Método <em>Trim-and-fill</em></a>
   <ul class="collapse">
-  <li><a href="#diferença-entre-dataset-e-data-frame" id="toc-diferença-entre-dataset-e-data-frame" class="nav-link" data-scroll-target="#diferença-entre-dataset-e-data-frame">Diferença entre Dataset e Data Frame</a></li>
-  <li><a href="#por-que-converter-para-data-frame" id="toc-por-que-converter-para-data-frame" class="nav-link" data-scroll-target="#por-que-converter-para-data-frame">Por que converter para Data Frame?</a></li>
+  <li><a href="#interpretando-o-trim-and-fill" id="toc-interpretando-o-trim-and-fill" class="nav-link" data-scroll-target="#interpretando-o-trim-and-fill">Interpretando o <em>Trim-and-fill</em></a></li>
   </ul></li>
-  <li><a href="#selecionando-variáveis-de-um-conjunto-de-dados" id="toc-selecionando-variáveis-de-um-conjunto-de-dados" class="nav-link" data-scroll-target="#selecionando-variáveis-de-um-conjunto-de-dados"><span class="header-section-number">6.5</span> Selecionando Variáveis de um Conjunto de Dados</a>
-  <ul class="collapse">
-  <li><a href="#selecionando-uma-única-variável" id="toc-selecionando-uma-única-variável" class="nav-link" data-scroll-target="#selecionando-uma-única-variável">1. Selecionando uma única variável</a></li>
-  <li><a href="#selecionando-um-intervalo-de-linhas" id="toc-selecionando-um-intervalo-de-linhas" class="nav-link" data-scroll-target="#selecionando-um-intervalo-de-linhas">2. Selecionando um intervalo de linhas</a></li>
-  <li><a href="#selecionando-múltiplas-colunas" id="toc-selecionando-múltiplas-colunas" class="nav-link" data-scroll-target="#selecionando-múltiplas-colunas">3. Selecionando múltiplas colunas</a></li>
-  </ul></li>
-  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">6.6</span> Resumo do Tutorial</a></li>
+  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">10.7</span> Resumo do Tutorial</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Relatar um problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap05-importando-dados.html">Meta-análise na prática</a></li><li class="breadcrumb-item"><a href="./cap06-manipulacao-dados.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap10-vies-publicacao.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulação de dados no R</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></h1>
 </div>
 
 
@@ -310,307 +303,361 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="manipulação-de-dados-no-r-com-o-tidyverse" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="manipulação-de-dados-no-r-com-o-tidyverse"><span class="header-section-number">6.1</span> Manipulação de Dados no R com o tidyverse</h2>
-<p>A manipulação de dados refere-se ao processo de limpar, transformar e reformular dados brutos para torná-los mais adequados para análise. Esse processo é fundamental para garantir que os dados estejam organizados de maneira correta antes de qualquer tipo de modelagem estatística.</p>
+<p>Estudos com resultados estatisticamente significativos ou favoráveis à intervenção têm mais chance de serem publicados, e de forma mais rápida, do que estudos com resultados nulos. Quando isso acontece, a literatura disponível para a metanálise fica incompleta, e o efeito combinado pode ser superestimado. Esse fenômeno é chamado de <strong>viés de publicação</strong>.</p>
+<p>Neste capítulo, vamos aprender três ferramentas para investigar esse problema: o gráfico de funil (<em>funnel plot</em>), o teste de Egger e o método <em>trim-and-fill</em>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Planilha de exemplo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para acompanhar este capítulo, baixe a planilha <a href="bcg.xlsx">bcg.xlsx</a> e salve-a no seu diretório de trabalho. Ela reúne os dados de 13 ensaios clínicos sobre a eficácia da vacina BCG na prevenção da tuberculose (Colditz GA et al.&nbsp;Efficacy of BCG vaccine in the prevention of tuberculosis: meta-analysis of the published literature. <em>JAMA</em>, 1994;271:698-702), também disponíveis no pacote <code>metadat</code> como <code>dat.bcg</code>.</p>
+</div>
+</div>
+<p>💡 Por que não usamos a planilha dos capítulos anteriores? Os testes de assimetria do gráfico de funil só são recomendados quando a metanálise inclui pelo menos 10 estudos, e a planilha <code>data.xlsx</code> tem apenas 7. Com poucos estudos, esses testes têm baixo poder para detectar o problema.</p>
+<section id="carregando-os-pacotes" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="carregando-os-pacotes"><span class="header-section-number">10.1</span> Carregando os Pacotes</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># Importar planilhas do Excel</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)     <span class="co"># Realizar a metanálise</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="instalando-e-carregando-o-pacote-necessário" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="instalando-e-carregando-o-pacote-necessário"><span class="header-section-number">6.2</span> Instalando e Carregando o Pacote Necessário</h2>
-<p>Para realizar manipulação de dados no R de maneira eficiente, usaremos o pacote <code>tidyverse</code>, que oferece um conjunto de ferramentas poderosas para transformar dados.</p>
-<section id="passo-1-instalar-e-carregar-o-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="passo-1-instalar-e-carregar-o-tidyverse">Passo 1: Instalar e carregar o tidyverse</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)  <span class="co"># Instalar o pacote</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># Carregar o pacote</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="operadores-essenciais-para-manipulação-de-dados" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="operadores-essenciais-para-manipulação-de-dados"><span class="header-section-number">6.3</span> Operadores Essenciais para Manipulação de Dados</h2>
-<section id="operador-de-atribuição---ou" class="level3">
-<h3 class="anchored" data-anchor-id="operador-de-atribuição---ou">1. Operador de Atribuição (<code>&lt;-</code> ou <code>=</code>)</h3>
-<p>O operador de atribuição é usado para criar variáveis e armazenar valores dentro delas. Podemos usar <code>&lt;-</code> ou <code>=</code>, mas o mais recomendado no R é o operador <code>&lt;-</code>.</p>
-<section id="exemplo-genérico" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-genérico">Exemplo genérico</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Criando um objeto e atribuindo um valor a ele</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>objeto_nome <span class="ot">&lt;-</span> valor</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="explicação" class="level4">
-<h4 class="anchored" data-anchor-id="explicação">Explicação</h4>
+<section id="preparando-seu-conjunto-de-dados" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="preparando-seu-conjunto-de-dados"><span class="header-section-number">10.2</span> Preparando seu Conjunto de Dados</h2>
+<p>A planilha segue a mesma estrutura da utilizada no capítulo 7:</p>
 <ul>
-<li><p><strong>objeto_nome</strong> → Nome do objeto que será criado (utilize nomes descritivos para facilitar a leitura do código).</p></li>
-<li><p><strong><code>&lt;-</code></strong> → Operador de atribuição. O valor localizado à direita será atribuído ao objeto localizado à esquerda.</p></li>
-<li><p><strong>valor</strong> → Pode ser um número, texto, vetor, lista, matriz ou qualquer outro objeto do R.</p></li>
+<li><strong>Author</strong> e <strong>Year</strong> → Identificação e ano do estudo.</li>
+<li><strong>event.e</strong> e <strong>n.e</strong> → Casos de tuberculose e total de participantes no grupo vacinado.</li>
+<li><strong>event.c</strong> e <strong>n.c</strong> → Casos de tuberculose e total de participantes no grupo não vacinado.</li>
 </ul>
-</section>
-<section id="exemplo-aplicado" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-aplicado">Exemplo aplicado</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Criando um novo objeto 'm.acm' e atribuindo a ele a lista 'acm' do objeto 'ma'</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>m.acm <span class="ot">&lt;-</span> ma<span class="sc">$</span>acm</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Author</th>
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">event.e</th>
+<th style="text-align: right;">n.e</th>
+<th style="text-align: right;">event.c</th>
+<th style="text-align: right;">n.c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Aronson</td>
+<td style="text-align: right;">1948</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ferguson &amp; Simes</td>
+<td style="text-align: right;">1949</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">306</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">303</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rosenthal et al</td>
+<td style="text-align: right;">1960</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">231</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">220</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hart &amp; Sutherland</td>
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">13598</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">12867</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Frimodt-Moller et al</td>
+<td style="text-align: right;">1973</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">5069</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">5808</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stein &amp; Aronson</td>
+<td style="text-align: right;">1953</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">1541</td>
+<td style="text-align: right;">372</td>
+<td style="text-align: right;">1451</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vandiviere et al</td>
+<td style="text-align: right;">1973</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2545</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">629</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TPT Madras</td>
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">505</td>
+<td style="text-align: right;">88391</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">88391</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Coetzee &amp; Berjak</td>
+<td style="text-align: right;">1968</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">7499</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">7277</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rosenthal et al</td>
+<td style="text-align: right;">1961</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">1716</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">1665</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Comstock et al</td>
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">50634</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">27338</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Comstock &amp; Webster</td>
+<td style="text-align: right;">1969</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2498</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Comstock et al</td>
+<td style="text-align: right;">1976</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">16913</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">17854</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
-<section id="o-que-acontece-aqui" class="level4">
-<h4 class="anchored" data-anchor-id="o-que-acontece-aqui">O que acontece aqui?</h4>
-<p>Esse código extrai a planilha <strong>acm</strong> do objeto <strong>ma</strong> e a armazena em um novo objeto chamado <strong>m.acm</strong>, permitindo que ela seja manipulada de forma independente.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="imagens/cap06-environment-rstudio.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption>Painel <em>Environment</em> do RStudio após a criação do objeto <code>m.acm</code>.</figcaption>
-</figure>
-</div>
-<hr>
-</section>
-</section>
-<section id="operador-de-subconjunto" class="level3">
-<h3 class="anchored" data-anchor-id="operador-de-subconjunto">2. Operador de Subconjunto (<code>[]</code>)</h3>
-<p>O operador <code>[]</code> é utilizado para selecionar elementos específicos de um vetor, matriz ou <em>data frame</em>.</p>
-<section id="exemplo" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo">Exemplo</h4>
+<section id="realizando-a-metanálise" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="realizando-a-metanálise"><span class="header-section-number">10.3</span> Realizando a Metanálise</h2>
+<p>Primeiro, importamos os dados e realizamos a metanálise com a função <code>metabin()</code>, exatamente como no capítulo 7. Neste exemplo, usaremos o risco relativo (<code>"RR"</code>) como medida de efeito:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="st">"Author"</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bcg <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"bcg.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"tb"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m.bcg <span class="ot">&lt;-</span> <span class="fu">metabin</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  event.e,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  n.e,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  event.c,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  n.c,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> bcg,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"MH"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method.tau =</span> <span class="st">"DL"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sm =</span> <span class="st">"RR"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">studlab =</span> Author</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>m.bcg</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Author
-1  MRC-1
-2    CDP
-3  MRC-2
-4   GASP
-5  PARIS
-6   AMIS
-7 ISIS-2</code></pre>
+<pre><code>Number of studies: k = 13
+Number of observations: o = 357347 (o.e = 191064, o.c = 166283)
+Number of events: e = 2575
+
+                         RR           95% CI      z  p-value
+Common effect model  0.6353 [0.5881; 0.6862] -11.53 &lt; 0.0001
+Random effects model 0.4896 [0.3448; 0.6952]  -3.99 &lt; 0.0001
+
+Quantifying heterogeneity (with 95% CIs):
+ tau^2 = 0.3095; tau = 0.5563; I^2 = 92.1% [88.3%; 94.7%]; H = 3.57 [2.93; 4.34]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 152.57   12 &lt; 0.0001
+
+Details of meta-analysis methods:
+- Mantel-Haenszel method (common effect model)
+- Inverse variance method (random effects model)
+- DerSimonian-Laird estimator for tau^2
+- Mantel-Haenszel estimator used in calculation of Q and tau^2 (like RevMan 5)
+- Calculation of I^2 based on Q</code></pre>
 </div>
 </div>
+<p>No modelo de efeitos aleatórios, o risco relativo foi de 0,49 (IC 95%: 0,34 a 0,70), o que corresponde a uma redução de cerca de 51% no risco de tuberculose entre os vacinados. A heterogeneidade, porém, é muito alta (I² = 92,1%).</p>
 </section>
-<section id="explicação-1" class="level4">
-<h4 class="anchored" data-anchor-id="explicação-1">Explicação</h4>
-<p>O comando acima seleciona a coluna <strong>Author</strong> do objeto <strong>ma$acm</strong>, retornando todos os valores dessa variável.</p>
-<hr>
-</section>
-</section>
-<section id="operador-de-função" class="level3">
-<h3 class="anchored" data-anchor-id="operador-de-função">3. Operador de Função (<code>()</code>)</h3>
-<p>Os parênteses <code>()</code> são utilizados para chamar funções e passar argumentos para elas.</p>
-<section id="exemplo-1" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-1">Exemplo</h4>
+<section id="o-gráfico-de-funil-funnel-plot" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="o-gráfico-de-funil-funnel-plot"><span class="header-section-number">10.4</span> O Gráfico de Funil (<em>Funnel Plot</em>)</h2>
+<p>O <strong>gráfico de funil</strong> é a principal ferramenta visual para investigar o viés de publicação. Nele:</p>
+<ul>
+<li>cada ponto representa um estudo;</li>
+<li>o eixo horizontal mostra o efeito de cada estudo (neste exemplo, o risco relativo, em escala logarítmica);</li>
+<li>o eixo vertical mostra o erro padrão do efeito, com os estudos maiores (mais precisos) no topo e os menores na base.</li>
+</ul>
+<p>Na ausência de viés, os pontos formam um funil invertido e simétrico em torno do efeito combinado: os estudos grandes ficam próximos do centro, e os pequenos se espalham igualmente para os dois lados. Se estudos pequenos com resultados desfavoráveis deixaram de ser publicados, um dos lados da base do funil fica vazio, e o gráfico se torna <strong>assimétrico</strong>.</p>
+<section id="código" class="level3">
+<h3 class="anchored" data-anchor-id="código">Código</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Nesse exemplo, a função <code>library()</code> recebe como argumento o pacote <code>tidyverse</code>, carregando-o para utilização durante a sessão do R.</p>
-<hr>
-</section>
-</section>
-<section id="operador-pipe" class="level3">
-<h3 class="anchored" data-anchor-id="operador-pipe">4. Operador Pipe (<code>%&gt;%</code>)</h3>
-<p>O operador <code>%&gt;%</code> permite encadear múltiplas operações de maneira clara e intuitiva, evitando a criação de diversos objetos intermediários.</p>
-<p>💡 Pense no <code>%&gt;%</code> como “e então”.</p>
-<section id="exemplo-2" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-2">Exemplo</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m.acm <span class="ot">&lt;-</span> <span class="fu">metabin</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  event.e,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  n.e,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  event.c,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  n.c,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ma<span class="sc">$</span>acm,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"MH"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method.tau =</span> <span class="st">"DL"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sm =</span> <span class="st">"RR"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">studlab =</span> Author</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">forest</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">funnel</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  m.bcg,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">common =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Risco relativo"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Erro padrão"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="cap06-manipulacao-dados_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1248"></p>
+<p><img src="cap10-vies-publicacao_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No nosso exemplo, os estudos menores (na base do gráfico) tendem a se concentrar à esquerda do efeito combinado, ou seja, com efeitos mais favoráveis à vacina: dos 5 estudos com maior erro padrão, 4 estão desse lado. Isso sugere alguma assimetria, que vamos investigar a seguir.</p>
+</section>
+<section id="gráfico-de-funil-com-contornos-de-significância" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-funil-com-contornos-de-significância">Gráfico de funil com contornos de significância</h3>
+<p>Uma versão mais informativa do gráfico adiciona faixas que indicam o nível de significância estatística de cada região. Se os estudos “faltantes” estiverem na área de resultados não significativos (em branco), a assimetria é mais compatível com viés de publicação.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">funnel</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  m.bcg,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">common =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Risco relativo"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Erro padrão"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">contour.levels =</span> <span class="fu">c</span>(<span class="fl">0.90</span>, <span class="fl">0.95</span>, <span class="fl">0.99</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.contour =</span> <span class="fu">c</span>(<span class="st">"gray75"</span>, <span class="st">"gray85"</span>, <span class="st">"gray95"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"0,05 &lt; p &lt; 0,10"</span>, <span class="st">"0,01 &lt; p &lt; 0,05"</span>, <span class="st">"p &lt; 0,01"</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"gray75"</span>, <span class="st">"gray85"</span>, <span class="st">"gray95"</span>),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"white"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.85</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cap10-vies-publicacao_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="explicação-2" class="level4">
-<h4 class="anchored" data-anchor-id="explicação-2">Explicação</h4>
-<p>O comando <code>metabin()</code> realiza uma metanálise para dados binários.</p>
-<p>O operador <code>%&gt;%</code> envia automaticamente o resultado da metanálise para a função <code>forest()</code>, responsável pela construção do <strong>Forest Plot</strong>.</p>
-<p>Dessa forma, não há necessidade de criar um objeto intermediário contendo o resultado da metanálise antes de gerar o gráfico.</p>
+<section id="principais-argumentos-da-função-funnel" class="level3">
+<h3 class="anchored" data-anchor-id="principais-argumentos-da-função-funnel">Principais argumentos da função <code>funnel()</code></h3>
+<ul>
+<li><p><strong>common</strong> e <strong>random</strong> → Definem qual efeito combinado será usado como centro do funil. Neste exemplo, usamos o modelo de efeitos aleatórios.</p></li>
+<li><p><strong>xlab</strong> e <strong>ylab</strong> → Rótulos dos eixos horizontal e vertical.</p></li>
+<li><p><strong>contour.levels</strong> → Níveis de confiança usados para desenhar os contornos de significância.</p></li>
+<li><p><strong>col.contour</strong> → Cores das faixas de significância.</p></li>
+</ul>
 </section>
 </section>
+<section id="teste-de-egger" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="teste-de-egger"><span class="header-section-number">10.5</span> Teste de Egger</h2>
+<p>A inspeção visual do gráfico de funil é subjetiva. Por isso, costuma ser complementada por testes estatísticos. O mais utilizado é o <strong>teste de Egger</strong>, uma regressão que avalia se existe relação entre o tamanho do efeito e a precisão dos estudos. Um resultado significativo indica assimetria no gráfico de funil.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metabias</span>(m.bcg, <span class="at">method.bias =</span> <span class="st">"Egger"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear regression test of funnel plot asymmetry
+
+Test result: t = -1.40, df = 11, p-value = 0.1887
+Bias estimate: -2.1120 (SE = 1.5072)
+
+Details:
+- multiplicative residual heterogeneity variance (tau^2 = 11.7431)
+- predictor: standard error
+- weight:    inverse variance
+- reference: Egger et al. (1997), BMJ</code></pre>
+</div>
+</div>
+<section id="o-que-o-resultado-mostra" class="level3">
+<h3 class="anchored" data-anchor-id="o-que-o-resultado-mostra">O que o resultado mostra?</h3>
+<ul>
+<li><p><strong>Test result</strong> → Estatística do teste (t = −1,40), graus de liberdade (df = 11) e valor de p (p = 0,19).</p></li>
+<li><p><strong>Bias estimate</strong> → Estimativa da assimetria (intercepto da regressão).</p></li>
+</ul>
+<p>Como o valor de p foi maior do que 0,05, <strong>não houve evidência estatisticamente significativa de assimetria</strong>. Isso, porém, não prova que o viés de publicação esteja ausente: com poucos estudos, o teste tem baixo poder.</p>
+<p>💡 Para desfechos binários, existem alternativas ao teste de Egger, como os testes de Harbord e de Peters, disponíveis no argumento <code>method.bias</code> (<code>"Harbord"</code> ou <code>"Peters"</code>).</p>
 </section>
-<section id="convertendo-um-conjunto-de-dados-para-um-data-frame" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="convertendo-um-conjunto-de-dados-para-um-data-frame"><span class="header-section-number">6.4</span> Convertendo um Conjunto de Dados para um Data Frame</h2>
-<section id="diferença-entre-dataset-e-data-frame" class="level3">
-<h3 class="anchored" data-anchor-id="diferença-entre-dataset-e-data-frame">Diferença entre Dataset e Data Frame</h3>
-<p><strong>Dataset:</strong> termo genérico utilizado para qualquer estrutura de dados do R, como vetores, listas, matrizes e <em>data frames</em>.</p>
-<p><strong>Data Frame:</strong> estrutura bidimensional composta por linhas (observações) e colunas (variáveis), sendo o formato mais utilizado em análises estatísticas.</p>
 </section>
-<section id="por-que-converter-para-data-frame" class="level3">
-<h3 class="anchored" data-anchor-id="por-que-converter-para-data-frame">Por que converter para Data Frame?</h3>
-<p>Muitos pacotes do R exigem que os dados estejam no formato <strong>data frame</strong> para que suas funções funcionem corretamente.</p>
-<section id="como-converter-para-data-frame" class="level4">
-<h4 class="anchored" data-anchor-id="como-converter-para-data-frame">Como converter para Data Frame</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convertendo um objeto para data frame</span></span>
+<section id="método-trim-and-fill" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="método-trim-and-fill"><span class="header-section-number">10.6</span> Método <em>Trim-and-fill</em></h2>
+<p>O método <strong><em>trim-and-fill</em></strong> estima quantos estudos estariam “faltando” para que o gráfico de funil fosse simétrico, acrescenta esses estudos hipotéticos à análise e recalcula o efeito combinado.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tf.bcg <span class="ot">&lt;-</span> <span class="fu">trimfill</span>(m.bcg)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>m.acm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m.acm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-</section>
-<section id="selecionando-variáveis-de-um-conjunto-de-dados" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="selecionando-variáveis-de-um-conjunto-de-dados"><span class="header-section-number">6.5</span> Selecionando Variáveis de um Conjunto de Dados</h2>
-<p>O R não reconhece automaticamente os nomes das variáveis. Para acessá-las, é necessário indicar o objeto ao qual pertencem. ### Erro comum</p>
-<p>Tentar utilizar uma variável sem informar o objeto de origem.</p>
-<section id="exemplo-incorreto" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-incorreto">Exemplo incorreto</h4>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tf.bcg</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of studies: k = 17 (with 4 added studies)
+Number of observations: o = 390976 (o.e = 209229, o.c = 181747)
+Number of events: e = 3020
+
+                         RR           95% CI     z p-value
+Random effects model 0.7124 [0.4971; 1.0207] -1.85  0.0646
+
+Quantifying heterogeneity (with 95% CIs):
+ tau^2 = 0.4568; tau = 0.6758; I^2 = 93.9% [91.6%; 95.6%]; H = 4.05 [3.46; 4.75]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 262.73   16 &lt; 0.0001
+
+Details of meta-analysis methods:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Calculation of I^2 based on Q
+- Trim-and-fill method to adjust for funnel plot asymmetry (L-estimator)</code></pre>
+</div>
+</div>
+<p>No gráfico de funil do resultado, os estudos acrescentados pelo método aparecem como pontos vazados:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Author</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error:
-! objeto 'Author' não encontrado</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">funnel</span>(tf.bcg, <span class="at">xlab =</span> <span class="st">"Risco relativo"</span>, <span class="at">ylab =</span> <span class="st">"Erro padrão"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cap10-vies-publicacao_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>Esse comando retornará um erro, pois o R não sabe onde procurar a variável <strong>Author</strong>.</p>
-</section>
-<section id="selecionando-uma-única-variável" class="level3">
-<h3 class="anchored" data-anchor-id="selecionando-uma-única-variável">1. Selecionando uma única variável</h3>
-<p>Existem diferentes maneiras de selecionar uma variável específica de um conjunto de dados.</p>
-<section id="utilizando-o-operador" class="level4">
-<h4 class="anchored" data-anchor-id="utilizando-o-operador">Utilizando o operador <code>$</code></h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm<span class="sc">$</span>Author   <span class="co"># Seleciona a variável "Author"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "MRC-1"  "CDP"    "MRC-2"  "GASP"   "PARIS"  "AMIS"   "ISIS-2"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm<span class="sc">$</span>Year     <span class="co"># Seleciona a variável "Year"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1974 1976 1979 1979 1980 1980 1988</code></pre>
-</div>
-</div>
-<p>O operador <code>$</code> permite acessar diretamente uma variável pertencente a um <em>data frame</em>.</p>
-</section>
-<section id="utilizando-o-operador-1" class="level4">
-<h4 class="anchored" data-anchor-id="utilizando-o-operador-1">Utilizando o operador <code>[]</code></h4>
-<p>Também é possível selecionar uma única variável utilizando colchetes.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="st">"Author"</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Author
-1  MRC-1
-2    CDP
-3  MRC-2
-4   GASP
-5  PARIS
-6   AMIS
-7 ISIS-2</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="st">"Year"</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Year
-1 1974
-2 1976
-3 1979
-4 1979
-5 1980
-6 1980
-7 1988</code></pre>
-</div>
-</div>
-<p>Essa abordagem retorna a variável mantendo-a como um <em>data frame</em>.</p>
-<hr>
-</section>
-</section>
-<section id="selecionando-um-intervalo-de-linhas" class="level3">
-<h3 class="anchored" data-anchor-id="selecionando-um-intervalo-de-linhas">2. Selecionando um intervalo de linhas</h3>
-<p>Também podemos selecionar apenas algumas linhas de uma variável.</p>
-<section id="exemplo-3" class="level4">
-<h4 class="anchored" data-anchor-id="exemplo-3">Exemplo</h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">"Author"</span>]    <span class="co"># Seleciona as linhas 1 a 5 da coluna "Author"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "MRC-1" "CDP"   "MRC-2" "GASP"  "PARIS"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>, <span class="st">"Year"</span>]      <span class="co"># Seleciona as linhas 3 a 8 da coluna "Year"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1979 1979 1980 1980 1988   NA</code></pre>
-</div>
-</div>
-<p>Nesse caso:</p>
+<section id="interpretando-o-trim-and-fill" class="level3">
+<h3 class="anchored" data-anchor-id="interpretando-o-trim-and-fill">Interpretando o <em>Trim-and-fill</em></h3>
 <ul>
-<li><code>1:5</code> indica as linhas que serão selecionadas;</li>
-<li><code>"Author"</code> indica a coluna desejada.</li>
+<li><p><strong>Estudos acrescentados</strong> → O método acrescentou 4 estudos hipotéticos, passando de 13 para 17 estudos.</p></li>
+<li><p><strong>Efeito ajustado</strong> → O risco relativo passou de 0,49 para 0,71 (IC 95%: 0,50 a 1,02; p = 0,06). Ou seja, o efeito ficou menor, e o intervalo de confiança passou a incluir o valor 1.</p></li>
+<li><p><strong>Cautela</strong> → O <em>trim-and-fill</em> parte do princípio de que toda a assimetria se deve ao viés de publicação. Quando a heterogeneidade é muito alta, como neste exemplo (I² = 92,1%), a assimetria pode ter outras causas, e o método pode acrescentar estudos sem necessidade. No caso da vacina BCG, sabe-se que boa parte da heterogeneidade está relacionada à latitude dos locais onde os estudos foram realizados (Colditz et al., 1994). Por isso, o resultado ajustado deve ser visto como uma <strong>análise de sensibilidade</strong>, e não como o “efeito verdadeiro”.</p></li>
 </ul>
-<hr>
+<p>Observe que o teste de Egger e o <em>trim-and-fill</em> chegaram a conclusões diferentes. Isso reforça que nenhuma ferramenta deve ser usada isoladamente: o viés de publicação deve ser avaliado com o gráfico de funil, os testes estatísticos e o conhecimento sobre os estudos incluídos.</p>
 </section>
 </section>
-<section id="selecionando-múltiplas-colunas" class="level3">
-<h3 class="anchored" data-anchor-id="selecionando-múltiplas-colunas">3. Selecionando múltiplas colunas</h3>
-<p>Também é possível selecionar várias colunas simultaneamente.</p>
-<section id="utilizando-c" class="level4">
-<h4 class="anchored" data-anchor-id="utilizando-c">Utilizando <code>c()</code></h4>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"Year"</span>)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Author Year
-1  MRC-1 1974
-2    CDP 1976
-3  MRC-2 1979
-4   GASP 1979
-5  PARIS 1980
-6   AMIS 1980
-7 ISIS-2 1988</code></pre>
-</div>
-</div>
-<p>A função <code>c()</code> cria um vetor contendo os nomes das colunas que desejamos selecionar.</p>
-</section>
-<section id="utilizando-o-operador-pipe" class="level4">
-<h4 class="anchored" data-anchor-id="utilizando-o-operador-pipe">Utilizando o operador Pipe (<code>%&gt;%</code>)</h4>
-<p>Outra forma bastante utilizada consiste em utilizar a função <code>select()</code> juntamente com o operador Pipe.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Author, Year, event.e)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Author Year event.e
-1  MRC-1 1974      49
-2    CDP 1976      44
-3  MRC-2 1979     102
-4   GASP 1979      32
-5  PARIS 1980      85
-6   AMIS 1980     246
-7 ISIS-2 1988    1570</code></pre>
-</div>
-</div>
-<p>Esse método costuma ser mais intuitivo e é amplamente utilizado pelos pacotes do <strong>tidyverse</strong>.</p>
-</section>
-<section id="selecionando-múltiplas-colunas-e-um-intervalo-de-linhas" class="level4">
-<h4 class="anchored" data-anchor-id="selecionando-múltiplas-colunas-e-um-intervalo-de-linhas">Selecionando múltiplas colunas e um intervalo de linhas</h4>
-<p>Também podemos selecionar simultaneamente linhas e colunas.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"Year"</span>, <span class="st">"event.e"</span>)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Author Year event.e
-1  MRC-1 1974      49
-2    CDP 1976      44
-3  MRC-2 1979     102
-4   GASP 1979      32
-5  PARIS 1980      85</code></pre>
-</div>
-</div>
-<p>Nesse exemplo:</p>
-<ul>
-<li><code>1:5</code> seleciona as cinco primeiras linhas;</li>
-<li><code>c("Author", "Year", "event.e")</code> seleciona as três colunas desejadas.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="resumo-do-tutorial" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">6.6</span> Resumo do Tutorial</h2>
-<p>Ao final deste capítulo, aprendemos os principais conceitos relacionados à manipulação de dados no R.</p>
+<section id="resumo-do-tutorial" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">10.7</span> Resumo do Tutorial</h2>
+<p>Ao final deste capítulo, aprendemos como investigar o viés de publicação em uma metanálise utilizando o pacote <strong>meta</strong>.</p>
 <p>Em resumo:</p>
 <ul>
-<li><p>Instalamos e carregamos o pacote <code>tidyverse</code>;</p></li>
-<li><p>Aprendemos a utilizar os principais operadores do R, como <code>&lt;-</code>, <code>[]</code>, <code>$</code> e <code>%&gt;%</code>;</p></li>
-<li><p>Convertimos objetos para o formato <strong>data frame</strong> quando necessário;</p></li>
-<li><p>Selecionamos variáveis, linhas e colunas de diferentes maneiras para facilitar a manipulação dos dados.</p></li>
+<li><p>Entendemos o que é o viés de publicação e por que ele pode superestimar o efeito combinado;</p></li>
+<li><p>Construímos o gráfico de funil com a função <code>funnel()</code>, incluindo os contornos de significância;</p></li>
+<li><p>Aplicamos o teste de Egger com a função <code>metabias()</code>;</p></li>
+<li><p>Utilizamos o método <em>trim-and-fill</em> com a função <code>trimfill()</code>;</p></li>
+<li><p>Discutimos as limitações de cada ferramenta e a importância de interpretá-las em conjunto.</p></li>
 </ul>
-<p>Esses conceitos serão fundamentais para os próximos capítulos, nos quais começaremos a preparar os conjuntos de dados para a realização das metanálises.</p>
 
 
 </section>
@@ -1018,14 +1065,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cap05-importando-dados.html" class="pagination-link" aria-label="Importando dados">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importando dados</span></span>
+      <a href="./cap09-metanalise-braco-unico.html" class="pagination-link" aria-label="Meta-análise de braço único">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap07-metanalise-binarios.html" class="pagination-link" aria-label="Meta-análise de desfechos binários">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos binários</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Camilo André Viana Diaz">
-<meta name="author" content="Ana Paula Fernandes">
 
-<title>Meta-análise no R</title>
+<title>9&nbsp; Meta-análise de braço único – Meta-análise no R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap01-instalando-r-rstudio.html" rel="next">
+<link href="./cap10-vies-publicacao.html" rel="next">
+<link href="./cap08-metanalise-continuos.html" rel="prev">
 <link href="./imagens/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -88,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap09-metanalise-braco-unico.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -120,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Apresentação</span></a>
   </div>
 </li>
@@ -205,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap09-metanalise-braco-unico.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap09-metanalise-braco-unico.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></span></a>
   </div>
 </li>
@@ -227,37 +261,41 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
+  <li><a href="#carregando-os-pacotes" id="toc-carregando-os-pacotes" class="nav-link active" data-scroll-target="#carregando-os-pacotes"><span class="header-section-number">9.1</span> Carregando os Pacotes</a></li>
+  <li><a href="#preparando-seu-conjunto-de-dados" id="toc-preparando-seu-conjunto-de-dados" class="nav-link" data-scroll-target="#preparando-seu-conjunto-de-dados"><span class="header-section-number">9.2</span> Preparando seu Conjunto de Dados</a></li>
+  <li><a href="#por-que-transformar-as-proporções" id="toc-por-que-transformar-as-proporções" class="nav-link" data-scroll-target="#por-que-transformar-as-proporções"><span class="header-section-number">9.3</span> Por que Transformar as Proporções?</a></li>
+  <li><a href="#criando-sua-metanálise" id="toc-criando-sua-metanálise" class="nav-link" data-scroll-target="#criando-sua-metanálise"><span class="header-section-number">9.4</span> Criando sua Metanálise</a>
   <ul class="collapse">
-  <li><a href="#como-usar-este-material" id="toc-como-usar-este-material" class="nav-link" data-scroll-target="#como-usar-este-material">Como usar este material</a></li>
-  <li><a href="#conteúdo" id="toc-conteúdo" class="nav-link" data-scroll-target="#conteúdo">Conteúdo</a></li>
-  <li><a href="#autoria" id="toc-autoria" class="nav-link" data-scroll-target="#autoria">Autoria</a></li>
-  <li><a href="#como-citar" id="toc-como-citar" class="nav-link" data-scroll-target="#como-citar">Como citar</a></li>
-  <li><a href="#licença" id="toc-licença" class="nav-link" data-scroll-target="#licença">Licença</a></li>
+  <li><a href="#principais-argumentos-da-função-metaprop" id="toc-principais-argumentos-da-função-metaprop" class="nav-link" data-scroll-target="#principais-argumentos-da-função-metaprop">Principais argumentos da função <code>metaprop()</code></a></li>
   </ul></li>
+  <li><a href="#exemplo-de-código" id="toc-exemplo-de-código" class="nav-link" data-scroll-target="#exemplo-de-código"><span class="header-section-number">9.5</span> Exemplo de Código</a></li>
+  <li><a href="#o-que-acontece-aqui" id="toc-o-que-acontece-aqui" class="nav-link" data-scroll-target="#o-que-acontece-aqui"><span class="header-section-number">9.6</span> O que acontece aqui?</a></li>
+  <li><a href="#visualizando-os-resultados-da-metanálise" id="toc-visualizando-os-resultados-da-metanálise" class="nav-link" data-scroll-target="#visualizando-os-resultados-da-metanálise"><span class="header-section-number">9.7</span> Visualizando os Resultados da Metanálise</a></li>
+  <li><a href="#interpretando-os-resultados" id="toc-interpretando-os-resultados" class="nav-link" data-scroll-target="#interpretando-os-resultados"><span class="header-section-number">9.8</span> Interpretando os Resultados</a></li>
+  <li><a href="#criando-o-forest-plot" id="toc-criando-o-forest-plot" class="nav-link" data-scroll-target="#criando-o-forest-plot"><span class="header-section-number">9.9</span> Criando o Forest Plot</a></li>
+  <li><a href="#principais-argumentos-da-função-forest" id="toc-principais-argumentos-da-função-forest" class="nav-link" data-scroll-target="#principais-argumentos-da-função-forest"><span class="header-section-number">9.10</span> Principais Argumentos da Função <code>forest()</code></a>
+  <ul class="collapse">
+  <li><a href="#pscale" id="toc-pscale" class="nav-link" data-scroll-target="#pscale"><code>pscale</code></a></li>
+  <li><a href="#leftlabs-rightlabs-e-smlab" id="toc-leftlabs-rightlabs-e-smlab" class="nav-link" data-scroll-target="#leftlabs-rightlabs-e-smlab"><code>leftlabs</code>, <code>rightlabs</code> e <code>smlab</code></a></li>
+  <li><a href="#colgap.left" id="toc-colgap.left" class="nav-link" data-scroll-target="#colgap.left"><code>colgap.left</code></a></li>
+  <li><a href="#xlab" id="toc-xlab" class="nav-link" data-scroll-target="#xlab"><code>xlab</code></a></li>
+  </ul></li>
+  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">9.11</span> Resumo do Tutorial</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Relatar um problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap08-metanalise-continuos.html">Aprofundando a análise</a></li><li class="breadcrumb-item"><a href="./cap09-metanalise-braco-unico.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Meta-análise no R</h1>
-<p class="subtitle lead">Guia prático para estudantes da área da saúde</p>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autores</div>
-    <div class="quarto-title-meta-contents">
-             <p>Camilo André Viana Diaz </p>
-             <p>Ana Paula Fernandes </p>
-          </div>
-  </div>
     
   
     
@@ -268,95 +306,191 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
-<section id="apresentação" class="level1 unnumbered">
-<h1 class="unnumbered">Apresentação</h1><p><img src="imagens/capa.svg" title="Meta-análise no R" class="quarto-cover-image nolightbox img-fluid" alt="Capa do livro Meta-análise no R, com um forest plot estilizado"></p>
-<p>Este material ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Foi escrito em português para estudantes da área da saúde e não exige experiência prévia com programação.</p>
-<p><a href="./cap01-instalando-r-rstudio.html" class="btn btn-primary btn-comecar">Começar pelo capítulo 1 →</a></p>
-<section id="como-usar-este-material" class="level2">
-<h2 class="anchored" data-anchor-id="como-usar-este-material">Como usar este material</h2>
-<p>Os capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no anterior. Neles você encontra:</p>
+<p>Até aqui, todas as metanálises compararam dois grupos (experimental e controle). Em muitas situações, porém, cada estudo informa apenas um grupo, e o interesse está em estimar a frequência de um evento: por exemplo, a prevalência de uma doença, a taxa de complicações de um procedimento ou a proporção de pacientes que respondem a um tratamento em estudos sem grupo controle.</p>
+<p>Nesses casos, realizamos uma <strong>metanálise de braço único</strong> (<em>single-arm meta-analysis</em>), que combina as proporções observadas em cada estudo em uma proporção única.</p>
+<section id="carregando-os-pacotes" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="carregando-os-pacotes"><span class="header-section-number">9.1</span> Carregando os Pacotes</h2>
+<p>Assim como no capítulo anterior, usaremos os pacotes <code>readxl</code> e <code>meta</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># Importar planilhas do Excel</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)     <span class="co"># Realizar a metanálise</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="preparando-seu-conjunto-de-dados" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="preparando-seu-conjunto-de-dados"><span class="header-section-number">9.2</span> Preparando seu Conjunto de Dados</h2>
+<p>Em uma metanálise de proporções, cada estudo precisa informar apenas:</p>
 <ul>
-<li>a explicação do conceito;</li>
-<li>o código em R comentado, pronto para copiar pelo botão no canto de cada bloco;</li>
-<li>orientações para interpretar o que o R devolve.</li>
+<li>o número de eventos (por exemplo, número de óbitos ou de casos da doença);</li>
+<li>o número total de participantes.</li>
 </ul>
-<p>Recomendamos acompanhar com o RStudio aberto, executando cada código à medida que avança. Os capítulos 5 a 10 usam planilhas de exemplo, disponíveis para download nos próprios capítulos.</p>
+<p>Neste capítulo, para fins didáticos, vamos reaproveitar a aba <code>acm</code> da planilha <a href="data.xlsx">data.xlsx</a>, apresentada no capítulo 5. Usaremos apenas o grupo aspirina de cada estudo (colunas <code>event.e</code> e <code>n.e</code>), como se cada ensaio tivesse um único braço. A pergunta passa a ser: <strong>qual a proporção de óbitos entre os pacientes que usaram aspirina após o infarto do miocárdio?</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>acm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"acm"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>acm[, <span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"Year"</span>, <span class="st">"event.e"</span>, <span class="st">"n.e"</span>)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Author Year event.e  n.e
+1  MRC-1 1974      49  615
+2    CDP 1976      44  758
+3  MRC-2 1979     102  832
+4   GASP 1979      32  317
+5  PARIS 1980      85  810
+6   AMIS 1980     246 2267
+7 ISIS-2 1988    1570 8587</code></pre>
+</div>
+</div>
+<p>💡 Em uma revisão com estudos de braço único de verdade, a planilha teria apenas as colunas de identificação do estudo, número de eventos e número total de participantes.</p>
 </section>
-<section id="conteúdo" class="level2">
-<h2 class="anchored" data-anchor-id="conteúdo">Conteúdo</h2>
-<div class="grid cartoes">
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 1</span></p>
-<p><span class="cartao-titulo"><a href="./cap01-instalando-r-rstudio.html">Baixando e instalando o R e o RStudio</a></span></p>
-<p><span class="cartao-desc">O que são o R e o RStudio e como instalar os dois, passo a passo.</span></p>
+<section id="por-que-transformar-as-proporções" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="por-que-transformar-as-proporções"><span class="header-section-number">9.3</span> Por que Transformar as Proporções?</h2>
+<p>Proporções têm características que dificultam a sua combinação direta: ficam sempre entre 0 e 1, e a sua variância depende do próprio valor da proporção, sendo muito pequena quando a proporção se aproxima de 0 ou de 1. Por isso, as proporções costumam ser transformadas antes da metanálise e, ao final, os resultados são convertidos de volta para a escala original.</p>
+<p>As opções mais utilizadas no pacote <code>meta</code> são:</p>
+<ul>
+<li><p><strong><code>"PLOGIT"</code></strong> → Transformação logit (padrão do pacote).</p></li>
+<li><p><strong><code>"PFT"</code></strong> → Transformação de Freeman-Tukey (arco-seno duplo).</p></li>
+<li><p><strong><code>"PRAW"</code></strong> → Proporções sem transformação.</p></li>
+</ul>
+<p>Atualmente, recomenda-se utilizar a transformação logit combinada a um modelo linear generalizado misto (GLMM), que analisa diretamente o número de eventos de cada estudo (Schwarzer G et al.&nbsp;<em>Research Synthesis Methods</em>, 2019;10:476-83).</p>
+</section>
+<section id="criando-sua-metanálise" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="criando-sua-metanálise"><span class="header-section-number">9.4</span> Criando sua Metanálise</h2>
+<p>A função <code>metaprop()</code> é utilizada para realizar metanálises de proporções.</p>
+<section id="principais-argumentos-da-função-metaprop" class="level3">
+<h3 class="anchored" data-anchor-id="principais-argumentos-da-função-metaprop">Principais argumentos da função <code>metaprop()</code></h3>
+<ul>
+<li><p><strong>event</strong> → Número de eventos em cada estudo (neste exemplo, <code>event.e</code>).</p></li>
+<li><p><strong>n</strong> → Número total de participantes em cada estudo (neste exemplo, <code>n.e</code>).</p></li>
+<li><p><strong>data</strong> → Nome do <em>data frame</em> contendo os dados da metanálise (neste exemplo, <code>acm</code>).</p></li>
+<li><p><strong>studlab</strong> → Nome da coluna contendo a identificação dos estudos (por exemplo, <code>Author</code>).</p></li>
+<li><p><strong>sm</strong> → Transformação utilizada: <code>"PLOGIT"</code>, <code>"PFT"</code> ou <code>"PRAW"</code>.</p></li>
+<li><p><strong>method</strong> → Método utilizado para combinar os estudos. Usaremos <code>"GLMM"</code>; a alternativa clássica é <code>"Inverse"</code> (inverso da variância).</p></li>
+</ul>
+</section>
+</section>
+<section id="exemplo-de-código" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="exemplo-de-código"><span class="header-section-number">9.5</span> Exemplo de Código</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m.prop <span class="ot">&lt;-</span> <span class="fu">metaprop</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  event.e,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  n.e,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> acm,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">studlab =</span> Author,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sm =</span> <span class="st">"PLOGIT"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"GLMM"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 2</span></p>
-<p><span class="cartao-titulo"><a href="./cap02-entendendo-rstudio.html">Entendendo o RStudio</a></span></p>
-<p><span class="cartao-desc">Os painéis da interface, scripts, pacotes e como salvar seu trabalho.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 3</span></p>
-<p><span class="cartao-titulo"><a href="./cap03-introducao-pacotes.html">Introdução aos pacotes no R</a></span></p>
-<p><span class="cartao-desc">Como instalar e carregar pacotes, incluindo os usados neste material.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 4</span></p>
-<p><span class="cartao-titulo"><a href="./cap04-pacotes-metanalise.html">Pacotes utilizados para realizar meta-análises</a></span></p>
-<p><span class="cartao-desc">meta, metafor, dmetar e outros pacotes úteis para meta-análise.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 5</span></p>
-<p><span class="cartao-titulo"><a href="./cap05-importando-dados.html">Importando dados</a></span></p>
-<p><span class="cartao-desc">Boas práticas na planilha e importação dos dados do Excel para o R.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 6</span></p>
-<p><span class="cartao-titulo"><a href="./cap06-manipulacao-dados.html">Manipulação de dados no R</a></span></p>
-<p><span class="cartao-desc">Operadores do R, tidyverse e seleção de variáveis, linhas e colunas.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 7</span></p>
-<p><span class="cartao-titulo"><a href="./cap07-metanalise-binarios.html">Meta-análise de desfechos binários</a></span></p>
-<p><span class="cartao-desc">A função metabin(), o resumo dos resultados e o <em>forest plot</em>, argumento por argumento.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 8</span></p>
-<p><span class="cartao-titulo"><a href="./cap08-metanalise-continuos.html">Meta-análise de desfechos contínuos</a></span></p>
-<p><span class="cartao-desc">A função metacont(), a escolha entre MD e SMD e o <em>forest plot</em>.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 9</span></p>
-<p><span class="cartao-titulo"><a href="./cap09-metanalise-braco-unico.html">Meta-análise de braço único</a></span></p>
-<p><span class="cartao-desc">Proporções com metaprop(), transformações e heterogeneidade.</span></p>
-</div>
-<div class="g-col-12 g-col-md-6 cartao">
-<p><span class="cartao-num">Capítulo 10</span></p>
-<p><span class="cartao-titulo"><a href="./cap10-vies-publicacao.html">Viés de publicação</a></span></p>
-<p><span class="cartao-desc">Gráfico de funil, teste de Egger e método <em>trim-and-fill</em>.</span></p>
+</section>
+<section id="o-que-acontece-aqui" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="o-que-acontece-aqui"><span class="header-section-number">9.6</span> O que acontece aqui?</h2>
+<p>O comando acima cria um novo objeto chamado <strong>m.prop</strong>, que armazenará a proporção de óbitos de cada estudo, a proporção combinada e as medidas de heterogeneidade.</p>
+<p>💡 Com <code>method = "GLMM"</code>, a variância entre os estudos (Tau²) é estimada por máxima verossimilhança. Por isso, não é necessário informar o argumento <code>method.tau</code>.</p>
+</section>
+<section id="visualizando-os-resultados-da-metanálise" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="visualizando-os-resultados-da-metanálise"><span class="header-section-number">9.7</span> Visualizando os Resultados da Metanálise</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.prop)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       proportion           95% CI
+MRC-1      0.0797 [0.0595; 0.1040]
+CDP        0.0580 [0.0425; 0.0771]
+MRC-2      0.1226 [0.1011; 0.1468]
+GASP       0.1009 [0.0701; 0.1395]
+PARIS      0.1049 [0.0847; 0.1281]
+AMIS       0.1085 [0.0960; 0.1220]
+ISIS-2     0.1828 [0.1747; 0.1912]
+
+Number of studies: k = 7
+Number of observations: o = 14186
+Number of events: e = 2128
+
+                     proportion           95% CI
+Common effect model      0.1500 [0.1442; 0.1560]
+Random effects model     0.1045 [0.0808; 0.1340]
+
+Quantifying heterogeneity (with 95% CIs):
+ tau^2 = 0.1301; tau = 0.3607; I^2 = 96.9% [95.2%; 97.9%]; H = 5.64 [4.58; 6.95]
+
+Test of heterogeneity:
+           Q d.f.  p-value
+ Wald 190.95    6 &lt; 0.0001
+ LRT  219.10    6 &lt; 0.0001
+
+Details of meta-analysis methods:
+- Random intercept logistic regression model
+- Maximum-likelihood estimator for tau^2
+- Calculation of I^2 based on Q
+- Logit transformation
+- Clopper-Pearson confidence interval for individual studies</code></pre>
 </div>
 </div>
 </section>
-<section id="autoria" class="level2">
-<h2 class="anchored" data-anchor-id="autoria">Autoria</h2>
-<p>Material desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).</p>
-<p>Encontrou um erro ou tem uma sugestão? Use o link <strong>Relatar um problema</strong>, no alto da página à direita, para nos avisar.</p>
+<section id="interpretando-os-resultados" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="interpretando-os-resultados"><span class="header-section-number">9.8</span> Interpretando os Resultados</h2>
+<ul>
+<li><p><strong>Proporção combinada</strong> → No modelo de efeitos aleatórios, a proporção combinada de óbitos foi de 10,4% (IC 95%: 8,1% a 13,4%).</p></li>
+<li><p><strong>Efeito comum × efeitos aleatórios</strong> → O modelo de efeito comum estimou 15,0%, um valor bem mais alto. Isso acontece porque esse modelo dá grande peso ao estudo ISIS-2, que sozinho reúne 60,5% dos participantes e apresenta a maior proporção de óbitos (18,3%). Quando há heterogeneidade importante, o modelo de efeitos aleatórios é o mais adequado.</p></li>
+<li><p><strong>Heterogeneidade</strong> → O I² foi de 96,9%, indicando heterogeneidade muito alta. Isso é comum em metanálises de braço único, pois os estudos podem diferir em população, tempo de acompanhamento e contexto. Por isso, a proporção combinada deve ser interpretada com cautela.</p></li>
+<li><p><strong>Sem grupo de comparação</strong> → Uma metanálise de braço único descreve a frequência de um evento, mas não permite concluir se a aspirina aumenta ou reduz a mortalidade. Para isso, é necessária a comparação com um grupo controle, como fizemos no capítulo 7.</p></li>
+</ul>
 </section>
-<section id="como-citar" class="level2">
-<h2 class="anchored" data-anchor-id="como-citar">Como citar</h2>
-<p>O material tem registro permanente no Zenodo, com o DOI <a href="https://doi.org/10.5281/zenodo.22710110">10.5281/zenodo.22710110</a>. Esse DOI sempre leva à versão mais recente.</p>
-<p><strong>ABNT</strong></p>
-<p>DIAZ, Camilo André Viana; FERNANDES, Ana Paula. <strong>Meta-análise no R</strong>: guia prático para estudantes da área da saúde. Zenodo, 2026. DOI: 10.5281/zenodo.22710110. Disponível em: https://metanalise-r.github.io.</p>
-<p><strong>Vancouver</strong></p>
-<p>Diaz CAV, Fernandes AP. Meta-análise no R: guia prático para estudantes da área da saúde [Internet]. Zenodo; 2026. Disponível em: https://doi.org/10.5281/zenodo.22710110</p>
+<section id="criando-o-forest-plot" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="criando-o-forest-plot"><span class="header-section-number">9.9</span> Criando o Forest Plot</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  m.prop,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">common =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pscale =</span> <span class="dv">100</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Óbitos (%)"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">smlab =</span> <span class="st">"Proporção de óbitos (%)"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">leftlabs =</span> <span class="fu">c</span>(<span class="st">"Estudo"</span>, <span class="st">"Óbitos"</span>, <span class="st">"Total"</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">rightlabs =</span> <span class="fu">c</span>(<span class="st">"Proporção (%)"</span>, <span class="st">"IC 95%"</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">colgap.left =</span> <span class="st">"10mm"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.square =</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.square.lines =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.diamond =</span> <span class="st">"black"</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cap09-metanalise-braco-unico_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="licença" class="level2">
-<h2 class="anchored" data-anchor-id="licença">Licença</h2>
-<p>Este material está licenciado sob a <a href="https://creativecommons.org/licenses/by/4.0/deed.pt-br">Licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)</a>. Você pode copiar, redistribuir e adaptar o conteúdo para qualquer finalidade, inclusive comercial, desde que dê o devido crédito aos autores e indique se fez alterações.</p>
+<section id="principais-argumentos-da-função-forest" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="principais-argumentos-da-função-forest"><span class="header-section-number">9.10</span> Principais Argumentos da Função <code>forest()</code></h2>
+<section id="pscale" class="level3">
+<h3 class="anchored" data-anchor-id="pscale"><code>pscale</code></h3>
+<p>Multiplica as proporções por um valor. Com <code>pscale = 100</code>, os resultados são apresentados em porcentagem.</p>
+</section>
+<section id="leftlabs-rightlabs-e-smlab" class="level3">
+<h3 class="anchored" data-anchor-id="leftlabs-rightlabs-e-smlab"><code>leftlabs</code>, <code>rightlabs</code> e <code>smlab</code></h3>
+<p>Definem os títulos das colunas exibidas à esquerda e à direita do gráfico e o título da medida de efeito, permitindo traduzi-los para o português.</p>
+</section>
+<section id="colgap.left" class="level3">
+<h3 class="anchored" data-anchor-id="colgap.left"><code>colgap.left</code></h3>
+<p>Aumenta o espaço entre as colunas da esquerda, evitando que os textos fiquem sobrepostos ao gráfico.</p>
+</section>
+<section id="xlab" class="level3">
+<h3 class="anchored" data-anchor-id="xlab"><code>xlab</code></h3>
+<p>Define o rótulo do eixo horizontal do gráfico.</p>
+</section>
+</section>
+<section id="resumo-do-tutorial" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">9.11</span> Resumo do Tutorial</h2>
+<p>Ao final deste capítulo, aprendemos como realizar uma metanálise de braço único utilizando o pacote <strong>meta</strong>.</p>
+<p>Em resumo:</p>
+<ul>
+<li><p>Entendemos quando utilizar uma metanálise de braço único;</p></li>
+<li><p>Organizamos os dados com o número de eventos e o número total de participantes de cada estudo;</p></li>
+<li><p>Conhecemos as principais transformações para proporções;</p></li>
+<li><p>Realizamos a metanálise com a função <code>metaprop()</code>;</p></li>
+<li><p>Interpretamos a proporção combinada, a diferença entre os modelos e a heterogeneidade;</p></li>
+<li><p>Construímos o <strong>Forest Plot</strong> com os resultados em porcentagem.</p></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -762,10 +896,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./cap08-metanalise-continuos.html" class="pagination-link" aria-label="Meta-análise de desfechos contínuos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap01-instalando-r-rstudio.html" class="pagination-link" aria-label="Baixando e instalando o R e o RStudio">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Baixando e instalando o R e o RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap10-vies-publicacao.html" class="pagination-link" aria-label="Viés de publicação">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

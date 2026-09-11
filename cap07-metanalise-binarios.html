@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./cap08-metanalise-continuos.html" rel="next">
 <link href="./cap06-manipulacao-dados.html" rel="prev">
 <link href="./imagens/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -77,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-b311067de9bb61c87081b7a4fd9bc435.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-670e3724db7835d07184ee28e3689933.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f8930871a6f83626bb31d1f1603a1c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -217,6 +218,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./cap07-metanalise-binarios.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos binários</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Aprofundando a análise</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap08-metanalise-continuos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap09-metanalise-braco-unico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Meta-análise de braço único</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10-vies-publicacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Viés de publicação</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>n.c</strong> → Número total de participantes no grupo controle.</p></li>
 <li><p><strong>data</strong> → Nome do <em>data frame</em> contendo os dados da metanálise (neste exemplo, <code>acm</code>).</p></li>
 <li><p><strong>method</strong> → Método utilizado para combinar os estudos. O padrão é <code>"MH"</code> (<em>Mantel-Haenszel</em>).</p></li>
-<li><p><strong>method.tau</strong> → Método utilizado para estimar a variância entre os estudos. O padrão é <code>"DL"</code> (<em>DerSimonian-Laird</em>).</p></li>
+<li><p><strong>method.tau</strong> → Método utilizado para estimar a variância entre os estudos. Neste livro, usamos <code>"DL"</code> (<em>DerSimonian-Laird</em>); nas versões atuais do pacote, o padrão é <code>"REML"</code> (máxima verossimilhança restrita).</p></li>
 <li><p><strong>sm</strong> → Medida de efeito utilizada. As opções mais comuns são <code>"RR"</code> (<em>Risk Ratio</em>) e <code>"OR"</code> (<em>Odds Ratio</em>).</p></li>
 <li><p><strong>method.random.ci</strong> → Método usado para calcular o intervalo de confiança no modelo de efeitos aleatórios. O padrão é <code>"classic"</code>; <code>"HK"</code> aplica o ajuste de Hartung-Knapp. Em versões antigas do pacote, esse argumento se chamava <code>hakn</code>.</p></li>
 <li><p><strong>studlab</strong> → Nome da coluna contendo a identificação dos estudos (por exemplo, <code>Author</code>).</p></li>
@@ -1067,6 +1097,9 @@ common = FALSE</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./cap08-metanalise-continuos.html" class="pagination-link" aria-label="Meta-análise de desfechos contínuos">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-análise de desfechos contínuos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
