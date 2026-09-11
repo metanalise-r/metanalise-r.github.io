@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Se usar este material, cite-o como indicado abaixo."
+title: "Meta-análise no R: guia prático para estudantes da área da saúde"
+authors:
+  - family-names: Diaz
+    given-names: Camilo André Viana
+    affiliation: Universidade Federal do Triângulo Mineiro
+  - family-names: Fernandes
+    given-names: Ana Paula
+    affiliation: Universidade Federal do Triângulo Mineiro
+license: CC-BY-4.0
+url: "https://metanalise-r.github.io"
+repository-code: "https://github.com/metanalise-r/metanalise-r.github.io"
+keywords:
+  - meta-análise
+  - revisão sistemática
+  - bioestatística
+  - linguagem R
+  - ensino

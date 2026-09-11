@@ -1,0 +1,26 @@
+{
+  "title": "Meta-análise no R: guia prático para estudantes da área da saúde",
+  "upload_type": "lesson",
+  "description": "<p>Material didático em português que ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Voltado a estudantes da área da saúde, não exige experiência prévia com programação. Inclui código comentado, planilha de exemplo e orientações para interpretar os resultados e o forest plot.</p><p>Versão online: <a href=\"https://metanalise-r.github.io\">https://metanalise-r.github.io</a></p>",
+  "creators": [
+    {
+      "name": "Diaz, Camilo André Viana",
+      "affiliation": "Universidade Federal do Triângulo Mineiro"
+    },
+    {
+      "name": "Fernandes, Ana Paula",
+      "affiliation": "Universidade Federal do Triângulo Mineiro"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "language": "por",
+  "keywords": [
+    "meta-análise",
+    "revisão sistemática",
+    "bioestatística",
+    "linguagem R",
+    "RStudio",
+    "ensino",
+    "material didático"
+  ]
+}
