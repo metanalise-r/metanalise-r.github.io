@@ -11,7 +11,7 @@ O RStudio possui quatro janelas principais que organizam suas ferramentas e func
 
 Cada janela possui uma funcionalidade específica, e você pode alternar entre elas usando as abas da interface.
 
-## 1. Console
+## Console
 
 O console é onde você interage diretamente com o R e visualiza os resultados dos seus comandos.
 
@@ -29,7 +29,7 @@ Exemplo de função mais complexa:
 summary(mtcars)
 ```
 
-## 2. Source
+## Source
 
 A janela **Source** é usada para escrever, salvar e executar códigos em arquivos separados.
 
@@ -48,7 +48,7 @@ Para executar o código:
 
 Escrever o código no Source é recomendado, pois facilita salvar, editar e organizar seu trabalho.
 
-## 3. Environment e History
+## Environment e History
 
 A aba **Environment** mostra todos os objetos criados no R, como variáveis, data frames e funções, junto dos seus valores.
 
@@ -56,7 +56,7 @@ A aba **History** exibe a lista de comandos digitados no console, permitindo reu
 
 Ambas as abas permitem limpar o ambiente e o histórico quando necessário.
 
-## 4. Files, Plots, Packages e Help
+## Files, Plots, Packages e Help
 
 Esta janela oferece acesso a arquivos, gráficos, pacotes instalados e ajuda integrada.
 

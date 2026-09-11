@@ -2,6 +2,8 @@
 
 Este material ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Foi escrito em português para estudantes da área da saúde e não exige experiência prévia com programação.
 
+[Começar pelo capítulo 1 →](cap01-instalando-r-rstudio.qmd){.btn .btn-primary .btn-comecar}
+
 ## Como usar este material
 
 Os capítulos seguem uma ordem progressiva, e cada um parte do que foi visto no anterior. Neles você encontra:
@@ -14,21 +16,79 @@ Recomendamos acompanhar com o RStudio aberto, executando cada código à medida 
 
 ## Conteúdo
 
-1. Baixando e instalando o R e o RStudio
-2. Entendendo o RStudio
-3. Introdução aos pacotes no R
-4. Pacotes utilizados para realizar meta-análises
-5. Importando dados
-6. Manipulação de dados no R
-7. Meta-análise de desfechos binários
+:::: {.grid .cartoes}
 
-Novos capítulos, sobre desfechos contínuos, meta-análise de braço único e viés de publicação, estão em elaboração.
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 1]{.cartao-num}
+
+[[Baixando e instalando o R e o RStudio](cap01-instalando-r-rstudio.qmd)]{.cartao-titulo}
+
+[O que são o R e o RStudio e como instalar os dois, passo a passo.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 2]{.cartao-num}
+
+[[Entendendo o RStudio](cap02-entendendo-rstudio.qmd)]{.cartao-titulo}
+
+[Os painéis da interface, scripts, pacotes e como salvar seu trabalho.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 3]{.cartao-num}
+
+[[Introdução aos pacotes no R](cap03-introducao-pacotes.qmd)]{.cartao-titulo}
+
+[Como instalar e carregar pacotes, incluindo os usados neste material.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 4]{.cartao-num}
+
+[[Pacotes utilizados para realizar meta-análises](cap04-pacotes-metanalise.qmd)]{.cartao-titulo}
+
+[meta, metafor, dmetar e outros pacotes úteis para meta-análise.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 5]{.cartao-num}
+
+[[Importando dados](cap05-importando-dados.qmd)]{.cartao-titulo}
+
+[Boas práticas na planilha e importação dos dados do Excel para o R.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 6]{.cartao-num}
+
+[[Manipulação de dados no R](cap06-manipulacao-dados.qmd)]{.cartao-titulo}
+
+[Operadores do R, tidyverse e seleção de variáveis, linhas e colunas.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao}
+[Capítulo 7]{.cartao-num}
+
+[[Meta-análise de desfechos binários](cap07-metanalise-binarios.qmd)]{.cartao-titulo}
+
+[A função metabin(), o resumo dos resultados e o *forest plot*, argumento por argumento.]{.cartao-desc}
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao .em-breve}
+[Em elaboração]{.cartao-num}
+
+[Próximos capítulos]{.cartao-titulo}
+
+[Desfechos contínuos, meta-análise de braço único e viés de publicação.]{.cartao-desc}
+:::
+
+::::
 
 ## Autoria
 
 Material desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).
 
-Encontrou um erro ou tem uma sugestão? Use o link **Criar uma issue**, no alto da página à direita, para nos avisar.
+Encontrou um erro ou tem uma sugestão? Use o link **Relatar um problema**, no alto da página à direita, para nos avisar.
 
 ## Licença
 

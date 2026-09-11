@@ -1,0 +1,153 @@
+/*-- scss:defaults --*/
+
+// Paleta: azul-petróleo com detalhe âmbar (as mesmas cores da capa)
+$primary:        #0e5a6a;
+$link-color:     #0e5a6a;
+$body-color:     #1f2d33;
+$headings-color: #0f3d47;
+$ambar-texto:    #9a4a14;
+
+$font-family-sans-serif: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family:   "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-family-monospace:  "JetBrains Mono", SFMono-Regular, Menlo, Consolas, monospace;
+$headings-font-weight:   600;
+$font-size-base:         1.0625rem;
+$line-height-base:       1.65;
+
+$code-color:             $ambar-texto;
+$code-block-bg:          #f3f7f8;
+$code-block-border-left: false;
+
+$callout-color-note: $primary;
+
+$sidebar-fg: #3c4a4f;
+$sidebar-hl: $primary;
+
+/*-- scss:rules --*/
+
+// Títulos
+h1, h2, h3 { letter-spacing: -0.01em; text-wrap: balance; }
+// clear: a linha do título não passa por baixo da capa
+h2 { border-bottom: 1px solid #d9e4e7; padding-bottom: .35rem; margin-top: 2.4rem; clear: both; }
+.quarto-title .title { font-size: 2.75rem; }
+.quarto-title .subtitle { color: #4a6268; font-family: $font-family-sans-serif; }
+
+// Capa na página inicial
+.quarto-cover-image {
+  max-width: 220px;
+  border-radius: 6px;
+  box-shadow: 0 10px 28px rgba(15, 61, 71, .28);
+}
+
+// Barra lateral
+#quarto-sidebar { font-size: .94rem; }
+.sidebar-title { font-family: $headings-font-family; font-weight: 600; color: $headings-color; font-size: 1.3rem; }
+
+.sidebar-navigation .sidebar-item { margin-bottom: .1rem; }
+.sidebar-navigation .sidebar-link {
+  padding: .32rem .55rem;
+  border-radius: 6px;
+  line-height: 1.35;
+  transition: background-color .12s, color .12s;
+}
+.sidebar-navigation .sidebar-link:hover { background: #eef4f5; color: $primary; }
+.sidebar-navigation .sidebar-link.active {
+  background: #e3eff1;
+  color: $primary;
+  font-weight: 400;  // sem negrito: o título não quebra linha diferente ao ficar ativo
+}
+
+// Número e título em colunas: a linha que quebra fica alinhada ao título, não ao número
+.sidebar-link .menu-text { display: flex; align-items: baseline; }
+.sidebar-link .chapter-number {
+  flex: 0 0 1.05rem;
+  color: #8a9aa0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.sidebar-link.active .chapter-number { color: $primary; }
+.sidebar-link .chapter-title { flex: 1; text-wrap: balance; }
+
+// Títulos das partes ("Primeiros passos no R", "Meta-análise na prática")
+.sidebar-item-section > .sidebar-item-container {
+  margin-top: 1rem;
+  .sidebar-link, .sidebar-link:hover { background: none; box-shadow: none; }
+  .menu-text {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: $ambar-texto;
+  }
+  .sidebar-item-toggle { display: none; }
+}
+.sidebar-section.depth1 { padding-left: 0; }
+
+// Blocos de código
+div.sourceCode { border-radius: 6px; border: 1px solid #dbe6e9; }
+div.sourceCode pre { padding-right: 2.6rem; }  // espaço para o botão de copiar
+code { font-size: .88em; }
+// Sem ligaduras: o aluno precisa ver "<-" como se digita, não uma seta
+code, pre, kbd { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+// Código dentro de títulos, sem o quadro colorido
+h1 code, h2 code, h3 code, h4 code { background: none; padding: 0; color: inherit; font-size: .9em; }
+
+// Listas mais compactas (os capítulos vieram com itens separados por linha em branco)
+li > p { margin-bottom: .3rem; }
+
+// Saídas do R: fundo branco e borda tracejada, para não confundir com o código
+.cell-output pre {
+  background: #ffffff;
+  border: 1px dashed #c5d4d8;
+  border-radius: 6px;
+  padding: .7rem 1rem;
+  font-size: .85em;
+}
+.cell-output-error pre { border-color: #e0a39b; background: #fff8f7; }
+
+// Quadros de aviso (callouts): borda fina e uniforme, sem a barra grossa à esquerda
+.callout { border: 1px solid #d9e4e7 !important; border-radius: 8px; }
+
+// Figuras e capturas de tela
+figcaption { color: #5b6b70; font-size: .9em; }
+.quarto-figure img { border-radius: 4px; }
+
+// Tabelas
+.table { font-size: .95em; }
+.table thead th { border-bottom: 2px solid $primary; }
+
+// Botão "Começar"
+.btn-comecar { font-weight: 600; padding: .55rem 1.2rem; margin: .4rem 0 .6rem; }
+
+// Cartões dos capítulos na página inicial
+.cartoes { margin-top: 1rem; }
+.cartao {
+  position: relative;
+  border: 1px solid #d9e4e7;
+  border-radius: 8px;
+  padding: .95rem 1.1rem 1rem;
+  background: #ffffff;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+
+  p { margin: 0; }
+  .cartao-num {
+    font-size: .75rem; font-weight: 600; letter-spacing: .09em;
+    text-transform: uppercase; color: $ambar-texto;
+  }
+  .cartao-titulo { display: block; margin-top: .15rem; line-height: 1.3; text-wrap: balance; }
+  .cartao-titulo a {
+    font-family: $headings-font-family; font-weight: 600; font-size: 1.12rem;
+    color: $headings-color; text-decoration: none;
+  }
+  // O cartão inteiro vira área clicável
+  .cartao-titulo a::after { content: ""; position: absolute; inset: 0; }
+  .cartao-desc { display: block; margin-top: .3rem; color: #4a6268; font-size: .95rem; line-height: 1.45; }
+
+  &:hover { border-color: $primary; box-shadow: 0 6px 18px rgba(14, 90, 106, .13); transform: translateY(-2px); }
+}
+.cartao.em-breve {
+  background: #f6f9fa;
+  border-style: dashed;
+  &:hover { border-color: #d9e4e7; box-shadow: none; transform: none; }
+  .cartao-titulo { font-family: $headings-font-family; font-weight: 600; font-size: 1.12rem; color: #4a6268; }
+}
