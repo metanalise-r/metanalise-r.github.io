@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Meta-análise no R",
     "section": "",
-    "text": "Apresentação\nEste material ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Foi escrito em português para estudantes da área da saúde e não exige experiência prévia com programação.",
+    "text": "Apresentação\nEste material ensina, passo a passo, a realizar meta-análises no software R, da instalação do programa à interpretação dos resultados. Foi escrito em português para estudantes da área da saúde e não exige experiência prévia com programação.\nComeçar pelo capítulo 1 →",
     "crumbs": [
       "Apresentação"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#conteúdo",
     "title": "Meta-análise no R",
     "section": "Conteúdo",
-    "text": "Conteúdo\n\nBaixando e instalando o R e o RStudio\nEntendendo o RStudio\nIntrodução aos pacotes no R\nPacotes utilizados para realizar meta-análises\nImportando dados\nManipulação de dados no R\nMeta-análise de desfechos binários\n\nNovos capítulos, sobre desfechos contínuos, meta-análise de braço único e viés de publicação, estão em elaboração.",
+    "text": "Conteúdo\n\n\nCapítulo 1\nBaixando e instalando o R e o RStudio\nO que são o R e o RStudio e como instalar os dois, passo a passo.\n\n\nCapítulo 2\nEntendendo o RStudio\nOs painéis da interface, scripts, pacotes e como salvar seu trabalho.\n\n\nCapítulo 3\nIntrodução aos pacotes no R\nComo instalar e carregar pacotes, incluindo os usados neste material.\n\n\nCapítulo 4\nPacotes utilizados para realizar meta-análises\nmeta, metafor, dmetar e outros pacotes úteis para meta-análise.\n\n\nCapítulo 5\nImportando dados\nBoas práticas na planilha e importação dos dados do Excel para o R.\n\n\nCapítulo 6\nManipulação de dados no R\nOperadores do R, tidyverse e seleção de variáveis, linhas e colunas.\n\n\nCapítulo 7\nMeta-análise de desfechos binários\nA função metabin(), o resumo dos resultados e o forest plot, argumento por argumento.\n\n\nEm elaboração\nPróximos capítulos\nDesfechos contínuos, meta-análise de braço único e viés de publicação.",
     "crumbs": [
       "Apresentação"
     ]
@@ -34,7 +34,7 @@
     "href": "index.html#autoria",
     "title": "Meta-análise no R",
     "section": "Autoria",
-    "text": "Autoria\nMaterial desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).\nEncontrou um erro ou tem uma sugestão? Use o link Criar uma issue, no alto da página à direita, para nos avisar.",
+    "text": "Autoria\nMaterial desenvolvido por Camilo André Viana Diaz, sob orientação da Profa. Ana Paula Fernandes, na Universidade Federal do Triângulo Mineiro (UFTM).\nEncontrou um erro ou tem uma sugestão? Use o link Relatar um problema, no alto da página à direita, para nos avisar.",
     "crumbs": [
       "Apresentação"
     ]
@@ -56,6 +56,7 @@
     "section": "",
     "text": "1.1 Introdução\nAntes de começarmos a realizar nossas análises estatísticas, precisamos preparar o ambiente adequado. Isso inclui baixar e instalar um programa que facilite o uso do R. Uma das melhores opções atualmente é o RStudio, que fornece uma interface amigável para lidar com dados, pacotes e resultados de forma prática.\nA melhor parte é que o RStudio é totalmente gratuito e pode ser baixado a qualquer momento pela internet.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Baixando e instalando o R e o RStudio</span>"
     ]
   },
@@ -66,6 +67,7 @@
     "section": "1.2 Entendendo a Relação entre R e RStudio",
     "text": "1.2 Entendendo a Relação entre R e RStudio\nO RStudio é uma interface que torna a escrita e execução de códigos em R muito mais fácil e eficiente. No entanto, é importante lembrar que o RStudio não é o R propriamente dito. Ele funciona como uma ferramenta auxiliar e exige que o software R já esteja instalado no computador.\nOutro ponto essencial é que o R é atualizado com frequência. Se sua versão estiver muito desatualizada, alguns pacotes ou comandos podem não funcionar corretamente. Por isso, recomenda-se atualizar o R regularmente — idealmente, ao menos uma vez ao ano — instalando a versão mais recente.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Baixando e instalando o R e o RStudio</span>"
     ]
   },
@@ -76,6 +78,7 @@
     "section": "1.3 Instruções Passo a Passo para Instalar o R e o RStudio",
     "text": "1.3 Instruções Passo a Passo para Instalar o R e o RStudio\n\n1. Baixar o R\nO software R pode ser baixado no site oficial do Comprehensive R Archive Network (CRAN). Siga os passos:\n\nAcesse o site oficial do R: https://www.r-project.org/.\nClique em Download R, localizado na seção Getting Started no lado esquerdo.\nEscolha o espelho (mirror) mais próximo da sua localização.\nSelecione o link de download apropriado para seu sistema operacional (Windows, macOS ou Linux).\nClique na subpasta base e baixe a versão mais recente do R.\n\n\n\n2. Instalar o R\nApós baixar o instalador:\n\nDê um duplo clique no arquivo baixado.\nAutorize a execução clicando em Sim.\nClique em Avançar na tela de boas-vindas.\nLeia e aceite o contrato de licença.\nEscolha os componentes que deseja instalar.\nRecomenda-se instalar o R diretamente no disco C:, evitando nomes de diretórios com espaços.\nClique em Avançar para iniciar a instalação.\nQuando for concluída, clique em Concluir.\n\n\n\n3. Baixar o RStudio\nCom o R já instalado, prossiga para o RStudio:\n\nAcesse: https://www.rstudio.com/products/rstudio/download/.\nClique em Download para o RStudio Desktop.\nEscolha a versão compatível com seu sistema operacional.\nBaixe a versão mais recente do RStudio Desktop.\n\n\n\n4. Instalar o RStudio\nApós baixar o instalador do RStudio:\n\nDê um duplo clique no arquivo de instalação.\nAutorize a execução clicando em Sim.\nClique em Avançar.\nLeia e aceite o contrato de licença.\nEscolha o local de instalação.\nClique em Avançar para iniciar o processo.\nAo final, clique em Concluir.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Baixando e instalando o R e o RStudio</span>"
     ]
   },
@@ -86,6 +89,7 @@
     "section": "1.4 Próximos Passos",
     "text": "1.4 Próximos Passos\nCom o R e o RStudio devidamente instalados, você está pronto para explorar e realizar análises estatísticas, incluindo metanálises. No próximo capítulo, aprenderemos a instalar os pacotes necessários e a utilizar o R para manipular dados e executar comandos básicos.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Baixando e instalando o R e o RStudio</span>"
     ]
   },
@@ -96,6 +100,7 @@
     "section": "",
     "text": "2.1 Explorando a Interface do RStudio\nO RStudio possui quatro janelas principais que organizam suas ferramentas e funcionalidades:\nCada janela possui uma funcionalidade específica, e você pode alternar entre elas usando as abas da interface.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -106,6 +111,7 @@
     "section": "",
     "text": "Console\n\nSource\n\nEnvironment/History\n\nFiles/Plots/Packages/Help",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -113,9 +119,10 @@
     "objectID": "cap02-entendendo-rstudio.html#console",
     "href": "cap02-entendendo-rstudio.html#console",
     "title": "2  Entendendo o RStudio",
-    "section": "2.2 1. Console",
-    "text": "2.2 1. Console\nO console é onde você interage diretamente com o R e visualiza os resultados dos seus comandos.\nQuando você executa um comando, o resultado aparece aqui, incluindo mensagens de erro ou alertas caso algo esteja incorreto.\nExemplo de operação simples:\n2 + 2\nExemplo de função mais complexa:\nsummary(mtcars)",
+    "section": "2.2 Console",
+    "text": "2.2 Console\nO console é onde você interage diretamente com o R e visualiza os resultados dos seus comandos.\nQuando você executa um comando, o resultado aparece aqui, incluindo mensagens de erro ou alertas caso algo esteja incorreto.\nExemplo de operação simples:\n2 + 2\nExemplo de função mais complexa:\nsummary(mtcars)",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -123,9 +130,10 @@
     "objectID": "cap02-entendendo-rstudio.html#source",
     "href": "cap02-entendendo-rstudio.html#source",
     "title": "2  Entendendo o RStudio",
-    "section": "2.3 2. Source",
-    "text": "2.3 2. Source\nA janela Source é usada para escrever, salvar e executar códigos em arquivos separados.\nPara criar um novo script:\n\nClique em Arquivo &gt; Novo Arquivo &gt; Script R.\n\nPara executar o código:\n\nSelecione o trecho desejado e clique em Executar\nOu utilize os atalhos:\n\nCtrl + Enter (Windows)\nCommand + Enter (Mac)\n\n\nEscrever o código no Source é recomendado, pois facilita salvar, editar e organizar seu trabalho.",
+    "section": "2.3 Source",
+    "text": "2.3 Source\nA janela Source é usada para escrever, salvar e executar códigos em arquivos separados.\nPara criar um novo script:\n\nClique em Arquivo &gt; Novo Arquivo &gt; Script R.\n\nPara executar o código:\n\nSelecione o trecho desejado e clique em Executar\nOu utilize os atalhos:\n\nCtrl + Enter (Windows)\nCommand + Enter (Mac)\n\n\nEscrever o código no Source é recomendado, pois facilita salvar, editar e organizar seu trabalho.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -133,9 +141,10 @@
     "objectID": "cap02-entendendo-rstudio.html#environment-e-history",
     "href": "cap02-entendendo-rstudio.html#environment-e-history",
     "title": "2  Entendendo o RStudio",
-    "section": "2.4 3. Environment e History",
-    "text": "2.4 3. Environment e History\nA aba Environment mostra todos os objetos criados no R, como variáveis, data frames e funções, junto dos seus valores.\nA aba History exibe a lista de comandos digitados no console, permitindo reutilizá-los facilmente.\nAmbas as abas permitem limpar o ambiente e o histórico quando necessário.",
+    "section": "2.4 Environment e History",
+    "text": "2.4 Environment e History\nA aba Environment mostra todos os objetos criados no R, como variáveis, data frames e funções, junto dos seus valores.\nA aba History exibe a lista de comandos digitados no console, permitindo reutilizá-los facilmente.\nAmbas as abas permitem limpar o ambiente e o histórico quando necessário.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -143,9 +152,10 @@
     "objectID": "cap02-entendendo-rstudio.html#files-plots-packages-e-help",
     "href": "cap02-entendendo-rstudio.html#files-plots-packages-e-help",
     "title": "2  Entendendo o RStudio",
-    "section": "2.5 4. Files, Plots, Packages e Help",
-    "text": "2.5 4. Files, Plots, Packages e Help\nEsta janela oferece acesso a arquivos, gráficos, pacotes instalados e ajuda integrada.\n\nArquivos (Files)\nMostra o diretório de trabalho atual e permite abrir ou criar arquivos e pastas.\n\n\nGráficos (Plots)\nExibe os gráficos gerados pelo R.\n\n\nPacotes (Packages)\nLista pacotes instalados e permite adicionar ou remover pacotes.\n\n\nAjuda (Help)\nFornece documentação detalhada sobre funções e pacotes.",
+    "section": "2.5 Files, Plots, Packages e Help",
+    "text": "2.5 Files, Plots, Packages e Help\nEsta janela oferece acesso a arquivos, gráficos, pacotes instalados e ajuda integrada.\n\nArquivos (Files)\nMostra o diretório de trabalho atual e permite abrir ou criar arquivos e pastas.\n\n\nGráficos (Plots)\nExibe os gráficos gerados pelo R.\n\n\nPacotes (Packages)\nLista pacotes instalados e permite adicionar ou remover pacotes.\n\n\nAjuda (Help)\nFornece documentação detalhada sobre funções e pacotes.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -156,6 +166,7 @@
     "section": "2.6 Criando um Novo Script no RStudio",
     "text": "2.6 Criando um Novo Script no RStudio\n\nAbra a janela Source.\nClique em Arquivo &gt; Novo Arquivo &gt; Script R.\nEscreva seu código no editor.\nExecute com:\n\nBotão Executar\nOu o atalho Ctrl + Enter (Windows) / Cmd + Enter (Mac)",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -166,6 +177,7 @@
     "section": "2.7 Explorando Pacotes no R",
     "text": "2.7 Explorando Pacotes no R\nO R possui uma grande variedade de pacotes que ampliam suas funcionalidades.\n\nInstalando um pacote\ninstall.packages(\"dplyr\")\n\n\nCarregando um pacote\nlibrary(dplyr)\nVocê pode visualizar e gerenciar pacotes na aba Pacotes, localizada no canto inferior direito do RStudio.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -176,6 +188,7 @@
     "section": "2.8 Gerenciando o Ambiente e Histórico",
     "text": "2.8 Gerenciando o Ambiente e Histórico\n\nA aba Environment permite visualizar e gerenciar objetos criados no R.\nA aba History armazena os comandos anteriores, permitindo reutilizá-los.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -186,6 +199,7 @@
     "section": "2.9 Salvando seu Trabalho",
     "text": "2.9 Salvando seu Trabalho\nPara salvar o script:\n\nClique em Arquivo &gt; Salvar\nOu utilize:\n\nCtrl + S (Windows)\nCmd + S (Mac)",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -196,6 +210,7 @@
     "section": "2.10 Fechando o RStudio",
     "text": "2.10 Fechando o RStudio\nPara fechar o RStudio:\n\nClique em Arquivo &gt; Sair\nOu no botão X no canto superior direito.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Entendendo o RStudio</span>"
     ]
   },
@@ -206,6 +221,7 @@
     "section": "",
     "text": "3.1 Como instalar um pacote no RStudio a partir do CRAN?\nOs pacotes no R são coleções de funções, conjuntos de dados e outros códigos projetados para resolver problemas específicos ou executar determinadas tarefas.\nEles são uma parte essencial da linguagem R, permitindo ampliar sua funcionalidade.\nPara se familiarizar com os pacotes do R, você pode explorar a grande variedade de pacotes disponíveis e suas documentações.\nO Comprehensive R Archive Network (CRAN) é o principal repositório de pacotes do R. Você pode navegar por sua coleção no link abaixo:\nhttps://cran.r-project.org/web/packages/index.html\nInstalar pacotes no R é uma tarefa simples.\nVocê pode utilizar a função install.packages() no console do R.\nPor exemplo, para instalar o pacote meta, basta digitar:\nApós a instalação, para utilizar um pacote, você precisa carregá-lo na sessão do R usando a função library():\nIsso tornará as funções e os dados do pacote meta disponíveis para uso no seu código R.\nO pacote meta é um dos mais importantes para realizar metanálises no R. No entanto, há outros pacotes que também serão necessários.\nVamos ensiná-lo a instalar cada um à medida que forem utilizados ao longo do curso.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introdução aos pacotes no R</span>"
     ]
   },
@@ -216,6 +232,7 @@
     "section": "",
     "text": "install.packages(\"meta\")\n\nlibrary(meta)",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introdução aos pacotes no R</span>"
     ]
   },
@@ -226,6 +243,7 @@
     "section": "3.2 Instalando os Pacotes Utilizados no Curso",
     "text": "3.2 Instalando os Pacotes Utilizados no Curso\nPara garantir que você tenha todas as ferramentas necessárias para suas análises, instale os seguintes pacotes utilizando os códigos abaixo.\n\nInstalação de Pacotes\ninstall.packages(\"meta\")\ninstall.packages(\"metafor\")\ninstall.packages(\"remotes\")\ninstall.packages(\"readr\")\ninstall.packages(\"readxl\")\ninstall.packages(\"ggplot2\")\ninstall.packages(\"tidyverse\")\ninstall.packages(\"grid\")\ninstall.packages(\"forestplot\")",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introdução aos pacotes no R</span>"
     ]
   },
@@ -236,6 +254,7 @@
     "section": "3.3 Instalação do Pacote dmetar",
     "text": "3.3 Instalação do Pacote dmetar\nO pacote dmetar não está disponível diretamente no CRAN, mas pode ser instalado a partir do GitHub.\nPara isso, siga os passos abaixo:\n## Instalar o pacote \"devtools\" caso ainda não esteja instalado\n\nif (!require(\"devtools\")) {\n  install.packages(\"devtools\")\n}\n\n## Instalar o dmetar a partir do GitHub\n\ndevtools::install_github(\"MathiasHarrer/dmetar\")",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introdução aos pacotes no R</span>"
     ]
   },
@@ -246,6 +265,7 @@
     "section": "3.4 Carregando os Pacotes no R",
     "text": "3.4 Carregando os Pacotes no R\nApós a instalação, carregue os pacotes com o seguinte código para utilizá-los em sua análise:\nlibrary(meta)\nlibrary(metafor)\nlibrary(remotes)\nlibrary(dmetar)\nlibrary(readr)\nlibrary(readxl)\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(grid)\nlibrary(devtools)\nlibrary(forestplot)",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introdução aos pacotes no R</span>"
     ]
   },
@@ -256,6 +276,7 @@
     "section": "",
     "text": "1. meta\nNo R, existem diversos pacotes disponíveis para conduzir metanálises. Abaixo estão alguns dos mais utilizados.\nEsse é um pacote abrangente para metanálise, incluindo funções para estimar e visualizar efeitos, testar heterogeneidade, ajustar modelos de metarregressão e realizar análises de subgrupos.\nComo citar:\nBalduzzi S, Rücker G, Schwarzer G (2019). How to perform a meta-analysis with R: a practical tutorial. Evidence-Based Mental Health, 153–160.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pacotes utilizados para realizar meta-análises</span>"
     ]
   },
@@ -266,6 +287,7 @@
     "section": "4.1 Como instalar o pacote dmetar",
     "text": "4.1 Como instalar o pacote dmetar\nEste pacote não está disponível no CRAN, mas pode ser instalado diretamente do GitHub usando o código abaixo.\n## Instalar o pacote \"devtools\" caso ainda não esteja instalado\n\nif (!require(\"devtools\")) {\n  install.packages(\"devtools\")\n}\n\n## Instalar o dmetar a partir do GitHub\n\ndevtools::install_github(\"MathiasHarrer/dmetar\")",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pacotes utilizados para realizar meta-análises</span>"
     ]
   },
@@ -276,6 +298,7 @@
     "section": "4.2 Outros Pacotes Úteis",
     "text": "4.2 Outros Pacotes Úteis\nAlém dos pacotes específicos para metanálises, há outros que auxiliam na manipulação de dados, visualização gráfica e leitura de arquivos.\n\n1. readxl\nPermite importar dados de arquivos do Excel para o R. Suporta os formatos .xls e .xlsx, podendo ler tanto planilhas individuais quanto um livro inteiro.\n\n\n2. ggplot2\nUm dos pacotes mais populares para criar gráficos de alta qualidade no R. Baseado na gramática de gráficos, permite criar diversos tipos de visualizações, como gráficos de dispersão, barras, linhas, entre outros.\n\n\n3. tidyverse\nUma coleção de pacotes que trabalham juntos para facilitar a manipulação e visualização de dados no R.\nInclui pacotes como:\n\ndplyr — manipulação de dados;\nggplot2 — visualização de dados;\ntidyr — organização e estruturação de dados.\n\n\n\n4. readr\nPermite a importação rápida e eficiente de arquivos de texto delimitados (.csv, .tsv e outros formatos). É especialmente útil para lidar com grandes conjuntos de dados.\n\n\n5. remotes\nFacilita a instalação e o gerenciamento de pacotes R hospedados em repositórios remotos, como o GitHub.\n\n\n6. grid\nFornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos.",
     "crumbs": [
+      "Primeiros passos no R",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pacotes utilizados para realizar meta-análises</span>"
     ]
   },
@@ -286,6 +309,7 @@
     "section": "",
     "text": "5.1 Preparando seus Dados\nEste tutorial ensinará como preparar e importar dados para o R usando o RStudio.\nNeste tutorial, usaremos planilhas do Microsoft Excel para armazenar os dados que serão analisados no R.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -296,6 +320,7 @@
     "section": "",
     "text": "Boas práticas ao estruturar seus dados no Excel\n\nO que fazer\n\nNomeie corretamente as colunas da sua planilha. Se os nomes das colunas forem apropriados desde o início, você economizará tempo, pois não precisará transformá-los depois no R.\nUse underline (_) em vez de espaços nos nomes das colunas.\nA ordem das colunas na planilha não importa, desde que estejam rotuladas corretamente.\n\n\n\nO que evitar\n\nEvite caracteres especiais como ä, ü e ö, pois podem ser distorcidos ao serem importados. Se possível, transforme-os antes da importação.\nSe houver linhas ou colunas vazias que antes continham dados, exclua-as completamente para evitar que o R interprete esses espaços como valores ausentes.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -306,6 +331,7 @@
     "section": "5.2 Passo 1: Estruturando corretamente seu conjunto de dados no Excel",
     "text": "5.2 Passo 1: Estruturando corretamente seu conjunto de dados no Excel\nAqui está um exemplo básico de como formatar sua planilha quando estiver lidando com variáveis binárias (exemplo de endpoints).\n\n\n\n\n\nAuthor\nYear\nevent.e\nn.e\nevent.c\nn.c\n\n\n\n\nMRC-1\n1974\n49\n615\n67\n624\n\n\nCDP\n1976\n44\n758\n64\n771\n\n\nMRC-2\n1979\n102\n832\n126\n850\n\n\nGASP\n1979\n32\n317\n38\n309\n\n\nPARIS\n1980\n85\n810\n52\n406\n\n\nAMIS\n1980\n246\n2267\n219\n2257\n\n\nISIS-2\n1988\n1570\n8587\n1720\n8600",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -316,6 +342,7 @@
     "section": "5.3 Passo 2: Criando planilhas separadas para cada desfecho da metanálise",
     "text": "5.3 Passo 2: Criando planilhas separadas para cada desfecho da metanálise\nCada desfecho da sua metanálise deve estar em uma planilha separada dentro do mesmo arquivo do Excel.\nExemplo: uma aba acm para All-Cause Mortality (mortalidade por todas as causas) e outra mb para Major Bleeding (sangramento maior). A planilha de exemplo deste livro tem apenas a aba acm. ## Definindo o Diretório de Trabalho no RStudio\nUma vez que seu conjunto de dados no Excel esteja pronto, você deve salvá-lo em uma pasta específica do seu computador. Essa pasta será chamada de Diretório de Trabalho (Working Directory - WD).\nO WD é essencial, pois é a pasta onde o R buscará seus arquivos de entrada e salvará seus resultados.\n\nComo definir o Diretório de Trabalho (WD)\n\nCrie uma pasta no seu computador para armazenar seus dados e resultados da metanálise.\nDefina essa pasta como seu diretório de trabalho no RStudio usando a função setwd().\n\n## Definindo o diretório de trabalho no RStudio\n\nsetwd(\"/Users/SeuUsuario/Desktop/WD_RStudio\")\n\nSalve seu arquivo do Excel (.xlsx) dentro dessa pasta.\n\nExemplo: Nome do arquivo = data.xlsx",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -326,6 +353,7 @@
     "section": "5.4 Importando seu Conjunto de Dados para o R",
     "text": "5.4 Importando seu Conjunto de Dados para o R\nAgora que seu arquivo Excel está salvo no Diretório de Trabalho, podemos importá-lo para o R.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -336,6 +364,7 @@
     "section": "5.5 Passo 1: Instalar e carregar o pacote readxl",
     "text": "5.5 Passo 1: Instalar e carregar o pacote readxl\nPara ler arquivos Excel no R, precisamos do pacote readxl.\n## Instalar e carregar o pacote readxl\n\ninstall.packages(\"readxl\")\nlibrary(readxl)",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -346,6 +375,7 @@
     "section": "5.6 Passo 2: Listar os nomes das planilhas do arquivo Excel",
     "text": "5.6 Passo 2: Listar os nomes das planilhas do arquivo Excel\nPodemos usar a função excel_sheets() para verificar todas as abas do nosso arquivo.\n\n## Obtendo os nomes das planilhas dentro do arquivo Excel\n\nsheet_names &lt;- excel_sheets(\"data.xlsx\")\nsheet_names\n\n[1] \"acm\"",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -356,6 +386,7 @@
     "section": "5.7 Passo 3: Importar os dados para o RStudio",
     "text": "5.7 Passo 3: Importar os dados para o RStudio\nAgora vamos importar todas as planilhas do arquivo data.xlsx e convertê-las para um formato adequado para análise no R.\n\n## Importando os dados de todas as planilhas e convertendo para data frames\n\nma &lt;- lapply(sheet_names, function(x) {\n  as.data.frame(read_excel(\"data.xlsx\", sheet = x))\n})\n\nEsse código cria um objeto chamado ma, que é uma lista contendo todas as planilhas do Excel convertidas para data frames.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -366,6 +397,7 @@
     "section": "5.8 Passo 4: Renomear os elementos da lista",
     "text": "5.8 Passo 4: Renomear os elementos da lista\nPara facilitar o uso, podemos renomear cada elemento da lista com os nomes das planilhas originais.\n\nnames(ma) &lt;- sheet_names",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -376,6 +408,7 @@
     "section": "5.9 Visualizando os Dados",
     "text": "5.9 Visualizando os Dados\nAgora podemos visualizar os dados que foram importados para o R.\nPara visualizar uma planilha específica, utilize as funções View() ou head().\nView(ma$acm)   # Visualizar a aba \"acm\" (All-Cause Mortality)\n\nView(ma$mb)    # Visualizar a aba \"mb\" (Major Bleeding)\n\n\n\nVisualizador de dados do RStudio aberto com View(ma$acm).\n\n\nTambém podemos visualizar um resumo inicial utilizando a função head(), que exibe as primeiras linhas do conjunto de dados.\n\nhead(ma$acm)\n\n  Author Year event.e  n.e event.c  n.c\n1  MRC-1 1974      49  615      67  624\n2    CDP 1976      44  758      64  771\n3  MRC-2 1979     102  832     126  850\n4   GASP 1979      32  317      38  309\n5  PARIS 1980      85  810      52  406\n6   AMIS 1980     246 2267     219 2257",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -386,6 +419,7 @@
     "section": "5.10 Inspecionando os Dados",
     "text": "5.10 Inspecionando os Dados\n\n1. Usando a função str()\nA função str() fornece um resumo da estrutura do conjunto de dados, incluindo o número de observações, variáveis e seus tipos.\n\nstr(ma$acm)\n\n'data.frame':   7 obs. of  6 variables:\n $ Author : chr  \"MRC-1\" \"CDP\" \"MRC-2\" \"GASP\" ...\n $ Year   : num  1974 1976 1979 1979 1980 ...\n $ event.e: num  49 44 102 32 85 246 1570\n $ n.e    : num  615 758 832 317 810 ...\n $ event.c: num  67 64 126 38 52 219 1720\n $ n.c    : num  624 771 850 309 406 ...\n\n\n\nInterpretação da saída\n\nO objeto acm é um data frame contendo 7 observações e 6 variáveis.\nchr indica que a variável contém texto (por exemplo, Author).\nnum indica que a variável contém valores numéricos (por exemplo, Year e event.e).\n\n\n\n\n2. Usando a função summary()\nA função summary() fornece estatísticas descritivas das variáveis do conjunto de dados.\n\nsummary(ma$acm)\n\n    Author               Year         event.e            n.e        \n Length:7           Min.   :1974   Min.   :  32.0   Min.   : 317.0  \n Class :character   1st Qu.:1978   1st Qu.:  46.5   1st Qu.: 686.5  \n Mode  :character   Median :1979   Median :  85.0   Median : 810.0  \n                    Mean   :1979   Mean   : 304.0   Mean   :2026.6  \n                    3rd Qu.:1980   3rd Qu.: 174.0   3rd Qu.:1549.5  \n                    Max.   :1988   Max.   :1570.0   Max.   :8587.0  \n    event.c            n.c      \n Min.   :  38.0   Min.   : 309  \n 1st Qu.:  58.0   1st Qu.: 515  \n Median :  67.0   Median : 771  \n Mean   : 326.6   Mean   :1974  \n 3rd Qu.: 172.5   3rd Qu.:1554  \n Max.   :1720.0   Max.   :8600  \n\n\n\nInterpretação da saída\n\nPara variáveis numéricas, a função summary() exibe o valor mínimo, primeiro quartil, mediana, média, terceiro quartil e valor máximo.\nPara variáveis categóricas, exibe a frequência de ocorrência de cada categoria.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Importando dados</span>"
     ]
   },
@@ -396,6 +430,7 @@
     "section": "",
     "text": "6.1 Manipulação de Dados no R com o tidyverse\nA manipulação de dados refere-se ao processo de limpar, transformar e reformular dados brutos para torná-los mais adequados para análise. Esse processo é fundamental para garantir que os dados estejam organizados de maneira correta antes de qualquer tipo de modelagem estatística.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -406,6 +441,7 @@
     "section": "6.2 Instalando e Carregando o Pacote Necessário",
     "text": "6.2 Instalando e Carregando o Pacote Necessário\nPara realizar manipulação de dados no R de maneira eficiente, usaremos o pacote tidyverse, que oferece um conjunto de ferramentas poderosas para transformar dados.\n\nPasso 1: Instalar e carregar o tidyverse\ninstall.packages(\"tidyverse\")  # Instalar o pacote\n\nlibrary(tidyverse)  # Carregar o pacote",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -416,6 +452,7 @@
     "section": "6.3 Operadores Essenciais para Manipulação de Dados",
     "text": "6.3 Operadores Essenciais para Manipulação de Dados\n\n1. Operador de Atribuição (&lt;- ou =)\nO operador de atribuição é usado para criar variáveis e armazenar valores dentro delas. Podemos usar &lt;- ou =, mas o mais recomendado no R é o operador &lt;-.\n\nExemplo genérico\n## Criando um objeto e atribuindo um valor a ele\n\nobjeto_nome &lt;- valor\n\n\nExplicação\n\nobjeto_nome → Nome do objeto que será criado (utilize nomes descritivos para facilitar a leitura do código).\n&lt;- → Operador de atribuição. O valor localizado à direita será atribuído ao objeto localizado à esquerda.\nvalor → Pode ser um número, texto, vetor, lista, matriz ou qualquer outro objeto do R.\n\n\n\nExemplo aplicado\n\n## Criando um novo objeto 'm.acm' e atribuindo a ele a lista 'acm' do objeto 'ma'\n\nm.acm &lt;- ma$acm\n\n\n\nO que acontece aqui?\nEsse código extrai a planilha acm do objeto ma e a armazena em um novo objeto chamado m.acm, permitindo que ela seja manipulada de forma independente.\n\n\n\nPainel Environment do RStudio após a criação do objeto m.acm.\n\n\n\n\n\n\n2. Operador de Subconjunto ([])\nO operador [] é utilizado para selecionar elementos específicos de um vetor, matriz ou data frame.\n\nExemplo\n\nma$acm[\"Author\"]\n\n  Author\n1  MRC-1\n2    CDP\n3  MRC-2\n4   GASP\n5  PARIS\n6   AMIS\n7 ISIS-2\n\n\n\n\nExplicação\nO comando acima seleciona a coluna Author do objeto ma$acm, retornando todos os valores dessa variável.\n\n\n\n\n3. Operador de Função (())\nOs parênteses () são utilizados para chamar funções e passar argumentos para elas.\n\nExemplo\n\nlibrary(tidyverse)\n\nNesse exemplo, a função library() recebe como argumento o pacote tidyverse, carregando-o para utilização durante a sessão do R.\n\n\n\n\n4. Operador Pipe (%&gt;%)\nO operador %&gt;% permite encadear múltiplas operações de maneira clara e intuitiva, evitando a criação de diversos objetos intermediários.\n💡 Pense no %&gt;% como “e então”.\n\nExemplo\n\nm.acm &lt;- metabin(\n  event.e,\n  n.e,\n  event.c,\n  n.c,\n  data = ma$acm,\n  method = \"MH\",\n  method.tau = \"DL\",\n  sm = \"RR\",\n  studlab = Author\n) %&gt;% forest()\n\n\n\n\n\n\n\n\n\n\nExplicação\nO comando metabin() realiza uma metanálise para dados binários.\nO operador %&gt;% envia automaticamente o resultado da metanálise para a função forest(), responsável pela construção do Forest Plot.\nDessa forma, não há necessidade de criar um objeto intermediário contendo o resultado da metanálise antes de gerar o gráfico.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -426,6 +463,7 @@
     "section": "6.4 Convertendo um Conjunto de Dados para um Data Frame",
     "text": "6.4 Convertendo um Conjunto de Dados para um Data Frame\n\nDiferença entre Dataset e Data Frame\nDataset: termo genérico utilizado para qualquer estrutura de dados do R, como vetores, listas, matrizes e data frames.\nData Frame: estrutura bidimensional composta por linhas (observações) e colunas (variáveis), sendo o formato mais utilizado em análises estatísticas.\n\n\nPor que converter para Data Frame?\nMuitos pacotes do R exigem que os dados estejam no formato data frame para que suas funções funcionem corretamente.\n\nComo converter para Data Frame\n## Convertendo um objeto para data frame\n\nm.acm &lt;- as.data.frame(m.acm)",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -436,6 +474,7 @@
     "section": "6.5 Selecionando Variáveis de um Conjunto de Dados",
     "text": "6.5 Selecionando Variáveis de um Conjunto de Dados\nO R não reconhece automaticamente os nomes das variáveis. Para acessá-las, é necessário indicar o objeto ao qual pertencem. ### Erro comum\nTentar utilizar uma variável sem informar o objeto de origem.\n\nExemplo incorreto\n\nAuthor\n\nError:\n! objeto 'Author' não encontrado\n\n\nEsse comando retornará um erro, pois o R não sabe onde procurar a variável Author.\n\n\n1. Selecionando uma única variável\nExistem diferentes maneiras de selecionar uma variável específica de um conjunto de dados.\n\nUtilizando o operador $\n\nma$acm$Author   # Seleciona a variável \"Author\"\n\n[1] \"MRC-1\"  \"CDP\"    \"MRC-2\"  \"GASP\"   \"PARIS\"  \"AMIS\"   \"ISIS-2\"\n\nma$acm$Year     # Seleciona a variável \"Year\"\n\n[1] 1974 1976 1979 1979 1980 1980 1988\n\n\nO operador $ permite acessar diretamente uma variável pertencente a um data frame.\n\n\nUtilizando o operador []\nTambém é possível selecionar uma única variável utilizando colchetes.\n\nma$acm[\"Author\"]\n\n  Author\n1  MRC-1\n2    CDP\n3  MRC-2\n4   GASP\n5  PARIS\n6   AMIS\n7 ISIS-2\n\nma$acm[\"Year\"]\n\n  Year\n1 1974\n2 1976\n3 1979\n4 1979\n5 1980\n6 1980\n7 1988\n\n\nEssa abordagem retorna a variável mantendo-a como um data frame.\n\n\n\n\n2. Selecionando um intervalo de linhas\nTambém podemos selecionar apenas algumas linhas de uma variável.\n\nExemplo\n\nma$acm[1:5, \"Author\"]    # Seleciona as linhas 1 a 5 da coluna \"Author\"\n\n[1] \"MRC-1\" \"CDP\"   \"MRC-2\" \"GASP\"  \"PARIS\"\n\nma$acm[3:8, \"Year\"]      # Seleciona as linhas 3 a 8 da coluna \"Year\"\n\n[1] 1979 1979 1980 1980 1988   NA\n\n\nNesse caso:\n\n1:5 indica as linhas que serão selecionadas;\n\"Author\" indica a coluna desejada.\n\n\n\n\n\n3. Selecionando múltiplas colunas\nTambém é possível selecionar várias colunas simultaneamente.\n\nUtilizando c()\n\nma$acm[c(\"Author\", \"Year\")]\n\n  Author Year\n1  MRC-1 1974\n2    CDP 1976\n3  MRC-2 1979\n4   GASP 1979\n5  PARIS 1980\n6   AMIS 1980\n7 ISIS-2 1988\n\n\nA função c() cria um vetor contendo os nomes das colunas que desejamos selecionar.\n\n\nUtilizando o operador Pipe (%&gt;%)\nOutra forma bastante utilizada consiste em utilizar a função select() juntamente com o operador Pipe.\n\nma$acm %&gt;%\n  select(Author, Year, event.e)\n\n  Author Year event.e\n1  MRC-1 1974      49\n2    CDP 1976      44\n3  MRC-2 1979     102\n4   GASP 1979      32\n5  PARIS 1980      85\n6   AMIS 1980     246\n7 ISIS-2 1988    1570\n\n\nEsse método costuma ser mais intuitivo e é amplamente utilizado pelos pacotes do tidyverse.\n\n\nSelecionando múltiplas colunas e um intervalo de linhas\nTambém podemos selecionar simultaneamente linhas e colunas.\n\nma$acm[1:5, c(\"Author\", \"Year\", \"event.e\")]\n\n  Author Year event.e\n1  MRC-1 1974      49\n2    CDP 1976      44\n3  MRC-2 1979     102\n4   GASP 1979      32\n5  PARIS 1980      85\n\n\nNesse exemplo:\n\n1:5 seleciona as cinco primeiras linhas;\nc(\"Author\", \"Year\", \"event.e\") seleciona as três colunas desejadas.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -446,6 +485,7 @@
     "section": "6.6 Resumo do Tutorial",
     "text": "6.6 Resumo do Tutorial\nAo final deste capítulo, aprendemos os principais conceitos relacionados à manipulação de dados no R.\nEm resumo:\n\nInstalamos e carregamos o pacote tidyverse;\nAprendemos a utilizar os principais operadores do R, como &lt;-, [], $ e %&gt;%;\nConvertimos objetos para o formato data frame quando necessário;\nSelecionamos variáveis, linhas e colunas de diferentes maneiras para facilitar a manipulação dos dados.\n\nEsses conceitos serão fundamentais para os próximos capítulos, nos quais começaremos a preparar os conjuntos de dados para a realização das metanálises.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Manipulação de dados no R</span>"
     ]
   },
@@ -456,6 +496,7 @@
     "section": "",
     "text": "7.1 Instalando e Carregando o Pacote meta\nAntes de começar, precisamos instalar e carregar o pacote meta, que contém as funções necessárias para realizar metanálises.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -466,6 +507,7 @@
     "section": "",
     "text": "Passo 1: Instalar e carregar o pacote meta\ninstall.packages(\"meta\")  # Instalar o pacote\n\nlibrary(meta)             # Carregar o pacote",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -476,6 +518,7 @@
     "section": "7.2 Preparando seu Conjunto de Dados",
     "text": "7.2 Preparando seu Conjunto de Dados\nAntes de iniciar sua metanálise, é essencial garantir que os dados estejam organizados corretamente. Isso evita erros e facilita a compatibilidade com as funções do R.\nAbaixo está um exemplo de como estruturar seu conjunto de dados no Microsoft Excel antes de importá-lo para o R.\n\n\n\n\n\nAuthor\nYear\nevent.e\nn.e\nevent.c\nn.c\n\n\n\n\nMRC-1\n1974\n49\n615\n67\n624\n\n\nCDP\n1976\n44\n758\n64\n771\n\n\nMRC-2\n1979\n102\n832\n126\n850\n\n\nGASP\n1979\n32\n317\n38\n309\n\n\nPARIS\n1980\n85\n810\n52\n406\n\n\nAMIS\n1980\n246\n2267\n219\n2257\n\n\nISIS-2\n1988\n1570\n8587\n1720\n8600\n\n\n\n\n\nNeste capítulo usamos a planilha de exemplo data.xlsx, apresentada no capítulo 5.\nApós organizar seu conjunto de dados, importe-o para o R, converta-o para um data frame e atribua o nome acm, referente ao desfecho All-Cause Mortality.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -486,6 +529,7 @@
     "section": "7.3 Criando sua Metanálise",
     "text": "7.3 Criando sua Metanálise\nA função metabin() é utilizada para realizar metanálises de desfechos binários, ou seja, situações em que existem apenas dois possíveis resultados (por exemplo: vivo/morto, sucesso/fracasso ou sim/não).\n\nPrincipais argumentos da função metabin()\n\nevent.e → Número de eventos no grupo experimental.\nn.e → Número total de participantes no grupo experimental.\nevent.c → Número de eventos no grupo controle.\nn.c → Número total de participantes no grupo controle.\ndata → Nome do data frame contendo os dados da metanálise (neste exemplo, acm).\nmethod → Método utilizado para combinar os estudos. O padrão é \"MH\" (Mantel-Haenszel).\nmethod.tau → Método utilizado para estimar a variância entre os estudos. O padrão é \"DL\" (DerSimonian-Laird).\nsm → Medida de efeito utilizada. As opções mais comuns são \"RR\" (Risk Ratio) e \"OR\" (Odds Ratio).\nmethod.random.ci → Método usado para calcular o intervalo de confiança no modelo de efeitos aleatórios. O padrão é \"classic\"; \"HK\" aplica o ajuste de Hartung-Knapp. Em versões antigas do pacote, esse argumento se chamava hakn.\nstudlab → Nome da coluna contendo a identificação dos estudos (por exemplo, Author).",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -496,6 +540,7 @@
     "section": "7.4 Exemplo de Código",
     "text": "7.4 Exemplo de Código\n\nm.acm &lt;- metabin(\n  event.e,\n  n.e,\n  event.c,\n  n.c,\n  data = acm,\n  method = \"MH\",\n  method.tau = \"DL\",\n  sm = \"OR\",\n  method.random.ci = \"classic\",\n  studlab = Author\n)",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -506,6 +551,7 @@
     "section": "7.5 O que acontece aqui?",
     "text": "7.5 O que acontece aqui?\nO comando acima cria um novo objeto chamado m.acm, que armazenará todos os resultados da metanálise referente ao desfecho All-Cause Mortality (ACM).\nEsse objeto conterá informações como:\n\nmedida de efeito combinada;\nintervalo de confiança;\nheterogeneidade;\npesos dos estudos;\nresultados individuais;\ninformações necessárias para construção do Forest Plot.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -516,6 +562,7 @@
     "section": "7.6 Visualizando os Resultados da Metanálise",
     "text": "7.6 Visualizando os Resultados da Metanálise\nApós executar a função metabin(), podemos visualizar um resumo estatístico utilizando a função summary().\n\nCódigo\n\nsummary(m.acm)\n\n           OR           95% CI %W(common) %W(random)\nMRC-1  0.7197 [0.4890; 1.0593]        3.2        8.2\nCDP    0.6808 [0.4574; 1.0132]        3.1        7.8\nMRC-2  0.8029 [0.6065; 1.0629]        5.7       13.2\nGASP   0.8007 [0.4863; 1.3186]        1.8        5.4\nPARIS  0.7981 [0.5526; 1.1529]        3.2        8.9\nAMIS   1.1327 [0.9347; 1.3728]       10.2       20.7\nISIS-2 0.8950 [0.8294; 0.9657]       72.9       35.8\n\nNumber of studies: k = 7\nNumber of observations: o = 28003 (o.e = 14186, o.c = 13817)\nNumber of events: e = 4414\n\n                         OR           95% CI     z p-value\nCommon effect model  0.8969 [0.8405; 0.9570] -3.29  0.0010\nRandom effects model 0.8763 [0.7743; 0.9917] -2.09  0.0365\n\nQuantifying heterogeneity (with 95% CIs):\n tau^2 = 0.0096; tau = 0.0982; I^2 = 39.7% [0.0%; 74.6%]; H = 1.29 [1.00; 1.99]\n\nTest of heterogeneity:\n    Q d.f. p-value\n 9.95    6  0.1269\n\nDetails of meta-analysis methods:\n- Mantel-Haenszel method (common effect model)\n- Inverse variance method (random effects model)\n- DerSimonian-Laird estimator for tau^2\n- Mantel-Haenszel estimator used in calculation of Q and tau^2 (like RevMan 5)\n- Calculation of I^2 based on Q",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -526,6 +573,7 @@
     "section": "7.7 O que o summary() mostra?",
     "text": "7.7 O que o summary() mostra?\nA função summary() fornece um resumo completo da metanálise, incluindo:\n\nestimativa da medida de efeito (Odds Ratio ou Risk Ratio);\nintervalo de confiança de 95%;\nnúmero de estudos incluídos;\npeso de cada estudo;\nheterogeneidade entre os estudos;\nestimativa da variância entre estudos (Tau²);\nestatística Q de Cochran;\nvalor de I²;\ntestes estatísticos referentes ao efeito combinado.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -536,6 +584,7 @@
     "section": "7.8 Criando um Gráfico de Floresta (Forest Plot)",
     "text": "7.8 Criando um Gráfico de Floresta (Forest Plot)\nApós criar a metanálise e armazenar seus resultados no objeto m.acm, podemos visualizar os resultados graficamente utilizando a função forest().\n\nO que é um Forest Plot?\nO Forest Plot é o gráfico mais utilizado em metanálises. Ele apresenta, de forma visual, o efeito individual de cada estudo incluído na análise, bem como a estimativa combinada de todos os estudos.\nCada estudo é representado por um quadrado, cujo tamanho é proporcional ao seu peso na metanálise, acompanhado por uma linha horizontal correspondente ao intervalo de confiança de 95%. Ao final do gráfico, o efeito combinado é representado por um diamante.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -546,6 +595,7 @@
     "section": "7.9 Código para gerar o Forest Plot",
     "text": "7.9 Código para gerar o Forest Plot\n\nforest(\n  m.acm,\n  layout = \"Revman5\",\n  sortvar = studlab,\n  label.e = \"Aspirina\",\n  label.c = \"Placebo\",\n  label.left = \"Favorece aspirina\",\n  col.label.left = \"black\",\n  ff.lr = \"bold\",\n  label.right = \"Favorece placebo\",\n  col.label.right = \"black\",\n  leftcols = c(\n    \"studlab\",\n    \"Year\",\n    \"event.e\",\n    \"n.e\",\n    \"event.c\",\n    \"n.c\",\n    \"w.random\",\n    \"effect\",\n    \"ci\"\n  ),\n  rightcols = FALSE,\n  pooled.events = TRUE,\n  pooled.totals = TRUE,\n  random = TRUE,\n  common = FALSE,\n  diamond.random = TRUE,\n  fs.heading = 12,\n  fs.study = 12,\n  fs.hetstat = 12,\n  colgap = \"6mm\",\n  digits = 2,\n  digits.pval = 3,\n  col.square = \"darkblue\",\n  col.square.lines = \"black\",\n  col.diamond = \"black\",\n  col.diamond.lines = \"black\",\n  print.Q = TRUE,\n  print.pval.Q = TRUE,\n  print.tau.ci = TRUE,\n  test.overall.random = TRUE,\n  overall.hetstat = TRUE\n)",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -556,6 +606,7 @@
     "section": "7.10 Principais Argumentos da Função forest()",
     "text": "7.10 Principais Argumentos da Função forest()\nA função forest() possui diversas opções de personalização. A seguir, são apresentados os argumentos mais importantes utilizados neste tutorial.\n\nsortvar\nDefine a ordem em que os estudos serão apresentados no gráfico.\nNeste exemplo, os estudos são ordenados pela variável studlab, que identifica cada estudo.\n\n\nlabel.e e label.c\nDefinem os nomes que serão exibidos para os grupos experimental e controle. Em versões antigas do pacote, esses argumentos se chamavam lab.e e lab.c.\nlabel.e = \"Aspirina\"\n\nlabel.c = \"Placebo\"\n\n\nlabel.left e label.right\nAdicionam rótulos indicando a direção do efeito observado.\nEsses textos auxiliam na interpretação do gráfico, indicando qual intervenção é favorecida conforme a posição do efeito em relação à linha de nulidade.\n\n\nleftcols\nDefine quais informações serão exibidas na tabela localizada à esquerda do gráfico.\nNeste exemplo são apresentados:\n\nNome do estudo;\nAno de publicação;\nNúmero de eventos no grupo experimental;\nNúmero total de participantes do grupo experimental;\nNúmero de eventos no grupo controle;\nNúmero total de participantes do grupo controle;\nPeso do estudo;\nMedida de efeito;\nIntervalo de confiança.\n\n\n\nrandom e common\nEsses argumentos definem qual modelo estatístico será utilizado.\nrandom = TRUE\ncommon = FALSE\nNesse exemplo, será utilizado o modelo de efeitos aleatórios, enquanto o modelo de efeitos fixos não será exibido.\n\n\nw.random\nQuando utilizado em leftcols, exibe o peso de cada estudo considerando o modelo de efeitos aleatórios.\nCaso seja utilizado um modelo de efeitos fixos, normalmente utiliza-se w.common.\n\n\npooled.events e pooled.totals\nEsses argumentos adicionam ao gráfico o número total de eventos e o número total de participantes de cada grupo após o agrupamento dos estudos.\n\n\ncol.square e col.diamond\nPermitem personalizar as cores utilizadas no gráfico.\nNeste exemplo:\n\nos quadrados dos estudos são exibidos em azul escuro;\no diamante correspondente ao efeito combinado é exibido em preto.\n\n\n\ndigits e digits.pval\nControlam o número de casas decimais exibidas para as medidas de efeito e para os valores de p.\n\n\noverall.hetstat\nQuando definido como TRUE, exibe automaticamente as principais estatísticas de heterogeneidade da metanálise, incluindo:\n\nEstatística Q de Cochran;\nValor de p da heterogeneidade;\nI²;\nTau².\n\nEssas informações auxiliam na interpretação da consistência entre os estudos incluídos.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -566,6 +617,7 @@
     "section": "7.11 Interpretando o Forest Plot",
     "text": "7.11 Interpretando o Forest Plot\nApós a geração do gráfico, é possível identificar rapidamente:\n\na medida de efeito individual de cada estudo;\nos respectivos intervalos de confiança;\no peso relativo de cada estudo;\no efeito combinado da metanálise;\no grau de heterogeneidade entre os estudos.\n\nA interpretação conjunta dessas informações permite avaliar não apenas a magnitude do efeito observado, mas também a consistência dos resultados disponíveis na literatura.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   },
@@ -576,6 +628,7 @@
     "section": "7.12 Resumo do Tutorial",
     "text": "7.12 Resumo do Tutorial\nAo final deste capítulo, aprendemos como realizar uma metanálise de desfechos binários utilizando o pacote meta.\nEm resumo:\n\nInstalamos e carregamos o pacote meta;\nOrganizamos corretamente o conjunto de dados para a análise;\nRealizamos uma metanálise utilizando a função metabin();\nVisualizamos os resultados estatísticos com a função summary();\nConstruímos um Forest Plot utilizando a função forest();\nConhecemos os principais argumentos utilizados para personalizar o gráfico e interpretar seus resultados.",
     "crumbs": [
+      "Meta-análise na prática",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Meta-análise de desfechos binários</span>"
     ]
   }
