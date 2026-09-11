@@ -40,6 +40,16 @@
     ]
   },
   {
+    "objectID": "index.html#licença",
+    "href": "index.html#licença",
+    "title": "Meta-análise no R",
+    "section": "Licença",
+    "text": "Licença\nEste material está licenciado sob a Licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0). Você pode copiar, redistribuir e adaptar o conteúdo para qualquer finalidade, inclusive comercial, desde que dê o devido crédito aos autores e indique se fez alterações.",
+    "crumbs": [
+      "Apresentação"
+    ]
+  },
+  {
     "objectID": "cap01-instalando-r-rstudio.html",
     "href": "cap01-instalando-r-rstudio.html",
     "title": "1  Baixando e instalando o R e o RStudio",
