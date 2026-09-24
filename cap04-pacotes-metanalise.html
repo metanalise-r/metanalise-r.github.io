@@ -266,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rmeta" id="toc-rmeta" class="nav-link" data-scroll-target="#rmeta">3. rmeta</a></li>
   <li><a href="#metabma" id="toc-metabma" class="nav-link" data-scroll-target="#metabma">4. metaBMA</a></li>
   <li><a href="#netmeta" id="toc-netmeta" class="nav-link" data-scroll-target="#netmeta">5. netmeta</a></li>
-  <li><a href="#robust" id="toc-robust" class="nav-link" data-scroll-target="#robust">6. robust</a></li>
+  <li><a href="#robumeta" id="toc-robumeta" class="nav-link" data-scroll-target="#robumeta">6. robumeta</a></li>
   <li><a href="#dmetar" id="toc-dmetar" class="nav-link" data-scroll-target="#dmetar">7. dmetar</a></li>
   <li><a href="#como-instalar-o-pacote-dmetar" id="toc-como-instalar-o-pacote-dmetar" class="nav-link" data-scroll-target="#como-instalar-o-pacote-dmetar"><span class="header-section-number">4.1</span> Como instalar o pacote dmetar</a></li>
   <li><a href="#outros-pacotes-úteis" id="toc-outros-pacotes-úteis" class="nav-link" data-scroll-target="#outros-pacotes-úteis"><span class="header-section-number">4.2</span> Outros Pacotes Úteis</a>
@@ -308,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="meta">1. meta</h3>
 <p>Esse é um pacote abrangente para metanálise, incluindo funções para estimar e visualizar efeitos, testar heterogeneidade, ajustar modelos de metarregressão e realizar análises de subgrupos.</p>
 <p><strong>Como citar:</strong></p>
-<p>Balduzzi S, Rücker G, Schwarzer G (2019). <em>How to perform a meta-analysis with R: a practical tutorial.</em> Evidence-Based Mental Health, 153–160.</p>
+<p>Balduzzi S, Rücker G, Schwarzer G (2019). <em>How to perform a meta-analysis with R: a practical tutorial.</em> Evidence-Based Mental Health, 22(4), 153–160.</p>
 </section>
 <section id="metafor" class="level3">
 <h3 class="anchored" data-anchor-id="metafor">2. metafor</h3>
@@ -318,11 +318,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rmeta" class="level3">
 <h3 class="anchored" data-anchor-id="rmeta">3. rmeta</h3>
-<p>Este pacote oferece funções para metanálises univariadas e multivariadas, incluindo modelos de efeitos fixos e aleatórios.</p>
+<p>Pacote simples e mais antigo, que oferece funções para metanálises de efeitos fixos e aleatórios e metanálises cumulativas, além de <em>forest plots</em> e <em>funnel plots</em>.</p>
 </section>
 <section id="metabma" class="level3">
 <h3 class="anchored" data-anchor-id="metabma">4. metaBMA</h3>
-<p>Utiliza a abordagem <em>Bayesian Model Averaging</em> (BMA) para metanálises. Possui funções para estimar pesos de cada estudo, ajustar modelos de metarregressão e realizar análises de subgrupos.</p>
+<p>Utiliza a abordagem bayesiana de média de modelos (<em>Bayesian Model Averaging</em>, BMA). Em vez de escolher um único modelo, combina os resultados dos modelos de efeito fixo e de efeitos aleatórios (com e sem efeito do tratamento), ponderando cada modelo pela sua probabilidade a posteriori, e calcula fatores de Bayes para testar a existência do efeito e da heterogeneidade.</p>
 </section>
 <section id="netmeta" class="level3">
 <h3 class="anchored" data-anchor-id="netmeta">5. netmeta</h3>
@@ -330,13 +330,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Como citar:</strong></p>
 <p>Rücker G, Krahn U, König J, Efthimiou O, Davies A, Papakonstantinou T, Schwarzer G (2022). <em>netmeta: Network Meta-Analysis using Frequentist Methods.</em> R package version 2.7-0.</p>
 </section>
-<section id="robust" class="level3">
-<h3 class="anchored" data-anchor-id="robust">6. robust</h3>
-<p>Fornece métodos robustos para metanálises em situações onde há <em>outliers</em> ou estudos influentes. Inclui funções para calcular e visualizar efeitos, testar heterogeneidade e realizar análises de subgrupos usando métodos robustos.</p>
+<section id="robumeta" class="level3">
+<h3 class="anchored" data-anchor-id="robumeta">6. robumeta</h3>
+<p>Implementa a metanálise com estimação robusta da variância (<em>robust variance estimation</em>, RVE), indicada quando os estudos contribuem com mais de um tamanho de efeito (por exemplo, vários desfechos ou vários momentos de avaliação do mesmo estudo), situação em que os efeitos não são independentes. Permite ajustar modelos de metarregressão com esses dados.</p>
 </section>
 <section id="dmetar" class="level3">
 <h3 class="anchored" data-anchor-id="dmetar">7. dmetar</h3>
-<p>Este pacote foi desenvolvido para análises diagnósticas e metanalíticas de estudos de Differential Item Functioning (DIF) e Differential Test Functioning (DTF). Possui diversas funções para diferentes abordagens de metanálises, incluindo modelos de efeitos fixos e aleatórios, além de ferramentas para criar <em>forest plots</em>, <em>funnel plots</em> e outras visualizações gráficas.</p>
+<p>Pacote que acompanha o livro <em>Doing Meta-Analysis in R: A Hands-On Guide</em> (Harrer, Cuijpers, Furukawa e Ebert), disponível gratuitamente na internet. Complementa os pacotes <code>meta</code> e <code>metafor</code> com funções auxiliares, como a detecção de <em>outliers</em> e de estudos influentes, o cálculo do poder estatístico da metanálise e a conversão entre medidas de efeito.</p>
 <p><strong>Como citar:</strong></p>
 <p>Harrer, M., Cuijpers, P., Furukawa, T. &amp; Ebert, D. D. (2019). <em>dmetar: Companion R Package For The Guide ‘Doing Meta-Analysis in R’.</em> R package version 0.0.9000.</p>
 </section>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="grid" class="level3">
 <h3 class="anchored" data-anchor-id="grid">6. grid</h3>
-<p>Fornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos.</p>
+<p>Fornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos. Faz parte da instalação básica do R, por isso não precisa ser instalado, apenas carregado com <code>library(grid)</code>.</p>
 
 
 </section>

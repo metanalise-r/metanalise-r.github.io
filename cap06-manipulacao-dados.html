@@ -407,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exemplo-2" class="level4">
 <h4 class="anchored" data-anchor-id="exemplo-2">Exemplo</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m.acm <span class="ot">&lt;-</span> <span class="fu">metabin</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metabin</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  event.e,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  n.e,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  event.c,</span>
@@ -526,9 +526,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "MRC-1" "CDP"   "MRC-2" "GASP"  "PARIS"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>, <span class="st">"Year"</span>]      <span class="co"># Seleciona as linhas 3 a 8 da coluna "Year"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ma<span class="sc">$</span>acm[<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>, <span class="st">"Year"</span>]      <span class="co"># Seleciona as linhas 3 a 7 da coluna "Year"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1979 1979 1980 1980 1988   NA</code></pre>
+<pre><code>[1] 1979 1979 1980 1980 1988</code></pre>
 </div>
 </div>
 <p>Nesse caso:</p>

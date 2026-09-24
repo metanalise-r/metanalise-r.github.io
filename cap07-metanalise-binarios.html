@@ -277,12 +277,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#código" id="toc-código" class="nav-link" data-scroll-target="#código">Código</a></li>
   </ul></li>
   <li><a href="#o-que-o-summary-mostra" id="toc-o-que-o-summary-mostra" class="nav-link" data-scroll-target="#o-que-o-summary-mostra"><span class="header-section-number">7.7</span> O que o <code>summary()</code> mostra?</a></li>
-  <li><a href="#criando-um-gráfico-de-floresta-forest-plot" id="toc-criando-um-gráfico-de-floresta-forest-plot" class="nav-link" data-scroll-target="#criando-um-gráfico-de-floresta-forest-plot"><span class="header-section-number">7.8</span> Criando um Gráfico de Floresta (<em>Forest Plot</em>)</a>
+  <li><a href="#interpretando-os-resultados" id="toc-interpretando-os-resultados" class="nav-link" data-scroll-target="#interpretando-os-resultados"><span class="header-section-number">7.8</span> Interpretando os Resultados</a></li>
+  <li><a href="#criando-um-gráfico-de-floresta-forest-plot" id="toc-criando-um-gráfico-de-floresta-forest-plot" class="nav-link" data-scroll-target="#criando-um-gráfico-de-floresta-forest-plot"><span class="header-section-number">7.9</span> Criando um Gráfico de Floresta (<em>Forest Plot</em>)</a>
   <ul class="collapse">
   <li><a href="#o-que-é-um-forest-plot" id="toc-o-que-é-um-forest-plot" class="nav-link" data-scroll-target="#o-que-é-um-forest-plot">O que é um <em>Forest Plot</em>?</a></li>
   </ul></li>
-  <li><a href="#código-para-gerar-o-forest-plot" id="toc-código-para-gerar-o-forest-plot" class="nav-link" data-scroll-target="#código-para-gerar-o-forest-plot"><span class="header-section-number">7.9</span> Código para gerar o Forest Plot</a></li>
-  <li><a href="#principais-argumentos-da-função-forest" id="toc-principais-argumentos-da-função-forest" class="nav-link" data-scroll-target="#principais-argumentos-da-função-forest"><span class="header-section-number">7.10</span> Principais Argumentos da Função <code>forest()</code></a>
+  <li><a href="#código-para-gerar-o-forest-plot" id="toc-código-para-gerar-o-forest-plot" class="nav-link" data-scroll-target="#código-para-gerar-o-forest-plot"><span class="header-section-number">7.10</span> Código para gerar o Forest Plot</a></li>
+  <li><a href="#principais-argumentos-da-função-forest" id="toc-principais-argumentos-da-função-forest" class="nav-link" data-scroll-target="#principais-argumentos-da-função-forest"><span class="header-section-number">7.11</span> Principais Argumentos da Função <code>forest()</code></a>
   <ul class="collapse">
   <li><a href="#sortvar" id="toc-sortvar" class="nav-link" data-scroll-target="#sortvar"><code>sortvar</code></a></li>
   <li><a href="#label.e-e-label.c" id="toc-label.e-e-label.c" class="nav-link" data-scroll-target="#label.e-e-label.c"><code>label.e</code> e <code>label.c</code></a></li>
@@ -295,8 +296,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#digits-e-digits.pval" id="toc-digits-e-digits.pval" class="nav-link" data-scroll-target="#digits-e-digits.pval"><code>digits</code> e <code>digits.pval</code></a></li>
   <li><a href="#overall.hetstat" id="toc-overall.hetstat" class="nav-link" data-scroll-target="#overall.hetstat"><code>overall.hetstat</code></a></li>
   </ul></li>
-  <li><a href="#interpretando-o-forest-plot" id="toc-interpretando-o-forest-plot" class="nav-link" data-scroll-target="#interpretando-o-forest-plot"><span class="header-section-number">7.11</span> Interpretando o Forest Plot</a></li>
-  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">7.12</span> Resumo do Tutorial</a></li>
+  <li><a href="#interpretando-o-forest-plot" id="toc-interpretando-o-forest-plot" class="nav-link" data-scroll-target="#interpretando-o-forest-plot"><span class="header-section-number">7.12</span> Interpretando o Forest Plot</a></li>
+  <li><a href="#resumo-do-tutorial" id="toc-resumo-do-tutorial" class="nav-link" data-scroll-target="#resumo-do-tutorial"><span class="header-section-number">7.13</span> Resumo do Tutorial</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/metanalise-r/metanalise-r.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Relatar um problema</a></li></ul></div></nav>
     </div>
@@ -519,8 +520,17 @@ Details of meta-analysis methods:
 <li><p>testes estatísticos referentes ao efeito combinado.</p></li>
 </ul>
 </section>
-<section id="criando-um-gráfico-de-floresta-forest-plot" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="criando-um-gráfico-de-floresta-forest-plot"><span class="header-section-number">7.8</span> Criando um Gráfico de Floresta (<em>Forest Plot</em>)</h2>
+<section id="interpretando-os-resultados" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="interpretando-os-resultados"><span class="header-section-number">7.8</span> Interpretando os Resultados</h2>
+<ul>
+<li><p><strong>Efeito combinado</strong> → No modelo de efeitos aleatórios, o <em>odds ratio</em> foi de 0,88 (IC 95%: 0,77 a 0,99; p = 0,04). Como o valor é menor do que 1 e o intervalo de confiança não inclui o 1, a chance (<em>odds</em>) de óbito foi cerca de 12% menor no grupo aspirina do que no grupo placebo.</p></li>
+<li><p><strong>Efeito comum × efeitos aleatórios</strong> → O modelo de efeito comum produziu um resultado semelhante (OR = 0,90; IC 95%: 0,84 a 0,96). O intervalo do modelo de efeitos aleatórios é mais largo porque incorpora a variação entre os estudos.</p></li>
+<li><p><strong>Heterogeneidade</strong> → O I² foi de 39,7%, indicando heterogeneidade moderada, e o teste Q não foi significativo (p = 0,13). O intervalo de confiança do I², porém, vai de 0% a 74,6%: com apenas 7 estudos, a estimativa da heterogeneidade é pouco precisa.</p></li>
+</ul>
+<p>💡 O <em>odds ratio</em> não é o mesmo que o risco relativo. Quando o evento é pouco frequente, os dois ficam próximos; quando é frequente, o <em>odds ratio</em> se afasta mais de 1 do que o risco relativo e não deve ser interpretado como redução de risco.</p>
+</section>
+<section id="criando-um-gráfico-de-floresta-forest-plot" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="criando-um-gráfico-de-floresta-forest-plot"><span class="header-section-number">7.9</span> Criando um Gráfico de Floresta (<em>Forest Plot</em>)</h2>
 <p>Após criar a metanálise e armazenar seus resultados no objeto <code>m.acm</code>, podemos visualizar os resultados graficamente utilizando a função <code>forest()</code>.</p>
 <section id="o-que-é-um-forest-plot" class="level3">
 <h3 class="anchored" data-anchor-id="o-que-é-um-forest-plot">O que é um <em>Forest Plot</em>?</h3>
@@ -528,8 +538,8 @@ Details of meta-analysis methods:
 <p>Cada estudo é representado por um quadrado, cujo tamanho é proporcional ao seu peso na metanálise, acompanhado por uma linha horizontal correspondente ao intervalo de confiança de 95%. Ao final do gráfico, o efeito combinado é representado por um diamante.</p>
 </section>
 </section>
-<section id="código-para-gerar-o-forest-plot" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="código-para-gerar-o-forest-plot"><span class="header-section-number">7.9</span> Código para gerar o Forest Plot</h2>
+<section id="código-para-gerar-o-forest-plot" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="código-para-gerar-o-forest-plot"><span class="header-section-number">7.10</span> Código para gerar o Forest Plot</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  m.acm,</span>
@@ -584,8 +594,8 @@ Details of meta-analysis methods:
 </div>
 </div>
 </section>
-<section id="principais-argumentos-da-função-forest" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="principais-argumentos-da-função-forest"><span class="header-section-number">7.10</span> Principais Argumentos da Função <code>forest()</code></h2>
+<section id="principais-argumentos-da-função-forest" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="principais-argumentos-da-função-forest"><span class="header-section-number">7.11</span> Principais Argumentos da Função <code>forest()</code></h2>
 <p>A função <code>forest()</code> possui diversas opções de personalização. A seguir, são apresentados os argumentos mais importantes utilizados neste tutorial.</p>
 <section id="sortvar" class="level3">
 <h3 class="anchored" data-anchor-id="sortvar"><code>sortvar</code></h3>
@@ -661,8 +671,8 @@ common = FALSE</code></pre>
 <p>Essas informações auxiliam na interpretação da consistência entre os estudos incluídos.</p>
 </section>
 </section>
-<section id="interpretando-o-forest-plot" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="interpretando-o-forest-plot"><span class="header-section-number">7.11</span> Interpretando o Forest Plot</h2>
+<section id="interpretando-o-forest-plot" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="interpretando-o-forest-plot"><span class="header-section-number">7.12</span> Interpretando o Forest Plot</h2>
 <p>Após a geração do gráfico, é possível identificar rapidamente:</p>
 <ul>
 <li><p>a medida de efeito individual de cada estudo;</p></li>
@@ -673,8 +683,8 @@ common = FALSE</code></pre>
 </ul>
 <p>A interpretação conjunta dessas informações permite avaliar não apenas a magnitude do efeito observado, mas também a consistência dos resultados disponíveis na literatura.</p>
 </section>
-<section id="resumo-do-tutorial" class="level2" data-number="7.12">
-<h2 data-number="7.12" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">7.12</span> Resumo do Tutorial</h2>
+<section id="resumo-do-tutorial" class="level2" data-number="7.13">
+<h2 data-number="7.13" class="anchored" data-anchor-id="resumo-do-tutorial"><span class="header-section-number">7.13</span> Resumo do Tutorial</h2>
 <p>Ao final deste capítulo, aprendemos como realizar uma metanálise de desfechos binários utilizando o pacote <strong>meta</strong>.</p>
 <p>Em resumo:</p>
 <ul>

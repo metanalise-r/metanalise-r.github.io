@@ -489,9 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="5.9" class="anchored" data-anchor-id="visualizando-os-dados"><span class="header-section-number">5.9</span> Visualizando os Dados</h2>
 <p>Agora podemos visualizar os dados que foram importados para o R.</p>
 <p>Para visualizar uma planilha específica, utilize as funções <code>View()</code> ou <code>head()</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ma<span class="sc">$</span>acm)   <span class="co"># Visualizar a aba "acm" (All-Cause Mortality)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ma<span class="sc">$</span>mb)    <span class="co"># Visualizar a aba "mb" (Major Bleeding)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ma<span class="sc">$</span>acm)   <span class="co"># Visualizar a aba "acm" (All-Cause Mortality)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="imagens/cap05-view-rstudio.png" class="img-fluid figure-img" style="width:85.0%"></p>
@@ -564,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="interpretação-da-saída-1">Interpretação da saída</h4>
 <ul>
 <li><p>Para variáveis numéricas, a função <code>summary()</code> exibe o valor mínimo, primeiro quartil, mediana, média, terceiro quartil e valor máximo.</p></li>
-<li><p>Para variáveis categóricas, exibe a frequência de ocorrência de cada categoria.</p></li>
+<li><p>Para variáveis de texto (<code>chr</code>), como <code>Author</code>, exibe apenas o número de valores (<code>Length</code>) e o tipo da variável (<code>Class</code> e <code>Mode</code>). A frequência de cada categoria só é exibida quando a variável é um fator (<code>factor</code>).</p></li>
 </ul>
 
 
