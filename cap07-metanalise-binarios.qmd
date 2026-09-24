@@ -126,6 +126,16 @@ A função `summary()` fornece um resumo completo da metanálise, incluindo:
 
 - testes estatísticos referentes ao efeito combinado.
 
+## Interpretando os Resultados
+
+- **Efeito combinado** → No modelo de efeitos aleatórios, o *odds ratio* foi de 0,88 (IC 95%: 0,77 a 0,99; p = 0,04). Como o valor é menor do que 1 e o intervalo de confiança não inclui o 1, a chance (*odds*) de óbito foi cerca de 12% menor no grupo aspirina do que no grupo placebo.
+
+- **Efeito comum × efeitos aleatórios** → O modelo de efeito comum produziu um resultado semelhante (OR = 0,90; IC 95%: 0,84 a 0,96). O intervalo do modelo de efeitos aleatórios é mais largo porque incorpora a variação entre os estudos.
+
+- **Heterogeneidade** → O I² foi de 39,7%, indicando heterogeneidade moderada, e o teste Q não foi significativo (p = 0,13). O intervalo de confiança do I², porém, vai de 0% a 74,6%: com apenas 7 estudos, a estimativa da heterogeneidade é pouco precisa.
+
+💡 O *odds ratio* não é o mesmo que o risco relativo. Quando o evento é pouco frequente, os dois ficam próximos; quando é frequente, o *odds ratio* se afasta mais de 1 do que o risco relativo e não deve ser interpretado como redução de risco.
+
 ## Criando um Gráfico de Floresta (*Forest Plot*)
 
 Após criar a metanálise e armazenar seus resultados no objeto `m.acm`, podemos visualizar os resultados graficamente utilizando a função `forest()`.

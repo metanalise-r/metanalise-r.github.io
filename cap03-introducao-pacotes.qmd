@@ -48,7 +48,6 @@ install.packages("readr")
 install.packages("readxl")
 install.packages("ggplot2")
 install.packages("tidyverse")
-install.packages("grid")
 install.packages("forestplot")
 ```
 

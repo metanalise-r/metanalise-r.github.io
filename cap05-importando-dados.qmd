@@ -131,7 +131,6 @@ Para visualizar uma planilha específica, utilize as funções `View()` ou `head
 ```r
 View(ma$acm)   # Visualizar a aba "acm" (All-Cause Mortality)
 
-View(ma$mb)    # Visualizar a aba "mb" (Major Bleeding)
 ```
 
 ![Visualizador de dados do RStudio aberto com `View(ma$acm)`.](imagens/cap05-view-rstudio.png){width="85%"}
@@ -172,4 +171,4 @@ summary(ma$acm)
 
 - Para variáveis numéricas, a função `summary()` exibe o valor mínimo, primeiro quartil, mediana, média, terceiro quartil e valor máximo.
 
-- Para variáveis categóricas, exibe a frequência de ocorrência de cada categoria.
+- Para variáveis de texto (`chr`), como `Author`, exibe apenas o número de valores (`Length`) e o tipo da variável (`Class` e `Mode`). A frequência de cada categoria só é exibida quando a variável é um fator (`factor`).

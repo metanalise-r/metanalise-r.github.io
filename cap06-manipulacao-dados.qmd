@@ -106,7 +106,7 @@ O operador `%>%` permite encadear múltiplas operações de maneira clara e intu
 ```{r}
 #| fig-width: 13
 #| fig-height: 4
-m.acm <- metabin(
+metabin(
   event.e,
   n.e,
   event.c,
@@ -200,7 +200,7 @@ Também podemos selecionar apenas algumas linhas de uma variável.
 ```{r}
 ma$acm[1:5, "Author"]    # Seleciona as linhas 1 a 5 da coluna "Author"
 
-ma$acm[3:8, "Year"]      # Seleciona as linhas 3 a 8 da coluna "Year"
+ma$acm[3:7, "Year"]      # Seleciona as linhas 3 a 7 da coluna "Year"
 ```
 
 Nesse caso:

@@ -64,7 +64,7 @@ Antes de criar a metanálise, precisamos escolher a medida de efeito. Para desfe
 
 - **Diferença de médias padronizada (SMD, *Standardized Mean Difference*)** → Utilizada quando os estudos medem o mesmo desfecho com escalas ou instrumentos diferentes (por exemplo, questionários distintos de dor). O resultado é expresso em unidades de desvio padrão.
 
-Observe que, na nossa planilha, as médias do estudo de Gruen (entre 22 e 25) são bem maiores do que as dos demais estudos (entre 5 e 13). Isso indica que o desfecho não foi medido da mesma forma em todos os estudos. Por isso, neste exemplo, usaremos a **SMD**.
+Nos estudos da nossa planilha, a utilização de serviços médicos não foi medida da mesma forma. Observe, por exemplo, que as médias do estudo de Gruen (entre 22 e 25) são bem maiores do que as dos demais estudos (entre 5 e 13). Diferenças nas médias, isoladamente, não provam que as escalas são diferentes, pois também podem refletir populações diferentes; o que justifica a escolha é saber como cada estudo mediu o desfecho. Como aqui as medidas não são comparáveis, usaremos a **SMD**, assim como fez Fleiss (1993) na análise original.
 
 💡 Como referência aproximada, valores de SMD em torno de 0,2 costumam ser considerados efeitos pequenos; em torno de 0,5, moderados; e a partir de 0,8, grandes.
 

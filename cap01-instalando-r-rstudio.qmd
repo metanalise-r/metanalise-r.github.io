@@ -41,7 +41,7 @@ Após baixar o instalador:
 
 Com o R já instalado, prossiga para o RStudio:
 
-1.  Acesse: <https://www.rstudio.com/products/rstudio/download/>.
+1.  Acesse: <https://posit.co/download/rstudio-desktop/>.
 2.  Clique em **Download** para o RStudio Desktop.
 3.  Escolha a versão compatível com seu sistema operacional.
 4.  Baixe a versão mais recente do RStudio Desktop.

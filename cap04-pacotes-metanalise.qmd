@@ -8,7 +8,7 @@ Esse é um pacote abrangente para metanálise, incluindo funções para estimar 
 
 **Como citar:**
 
-Balduzzi S, Rücker G, Schwarzer G (2019). *How to perform a meta-analysis with R: a practical tutorial.* Evidence-Based Mental Health, 153--160.
+Balduzzi S, Rücker G, Schwarzer G (2019). *How to perform a meta-analysis with R: a practical tutorial.* Evidence-Based Mental Health, 22(4), 153--160.
 
 ### 2. metafor
 
@@ -20,11 +20,11 @@ Viechtbauer W (2010). *Conducting meta-analyses in R with the metafor package.* 
 
 ### 3. rmeta
 
-Este pacote oferece funções para metanálises univariadas e multivariadas, incluindo modelos de efeitos fixos e aleatórios.
+Pacote simples e mais antigo, que oferece funções para metanálises de efeitos fixos e aleatórios e metanálises cumulativas, além de *forest plots* e *funnel plots*.
 
 ### 4. metaBMA
 
-Utiliza a abordagem *Bayesian Model Averaging* (BMA) para metanálises. Possui funções para estimar pesos de cada estudo, ajustar modelos de metarregressão e realizar análises de subgrupos.
+Utiliza a abordagem bayesiana de média de modelos (*Bayesian Model Averaging*, BMA). Em vez de escolher um único modelo, combina os resultados dos modelos de efeito fixo e de efeitos aleatórios (com e sem efeito do tratamento), ponderando cada modelo pela sua probabilidade a posteriori, e calcula fatores de Bayes para testar a existência do efeito e da heterogeneidade.
 
 ### 5. netmeta
 
@@ -34,13 +34,13 @@ Pacote projetado para metanálises em redes de tratamento, permitindo comparar m
 
 Rücker G, Krahn U, König J, Efthimiou O, Davies A, Papakonstantinou T, Schwarzer G (2022). *netmeta: Network Meta-Analysis using Frequentist Methods.* R package version 2.7-0.
 
-### 6. robust
+### 6. robumeta
 
-Fornece métodos robustos para metanálises em situações onde há *outliers* ou estudos influentes. Inclui funções para calcular e visualizar efeitos, testar heterogeneidade e realizar análises de subgrupos usando métodos robustos.
+Implementa a metanálise com estimação robusta da variância (*robust variance estimation*, RVE), indicada quando os estudos contribuem com mais de um tamanho de efeito (por exemplo, vários desfechos ou vários momentos de avaliação do mesmo estudo), situação em que os efeitos não são independentes. Permite ajustar modelos de metarregressão com esses dados.
 
 ### 7. dmetar
 
-Este pacote foi desenvolvido para análises diagnósticas e metanalíticas de estudos de Differential Item Functioning (DIF) e Differential Test Functioning (DTF). Possui diversas funções para diferentes abordagens de metanálises, incluindo modelos de efeitos fixos e aleatórios, além de ferramentas para criar *forest plots*, *funnel plots* e outras visualizações gráficas.
+Pacote que acompanha o livro *Doing Meta-Analysis in R: A Hands-On Guide* (Harrer, Cuijpers, Furukawa e Ebert), disponível gratuitamente na internet. Complementa os pacotes `meta` e `metafor` com funções auxiliares, como a detecção de *outliers* e de estudos influentes, o cálculo do poder estatístico da metanálise e a conversão entre medidas de efeito.
 
 **Como citar:**
 
@@ -94,4 +94,4 @@ Facilita a instalação e o gerenciamento de pacotes R hospedados em repositóri
 
 ### 6. grid
 
-Fornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos.
+Fornece um sistema poderoso e flexível para criar e organizar objetos gráficos no R. É útil para gerar layouts personalizados e organizar elementos visuais em diferentes formatos. Faz parte da instalação básica do R, por isso não precisa ser instalado, apenas carregado com `library(grid)`.
