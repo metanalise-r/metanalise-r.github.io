@@ -4,8 +4,6 @@ BALDUZZI, S.; RÜCKER, G.; SCHWARZER, G. How to perform a meta-analysis with R: 
 
 COLDITZ, G. A. et al. Efficacy of BCG vaccine in the prevention of tuberculosis: meta-analysis of the published literature. *JAMA*, v. 271, n. 9, p. 698-702, 1994.
 
-DIAZ, C. A. V.; FERNANDES, A. P. *Meta-análise no R*: guia prático para estudantes da área da saúde. Zenodo, 2026. DOI: [10.5281/zenodo.22710110](https://doi.org/10.5281/zenodo.22710110). Disponível em: <https://metanalise-r.github.io>.
-
 DUVAL, S.; TWEEDIE, R. Trim and fill: a simple funnel-plot-based method of testing and adjusting for publication bias in meta-analysis. *Biometrics*, v. 56, n. 2, p. 455-463, 2000.
 
 EGGER, M. et al. Bias in meta-analysis detected by a simple, graphical test. *BMJ*, v. 315, n. 7109, p. 629-634, 1997.
