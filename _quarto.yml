@@ -42,6 +42,7 @@ book:
         - cap08-metanalise-continuos.qmd
         - cap09-metanalise-braco-unico.qmd
         - cap10-vies-publicacao.qmd
+    - referencias.qmd
 
 format:
   html:
